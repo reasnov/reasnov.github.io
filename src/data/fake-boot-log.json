@@ -1,10 +1,10 @@
 [
 	"System Initializing...",
 	"Kernel Loading: attempting to boot governance subsystem...",
-	"Kernel Warning: detected outdated bureaucratic structures — performance severely limited.",
+	"Kernel Warning: detected outdated bureaucratic structures.",
 	"Bootloader: GRUB v2.12 patched with 'DelayPolicy™'.",
 	"CPU Check: Leadership cores running at 12% efficiency...",
-	"Memory Test: Public welfare budget — insufficient allocation [ CRITICAL ].",
+	"Memory Test: Public welfare budget — insufficient allocation [ CRITICAL ]",
 	"Verifying integrity of public funds: [ FAILED — checksum mismatch ]",
 	"Mounting /dev/sda2 → / (ext4): [ OK ]",
 	"Mounting /dev/sda3 → /home (ext4): [ OK — but inequality rising ]",

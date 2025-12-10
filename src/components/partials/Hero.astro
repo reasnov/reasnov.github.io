@@ -2,7 +2,7 @@
 import FakeTerminal from "@components/FakeTerminal.astro";
 ---
 
-<div class="flex-1 w-full flex flex-col lg:flex-row px-12 gap-20 h-full justify-center items-center">
+<div class="flex-1 w-full flex flex-col lg:flex-row px-12 gap-20 justify-center items-center">
 	<div class="flex-1 flex flex-col gap-12">
 		<div class="leading-none">
 			<p class="text-sm">Hello_! ^_^</p>
@@ -25,16 +25,20 @@ import FakeTerminal from "@components/FakeTerminal.astro";
 		</div>
 
 		<div class="w-full flex gap-6">
-			<a href="#" type="button" class="btn btn-primary btn-md"
+			<a href="https://github.com/reasnov" type="button" class="btn btn-primary btn-md"
 				>Explore Projects <span class="icon-[tabler--arrow-narrow-right]"></span></a
 			>
-			<a href="https://linkedin.com/in/reasnov" type="button" class="btn btn-secondary btn-outline btn-md"
+			<a
+				href="https://linkedin.com/in/reasnov"
+				target="__blank"
+				type="button"
+				class="btn btn-secondary btn-outline btn-md"
 				><span class="icon-[tabler--brand-linkedin]"></span>Connect on LinkedIn</a
 			>
 		</div>
 	</div>
 
-	<div class="flex-1 flex items-center justify-center w-full">
+	<div class="flex-1 flex items-center justify-center w-full max-w-full px-6">
 		<FakeTerminal />
 	</div>
 </div>
