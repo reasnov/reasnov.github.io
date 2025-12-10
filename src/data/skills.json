@@ -1,0 +1,74 @@
+[
+	{
+		"name": "tailwindcss",
+		"icon": "icon-[skill-icons--tailwindcss-light]"
+	},
+	{
+		"name": "astro",
+		"icon": "icon-[skill-icons--astro]"
+	},
+	{
+		"name": "svelte",
+		"icon": "icon-[skill-icons--svelte]"
+	},
+	{
+		"name": "vuejs",
+		"icon": "icon-[skill-icons--vuejs-light]"
+	},
+	{
+		"name": "react",
+		"icon": "icon-[skill-icons--react-light]"
+	},
+	{
+		"name": "laravel",
+		"icon": "icon-[skill-icons--laravel-light]"
+	},
+	{
+		"name": "nuxtjs",
+		"icon": "icon-[skill-icons--nuxtjs-light]"
+	},
+	{
+		"name": "nextjs",
+		"icon": "icon-[skill-icons--nextjs-light]"
+	},
+	{
+		"name": "sqlite",
+		"icon": "icon-[skill-icons--sqlite]"
+	},
+	{
+		"name": "mysql",
+		"icon": "icon-[skill-icons--mysql-light]"
+	},
+	{
+		"name": "postgresql",
+		"icon": "icon-[skill-icons--postgresql-light]"
+	},
+	{
+		"name": "prisma",
+		"icon": "icon-[skill-icons--prisma]"
+	},
+	{
+		"name": "redis",
+		"icon": "icon-[skill-icons--redis-light]"
+	},
+	{
+		"name": "git",
+		"icon": "icon-[skill-icons--git]"
+	},
+	{
+		"name": "github",
+		"icon": "icon-[skill-icons--github-light]"
+	},
+	{
+		"name": "gitlab",
+		"icon": "icon-[skill-icons--gitlab-light]"
+	},
+	{
+		"name": "docker",
+		"icon": "icon-[skill-icons--docker]"
+	},
+	{
+		"name": "wordpress",
+		"icon": "icon-[skill-icons--wordpress]"
+	}
+]

@@ -1,0 +1,163 @@
+---
+import fakeBootLog from "@data/fake-boot-log.json";
+
+const terminalLines = fakeBootLog;
+const speed = 20;
+const delay = 1300;
+---
+
+<div
+	class="w-full border border-neutral-700 rounded-xl p-3 flex flex-col justify-between h-80 bg-neutral-900 font-mono gap-3 font-medium relative"
+>
+	<div class="absolute top-0 -translate-y-1/2 flex items-center gap-2 z-5 bg-black px-3 py-2 rounded-full right-6">
+		<span class="block size-3 rounded-full bg-success"></span>
+		<span class="block size-3 rounded-full bg-warning"></span>
+		<span class="block size-3 rounded-full bg-error"></span>
+	</div>
+
+	<div class="w-full flex gap-6 items-center">
+		<p class="px-3 py-1 rounded-lg bg-black text-xs flex items-center gap-2 justify-between min-w-24">
+			<span>What's up!</span>
+			<span class="text-[6pt] icon-[tabler--x]"></span>
+		</p>
+	</div>
+
+	<div class="flex-1 flex flex-col justify-end overflow-auto w-full">
+		<div id="typewriter-output" class="text-sm flex flex-col gap-1 w-full overflow-hidden"></div>
+
+		<p class="mt-3 text-nowrap flex items-center gap-4 w-full">
+			<span class="bg-white text-black px-2 font-bold select-none"> terminal \ users \ me: </span>
+			<span id="live-clock" class="text-neutral-400 text-sm"></span>
+			<span>$</span>
+			<span class="animate-blink font-medium"> What can I help you? </span>
+		</p>
+	</div>
+</div>
+
+<script define:vars={{ terminalLines, speed, delay }} is:inline>
+	const output = document.getElementById("typewriter-output");
+	const liveClockEl = document.getElementById("live-clock");
+
+	if (!output) return;
+
+	/* -----------------------------------
+     *  LIVE CLOCK
+	----------------------------------- */
+	function updateClock() {
+		const now = new Date();
+		const hh = String(now.getHours()).padStart(2, "0");
+		const mm = String(now.getMinutes()).padStart(2, "0");
+		const ss = String(now.getSeconds()).padStart(2, "0");
+		liveClockEl.textContent = `[${hh}:${mm}:${ss}]`;
+	}
+	updateClock();
+	setInterval(updateClock, 1000);
+
+	/* -----------------------------------
+     *  TYPEWRITER CONTROL
+	----------------------------------- */
+
+	let lineIndex = 0;
+	let charIndex = 0;
+	let currentEl = null;
+
+	let isResetting = false;
+	let activeTimers = [];
+
+	function clearTimers() {
+		activeTimers.forEach((t) => clearTimeout(t));
+		activeTimers = [];
+	}
+
+	function safeTimeout(fn, t) {
+		const id = setTimeout(fn, t);
+		activeTimers.push(id);
+		return id;
+	}
+
+	function timestamp() {
+		const now = new Date();
+		return `[${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(
+			2,
+			"0"
+		)}:${String(now.getSeconds()).padStart(2, "0")}]`;
+	}
+
+	function createLineElement() {
+		const el = document.createElement("div");
+		el.className = "line text-success whitespace-pre truncate overflow-hidden text-ellipsis";
+		output.appendChild(el);
+		return el;
+	}
+
+	function typeLine(text) {
+		if (isResetting) return;
+		if (!currentEl) currentEl = createLineElement();
+
+		if (charIndex < text.length) {
+			currentEl.textContent += text[charIndex];
+			charIndex++;
+			safeTimeout(() => typeLine(text), speed);
+		} else {
+			currentEl = null;
+			charIndex = 0;
+			lineIndex++;
+			safeTimeout(processNextLine, delay);
+		}
+	}
+
+	function processNextLine() {
+		if (isResetting) return;
+
+		// finished all lines
+		if (lineIndex >= terminalLines.length) {
+			const end = document.createElement("div");
+			end.innerHTML = `<span></span>`;
+			output.appendChild(end);
+			return;
+		}
+
+		const line = terminalLines[lineIndex];
+
+		// command mode ($ ...)
+		if (line.trim().startsWith("$")) {
+			const cmd = document.createElement("p");
+			cmd.className = "mt-2 text-nowrap truncate overflow-hidden";
+
+			const command = line.replace(/^\$\s*/, "").trim();
+
+			cmd.innerHTML = `
+                <span class="bg-white text-black px-2 font-bold select-none">terminal \\ users \\ me:</span>
+                <span class="text-neutral-500 pl-2">${timestamp()}</span>
+                <span class="pl-2 text-neutral-300">$ ${command}</span>
+            `;
+
+			output.appendChild(cmd);
+			lineIndex++;
+			safeTimeout(processNextLine, 150);
+		} else {
+			typeLine(line);
+		}
+	}
+
+	function resetAnimation() {
+		isResetting = true;
+		clearTimers();
+
+		lineIndex = 0;
+		charIndex = 0;
+		currentEl = null;
+		output.innerHTML = "";
+
+		safeTimeout(() => {
+			isResetting = false;
+			processNextLine();
+		}, 500);
+	}
+
+	// start
+	safeTimeout(processNextLine, 500);
+
+	// loop every 60 seconds
+	setInterval(resetAnimation, 60000);
+</script>
