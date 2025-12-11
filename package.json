@@ -8,7 +8,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@astrojs/svelte": "^7.2.2",
@@ -25,6 +26,7 @@
     "@iconify/tailwind4": "^1.2.0",
     "autoprefixer": "^10.4.22",
     "daisyui": "^5.5.8",
+    "gh-pages": "^6.3.0",
     "sass": "^1.95.0"
   }
 }

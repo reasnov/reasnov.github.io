@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 
 // https://astro.build/config
 export default defineConfig({
+	site: "https://reasnov.github.io",
+	base: "/reasnov.github.io/",
 	vite: {
 		plugins: [tailwindcss()],
 		resolve: {
