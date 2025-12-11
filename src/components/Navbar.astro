@@ -4,9 +4,19 @@ const { fixed } = Astro.props;
 
 <div
 	class={`
-		w-full flex bg-neutral px-6 py-3 rounded-full items-center gap-6
+		navbar border-b
 		${fixed ? "fixed" : ""}
 	`}
 >
-	<a href="/" class="text-xs font-black">&copy Reas Vyn \</a>
+	<div class="flex items-center gap-6 container mx-auto justify-between">
+		<div class="flex items-center">
+			<a href="/" class="text-xs font-black">&copy Reas Vyn \</a>
+		</div>
+
+		<div class="flex items-center gap-3">
+			<a href="https://github.com/reasnov" target="__blank" class="icon-[tabler--brand-github]"></a>
+			<a href="https://x.com/reasnov" target="__blank" class="icon-[tabler--brand-x]"></a>
+			<a href="https://linkedin.com/in/reasnov" target="__blank" class="icon-[tabler--brand-linkedin]"></a>
+		</div>
+	</div>
 </div>
