@@ -1,0 +1,22 @@
+---
+import AppLayout from "./AppLayout.astro";
+
+interface Props {
+    title: string;
+    date?: Date;
+}
+
+const { title, date } = Astro.props;
+---
+
+<AppLayout title={title}>
+    <article class="prose dark:prose-invert mx-auto py-8">
+        <h1 class="text-4xl font-bold mb-2">{title}</h1>
+        {date && (
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-8">
+                {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+        )}
+        <slot />
+    </article>
+</AppLayout>

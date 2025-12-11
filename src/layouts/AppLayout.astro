@@ -24,12 +24,12 @@ const { ...props } = Astro.props;
 		/>
 	</head>
 
-	<body class="flex flex-col size-full min-h-screen">
+	<body class="flex flex-col size-full font-mono max-w-screen overflow-x-hidden min-h-screen font-light">
 		<Navbar />
 
-		<div class="flex-1 container size-full flex flex-col gap-20 mx-auto p-4">
+		<main class="flex-1 container size-full flex flex-col gap-20 mx-auto p-3">
 			<slot />
-		</div>
+		</main>
 
 		<Footer />
 	</body>

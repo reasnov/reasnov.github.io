@@ -50,8 +50,8 @@
 /* UI Theme */
 @theme {
 	--font-display: "Plaster", system-ui;
-	--font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-		monospace;
+	--font-mono:
+		"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /* --- Utilities --- */
@@ -70,14 +70,4 @@
 	100% {
 		opacity: 1;
 	}
-}
-
-/* --- Custom Styles --- */
-
-* {
-	@apply scroll-smooth;
-}
-
-body {
-	@apply font-mono max-w-screen overflow-x-hidden min-h-screen font-light;
 }
