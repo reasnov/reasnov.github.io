@@ -4,7 +4,7 @@
     "verbatimModuleSyntax": true,
     "paths": {
       "@core/*": [
-        "./app/core/*"
+        "./src/core/*"
       ],
       "@config/*": [
         "./config/*"

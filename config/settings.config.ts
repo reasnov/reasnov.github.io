@@ -1,4 +1,4 @@
-import { config } from "../app/core/Config";
+import { config } from "../src/core/Config";
 
 const appName = config("app.name", "Reas Vyn");
 

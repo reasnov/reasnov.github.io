@@ -1,4 +1,4 @@
-import { env } from "../app/core/Env";
+import { env } from "../src/core/Env";
 
 export default {
 	name: env("APP_NAME", "Reas Vyn"),
