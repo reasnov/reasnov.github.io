@@ -1,0 +1,23 @@
+---
+const { title, icons } = Astro.props;
+---
+
+<div class="flex flex-col w-full">
+	<div class="w-full">
+		<span class="text-sm font-bold text-black bg-white w-fit">{title}</span>
+	</div>
+
+	<div class="flex items-center w-full gap-8 p-4 overflow-x-auto flex-nowrap rounded-xl">
+		{
+			icons.map((icon: { icon: string; name: string }) => (
+				<button
+					tabindex="0"
+					class={`inline-block size-12 aspect-square leading-none shrink-0 transition-all ease-in-out grayscale-100 opacity-10 hover:opacity-100 hover:grayscale-0 hover:scale-120 active:opacity-100 active:grayscale-0 active:scale-120 ${icon.icon}`}
+					title={icon.name}
+				>
+					{""}
+				</button>
+			))
+		}
+	</div>
+</div>

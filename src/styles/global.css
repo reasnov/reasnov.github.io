@@ -17,8 +17,8 @@
 	--color-base-content: oklch(87.609% 0 0);
 	--color-primary: oklch(97% 0 0);
 	--color-primary-content: oklch(14% 0 0);
-	--color-secondary: oklch(97% 0 0);
-	--color-secondary-content: oklch(14% 0 0);
+	--color-secondary: oklch(0% 0 0);
+	--color-secondary-content: oklch(98% 0 0);
 	--color-accent: oklch(59% 0.145 163.225);
 	--color-accent-content: oklch(100% 0 0);
 	--color-neutral: oklch(26% 0 0);
@@ -33,7 +33,8 @@
 	--color-error-content: oklch(12.559% 0.051 29.233);
 	--size-selector: 0.25rem;
 	--size-field: 0.25rem;
-	--depth: 1;
+	--border: 1px;
+	--depth: 0;
 	--noise: 0;
 }
 

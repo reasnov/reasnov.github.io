@@ -52,22 +52,6 @@
 		"icon": "icon-[skill-icons--redis-light]"
 	},
 	{
-		"name": "Git",
-		"icon": "icon-[skill-icons--git]"
-	},
-	{
-		"name": "Github",
-		"icon": "icon-[skill-icons--github-light]"
-	},
-	{
-		"name": "Gitlab",
-		"icon": "icon-[skill-icons--gitlab-light]"
-	},
-	{
-		"name": "Docker",
-		"icon": "icon-[skill-icons--docker]"
-	},
-	{
 		"name": "Wordpress",
 		"icon": "icon-[skill-icons--wordpress]"
 	}

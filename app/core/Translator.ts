@@ -1,4 +1,4 @@
-import { config } from "@helpers/Config";
+import { config } from "./Config";
 import fs from "fs";
 import path from "path";
 

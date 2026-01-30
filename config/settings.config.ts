@@ -1,4 +1,4 @@
-import { config } from "@helpers/Config";
+import { config } from "../app/core/Config";
 
 const appName = config("app.name", "Reas Vyn");
 

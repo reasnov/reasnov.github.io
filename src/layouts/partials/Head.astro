@@ -1,0 +1,22 @@
+---
+import { config } from "@core/Config";
+
+interface Props {
+	title?: string;
+	desc?: string;
+	keywords?: string;
+	author?: string;
+}
+
+const { title, desc, keywords, author = config("app.author") } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<meta name="description" content={desc} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+
+<title>{title ?? config("settings.site_title")}</title>

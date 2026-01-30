@@ -3,20 +3,20 @@
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "paths": {
+      "@core/*": [
+        "./app/core/*"
+      ],
+      "@config/*": [
+        "./config/*"
+      ],
       "@components/*": [
         "./src/components/*"
       ],
       "@layouts/*": [
         "./src/layouts/*"
       ],
-      "@config/*": [
-        "./config/*"
-      ],
       "@data/*": [
         "./src/data/*"
-      ],
-      "@helpers/*": [
-        "./src/helpers/*"
       ],
     },
     "plugins": [

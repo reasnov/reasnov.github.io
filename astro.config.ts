@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 export default defineConfig({
 	site: "https://reasnov.github.io",
 	base: "/",
+	trailingSlash: "always",
 	vite: {
 		plugins: [tailwindcss()],
 		resolve: {

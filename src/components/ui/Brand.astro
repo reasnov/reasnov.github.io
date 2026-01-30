@@ -1,0 +1,17 @@
+---
+import { config } from "@core/Config";
+
+interface Props {
+	name?: string;
+	url?: string;
+	size?: string;
+}
+
+const { name = config("settings.site_name"), url = "/", size = "sm" } = Astro.props;
+
+const sizeClass = `text-${size}`;
+---
+
+<a class={`flex items-center gap-1 flex-nowrap ${sizeClass}`} href={url}>
+	<span class="font-black">{name}</span>
+</a>
