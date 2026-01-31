@@ -1,5 +1,6 @@
 ---
 import AppLayout from "./AppLayout.astro";
+import ReadingProgressBar from "@components/ui/ReadingProgressBar.astro";
 
 interface Props {
     title: string;
@@ -12,6 +13,7 @@ const { title, date, readingTime, schema } = Astro.props;
 ---
 
 <AppLayout title={title} schema={schema}>
+    <ReadingProgressBar />
     <article class="prose dark:prose-invert mx-auto py-8">
         <h1 class="text-4xl font-bold mb-2">{title}</h1>
         <div class="flex items-center gap-4 text-neutral-600 dark:text-neutral-400 text-sm mb-8">

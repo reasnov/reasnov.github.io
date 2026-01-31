@@ -55,6 +55,22 @@
 		"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+@layer base {
+	:root {
+		background-color: white;
+		color: black;
+	}
+
+	:root.dark {
+		background-color: oklch(0% 0 0);
+		color: oklch(87.609% 0 0);
+	}
+
+	body {
+		@apply transition-colors duration-300;
+	}
+}
+
 /* --- Utilities --- */
 @utility animate-blink {
 	animation: blink 1.3s ease-in-out infinite;

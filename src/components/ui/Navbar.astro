@@ -1,6 +1,7 @@
 ---
 import Brand from "./Brand.astro";
 import LangSwitcher from "./LangSwitcher.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 const lang = Astro.currentLocale || "en";
@@ -16,15 +17,16 @@ const lang = Astro.currentLocale || "en";
 
 		<!-- Menu-Center -->
 		<div class="space-x-2 navbar-center p-4">
-			<a class="text-neutral-600 hover:text-neutral-300 hover:underline" href={getRelativeLocaleUrl(lang, "blog")}>Blog</a>
+			<a class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:underline" href={getRelativeLocaleUrl(lang, "blog")}>Blog</a>
 			<span>/</span>
-			<a class="text-neutral-600 hover:text-neutral-300 hover:underline" href="https://medium.com/reasnov"
+			<a class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:underline" href="https://medium.com/reasnov"
 				>Medium</a
 			>
 		</div>
 
 		<!-- Menu-End -->
 		<div class="space-x-4 navbar-end flex items-center">
+			<ThemeSwitcher />
 			<LangSwitcher />
 			<div class="flex items-center gap-2">
 				<a href="https://github.com/reasnov" target="__blank" class="icon-[tabler--brand-github]"></a>
