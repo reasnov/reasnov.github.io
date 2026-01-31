@@ -34,7 +34,10 @@ const commands = [
 				<span class="icon-[tabler--terminal] text-accent size-3"></span>
 				<span>COMMAND_EXECUTOR.EXE</span>
 			</div>
-			<span class="text-[9px] tracking-widest uppercase opacity-50">ESC to exit</span>
+			<div class="flex items-center gap-4">
+				<span class="hidden text-[9px] tracking-widest uppercase opacity-50 md:block">ESC to exit</span>
+				<button id="palette-close-btn" class="text-accent font-black hover:underline">[X]</button>
+			</div>
 		</div>
 
 		<div class="p-6 md:p-10">
@@ -110,6 +113,7 @@ const commands = [
 <script>
 	const palette = document.getElementById("command-palette");
 	const input = document.getElementById("palette-input") as HTMLInputElement;
+	const closeBtn = document.getElementById("palette-close-btn");
 
 	function togglePalette() {
 		if (!palette) return;
@@ -120,6 +124,8 @@ const commands = [
 			filterCommands("");
 		}
 	}
+
+	closeBtn?.addEventListener("click", togglePalette);
 
 	function filterCommands(query: string) {
 		const q = query.toLowerCase();

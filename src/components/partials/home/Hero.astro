@@ -20,12 +20,9 @@ const locale = Astro.currentLocale || "en";
 				</p>
 			</div>
 
-			<h1
-				class="font-display text-content text-6xl leading-[0.85] drop-shadow-[4px_4px_0px_var(--color-accent)]/10 sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem]"
-			>
+			<h1 class="font-display text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl">
 				{trans("hero.name", {}, locale)}<span class="animate-blink text-t-cyan">█</span>
 			</h1>
-
 			<div class="flex flex-wrap items-center gap-4">
 				<span class="text-content/40 text-[10px] font-bold tracking-widest uppercase md:text-xs"
 					>IDENT_{trans("hero.role_prefix", {}, locale)}</span

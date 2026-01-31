@@ -89,15 +89,10 @@
 			3px 100%;
 	}
 
-	h1,
-	.font-display {
-		@apply font-display tracking-tighter uppercase;
-	}
-	h2,
-	h3,
-	h4 {
-		@apply font-black tracking-tighter uppercase;
-	}
+	/* Core Typography */
+	h1, h2, h3, h4 { @apply font-black uppercase tracking-tighter; }
+	.font-display { @apply font-display uppercase tracking-tighter; }
+	p { @apply leading-relaxed; }
 	::selection {
 		@apply bg-accent text-accent-content;
 	}
