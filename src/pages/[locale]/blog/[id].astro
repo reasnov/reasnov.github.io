@@ -7,27 +7,38 @@ import { trans } from "@core/Translator";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 export async function getStaticPaths() {
-	const posts = await getCollection("blog", (entry) => {
-		const isNotDraft = import.meta.env.PROD ? !entry.data.draft : true;
-		return isNotDraft && entry.id.startsWith("id/");
-	});
+	const locales = ["en", "id"];
+	
+	const allPaths = await Promise.all(
+		locales.map(async (locale) => {
+			const posts = await getCollection("blog", (entry) => {
+				const isNotDraft = import.meta.env.PROD ? !entry.data.draft : true;
+				return isNotDraft && entry.id.startsWith(`${locale}/`);
+			});
 
-	posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+			posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-	return posts.map((post, index) => ({
-		params: { id: post.id.replace("id/", "") },
-		props: {
-			post,
-			prev: index < posts.length - 1 ? posts[index + 1] : null,
-			next: index > 0 ? posts[index - 1] : null,
-		},
-	}));
+			return posts.map((post, index) => ({
+				params: { 
+					locale,
+					id: post.id.replace(`${locale}/`, "") 
+				},
+				props: {
+					post,
+					prev: index < posts.length - 1 ? posts[index + 1] : null,
+					next: index > 0 ? posts[index - 1] : null,
+				},
+			}));
+		})
+	);
+
+	return allPaths.flat();
 }
 
 const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
 const readingTime = getReadingTime(post.body ?? "");
-const locale = Astro.currentLocale || "en";
+const locale = Astro.params.locale as string;
 
 const schema = generateBlogPostingSchema({
 	title: post.data.title,

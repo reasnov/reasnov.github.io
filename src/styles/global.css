@@ -19,27 +19,6 @@
 /* --- TailwindCSS --- */
 @import "tailwindcss";
 
-/* --- Daisy UI --- */
-@plugin "daisyui";
-
-@plugin "daisyui/theme" {
-	name: "black";
-	default: true;
-	prefersdark: true;
-	color-scheme: "dark";
-	--color-base-100: oklch(0% 0 0);
-	--color-base-200: oklch(10% 0 0);
-	--color-base-300: oklch(15% 0 0);
-	--color-base-content: oklch(90% 0 0);
-	--color-primary: oklch(70% 0.15 150); /* Matrix Green */
-	--color-primary-content: oklch(10% 0 0);
-	--color-secondary: oklch(75% 0.15 80); /* Amber/Gold */
-	--color-secondary-content: oklch(10% 0 0);
-	--border: 1px;
-	--radius-box: 0px;
-	--radius-btn: 0px;
-}
-
 /* --- Iconify --- */
 @plugin "@iconify/tailwind4" {
 	scale: 1.2;
@@ -47,9 +26,21 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+	--primary: #000000;
+	--secondary: #ffffff;
+}
+
+.dark {
+	--primary: #ffffff;
+	--secondary: #000000;
+}
+
 @theme {
 	--font-display: "Geist Mono", monospace;
 	--font-mono: "Geist Mono", monospace;
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
 }
 
 @layer base {
@@ -61,6 +52,11 @@
 		@apply font-mono antialiased;
 	}
 
+	/* Force monokrom for selection */
+	::selection {
+		@apply bg-black text-white dark:bg-white dark:text-black;
+	}
+
 	/* Reset all radius for TUI style */
 	* {
 		border-radius: 0 !important;
@@ -70,7 +66,7 @@
 @layer components {
     /* TUI Window Style */
     .tui-border {
-        @apply border border-black dark:border-neutral-800;
+        @apply border border-black dark:border-white;
     }
 
     .tui-window {
@@ -82,28 +78,28 @@
     }
 
     .tui-button {
-        @apply border border-black dark:border-white px-4 py-1 text-sm font-bold uppercase transition-all 
+        @apply border-2 border-black dark:border-white px-4 py-1 text-sm font-bold uppercase transition-all 
                bg-transparent text-black dark:text-white
                hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black
                active:translate-x-0.5 active:translate-y-0.5;
     }
 
     .tui-button-primary {
-        @apply bg-black text-white dark:bg-white dark:text-black hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white;
+        @apply bg-black text-white dark:bg-white dark:text-black hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white border-2 border-black dark:border-white;
     }
 
     .tui-panel {
-        @apply border border-neutral-200 dark:border-neutral-800 p-4;
+        @apply border-2 border-black dark:border-white p-4;
     }
 
     /* TUI Decoration */
     .tui-divider {
-        @apply h-px bg-neutral-200 dark:bg-neutral-800 w-full my-4 relative;
+        @apply h-0.5 bg-black dark:bg-white w-full my-4 relative;
     }
 
     .tui-divider::after {
-        content: "[+]";
-        @apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black px-2 text-[10px] text-neutral-400;
+        content: "[SYSTEM_DIVIDER]";
+        @apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black px-2 text-[10px] font-bold text-black dark:text-white;
     }
 }
 

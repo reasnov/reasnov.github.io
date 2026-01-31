@@ -17,7 +17,7 @@ const i18n = {
 	<div class="flex items-center justify-between px-3 py-1 bg-neutral-900 border-b border-neutral-800">
 		<div class="flex items-center gap-4">
             <span class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest flex items-center gap-2">
-                <span class="size-2 bg-success rounded-full"></span>
+                <span class="size-2 bg-white rounded-full"></span>
                 {trans("terminal.header", {}, locale)}
             </span>
         </div>
@@ -36,6 +36,8 @@ const i18n = {
 </div>
 
 <style>
+    @reference "../../../styles/global.css";
+
     .custom-scrollbar::-webkit-scrollbar {
         width: 4px;
     }

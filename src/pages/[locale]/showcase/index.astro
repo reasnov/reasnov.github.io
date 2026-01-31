@@ -1,0 +1,92 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+import { trans } from "@core/Translator";
+import projects from "@data/projects.json";
+
+export function getStaticPaths() {
+	return [
+		{ params: { locale: "en" } },
+		{ params: { locale: "id" } },
+	];
+}
+
+const locale = Astro.currentLocale || "en";
+---
+
+<AppLayout title={trans("pages.showcase.title", {}, locale)}>
+    <section class="flex flex-col gap-12 my-10" data-aos="fade-in">
+        <!-- Breadcrumb / Directory Style Header -->
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                <span>ROOT</span>
+                <span>/</span>
+                <span>PROJECTS</span>
+                <span>/</span>
+                <span class="text-black dark:text-white underline">{locale.toUpperCase()}</span>
+            </div>
+            <div class="flex flex-col gap-4 border-l-4 border-black dark:border-white pl-6 mt-4">
+                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
+                    {trans("pages.showcase.title", {}, locale)}
+                </h1>
+                <p class="text-neutral-500 font-bold uppercase text-xs md:text-sm tracking-widest">
+                    // {trans("pages.showcase.subtitle", {}, locale)}
+                </p>
+            </div>
+        </div>
+
+        <!-- Terminal Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-2 border-black dark:border-white">
+            {projects.map((project, index) => (
+                <div 
+                    class="group flex flex-col border-black dark:border-white [&:not(:last-child)]:border-b md:[&:not(:nth-child(2n))]:border-r lg:[&:not(:nth-child(3n))]:border-r transition-all duration-300"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                >
+                    <div class="aspect-video relative overflow-hidden grayscale group-hover:invert transition-all duration-500 border-b border-black dark:border-white">
+                        <img 
+                            src={project.image} 
+                            alt={project.title} 
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                        />
+                        <div class="absolute top-2 left-2 px-2 py-0.5 bg-black text-white text-[8px] font-bold uppercase tracking-widest border border-white/20">
+                            PRJ_{String(index + 1).padStart(3, '0')}
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col p-6 gap-4 bg-white dark:bg-black group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors flex-1">
+                        <div class="flex flex-wrap gap-1">
+                            {project.tags.map(tag => (
+                                <span class="text-[8px] font-bold uppercase px-1 border border-black dark:border-white opacity-60 group-hover:opacity-100">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        <h2 class="text-xl font-bold uppercase underline decoration-2 underline-offset-4">{project.title}</h2>
+                        
+                        <p class="text-xs leading-relaxed flex-1 opacity-80">
+                            {project.description}
+                        </p>
+
+                        <a 
+                            href={project.link} 
+                            target="_blank" 
+                            class="mt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest group-hover:underline"
+                        >
+                            <span>[{trans("showcase.view_project", {}, locale)}]</span>
+                            <span class="icon-[tabler--arrow-up-right] size-4"></span>
+                        </a>
+                    </div>
+                </div>
+            ))}
+        </div>
+        
+        <!-- Bottom Command Hint -->
+        <div class="flex justify-between items-center text-[10px] font-bold text-neutral-500 uppercase tracking-widest border-t border-neutral-200 dark:border-neutral-800 pt-4">
+            <span>[F3] HELP</span>
+            <span>TOTAL_ITEMS: {projects.length}</span>
+            <span>STATUS: OK</span>
+        </div>
+    </section>
+</AppLayout>

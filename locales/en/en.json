@@ -17,7 +17,8 @@
         },
         "playgrounds": {
             "title": "Code Playgrounds",
-            "subtitle": "Experimental mini-projects, creative coding, and logic puzzles."
+            "subtitle": "Experimental mini-projects, creative coding, and logic puzzles.",
+            "button": "RUN_EXPERIMENT"
         }
     },
 	"skills": {
@@ -37,7 +38,7 @@
 		"name": "REASVYN",
 		"role_prefix": "I'm a",
 		"role": "Fullstack Web Developer",
-		"description": "I'm a passionate <span class=\"font-bold text-blue-500\">Fullstack Web Developer</span> with a strong focus on creating <span class=\"font-medium text-yellow-500\">elegant</span>, <span class=\"font-medium text-purple-500\">efficient</span>, and <span class=\"font-medium text-emerald-500\">user-friendly</span> web applications. With a deep love for <span class=\"font-medium text-amber-500\">clean code</span> and a keen eye for detail, I specialize in building robust solutions using <span class=\"font-bold text-red-500\">Laravel</span>, <span class=\"font-bold text-green-500\">NodeJS</span> and modern web technologies.",
+		"description": "I'm a passionate <span class=\"font-bold underline\">Fullstack Web Developer</span> with a strong focus on creating <span class=\"font-bold\">elegant</span>, <span class=\"font-bold\">efficient</span>, and <span class=\"font-bold\">user-friendly</span> web applications. With a deep love for <span class=\"font-bold italic\">clean code</span> and a keen eye for detail, I specialize in building robust solutions using <span class=\"font-bold\">Laravel</span>, <span class=\"font-bold\">NodeJS</span> and modern web technologies.",
 		"buttons": {
 			"explore": "Explore Projects",
 			"connect": "Connect on LinkedIn"

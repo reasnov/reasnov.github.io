@@ -4,19 +4,32 @@ import { getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { trans } from "@core/Translator";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-	const blogs = await getCollection("blog", (entry) => {
-		const isNotDraft = import.meta.env.PROD ? !entry.data.draft : true;
-		return isNotDraft && entry.id.startsWith("en/");
-	});
+	const locales = ["en", "id"];
+	
+	const allPosts = await Promise.all(
+		locales.map(async (locale) => {
+			const blogs = await getCollection("blog", (entry) => {
+				const isNotDraft = import.meta.env.PROD ? !entry.data.draft : true;
+				return isNotDraft && entry.id.startsWith(`${locale}/`);
+			});
 
-	blogs.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-	return paginate(blogs, { pageSize: 15 });
+			blogs.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+			
+			return paginate(blogs, { 
+				params: { locale },
+				pageSize: 15 
+			});
+		})
+	);
+
+	return allPosts.flat();
 };
 
 const { page } = Astro.props as { page: Page<CollectionEntry<"blog">> };
-const locale = Astro.currentLocale || "en";
+const locale = Astro.params.locale as string;
 
 const today = new Date();
 const oneWeekAgo = new Date(today);
@@ -39,8 +52,8 @@ oneWeekAgo.setDate(today.getDate() - 7);
 							data-aos="fade-up"
 						>
 							<div class="flex items-center gap-4 flex-1">
-								{isNew && <span class="text-[10px] font-bold text-emerald-500 border border-emerald-500 px-2 py-0.5 rounded animate-pulse">NEW</span>}
-								<a href={`/en/blog/${blog.id.replace("en/", "")}`} class="text-xl font-bold group-hover:text-primary transition-colors">
+								{isNew && <span class="text-[10px] font-bold text-black dark:text-white border border-black dark:border-white px-2 py-0.5 animate-pulse">NEW</span>}
+								<a href={getRelativeLocaleUrl(locale, `blog/${blog.id.replace(`${locale}/`, "")}`)} class="text-xl font-bold group-hover:text-primary transition-colors">
 									{blog.data.title}
 								</a>
 							</div>
@@ -56,14 +69,14 @@ oneWeekAgo.setDate(today.getDate() - 7);
 		<div class="flex items-center justify-center gap-6 my-10">
 			{
 				page.url.prev && (
-					<a href={page.url.prev} class="btn btn-outline btn-sm">
+					<a href={page.url.prev} class="tui-button">
 						&laquo; {trans("blog.prev", {}, locale)}
 					</a>
 				)
 			}
 			{
 				page.url.next && (
-					<a href={page.url.next} class="btn btn-outline btn-sm">
+					<a href={page.url.next} class="tui-button">
 						{trans("blog.next", {}, locale)} &raquo;
 					</a>
 				)

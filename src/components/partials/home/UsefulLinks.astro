@@ -19,6 +19,8 @@ const locale = Astro.currentLocale || "en";
                 href={link.url} 
                 target="_blank" 
                 class="group tui-panel border-neutral-300 dark:border-neutral-800 hover:border-primary hover:bg-neutral-50 dark:hover:bg-neutral-900/10 transition-all flex flex-col items-center gap-4 text-center"
+                data-aos="fade-up"
+                data-aos-delay={index * 50}
             >
                 <div class="size-12 flex items-center justify-center border border-neutral-200 dark:border-neutral-800 group-hover:border-primary group-hover:text-primary transition-all">
                     <span class={`${link.icon} size-6`}></span>

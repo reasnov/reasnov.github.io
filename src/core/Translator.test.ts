@@ -1,7 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { trans } from "./Translator";
-import path from "path";
-import fs from "fs";
 
 // Mocking fs to avoid real file system interaction if desired,
 // but for integration-like tests, real files are okay.

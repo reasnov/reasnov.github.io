@@ -10,6 +10,13 @@ import Skills from "@components/partials/home/Skills.astro";
 import Tools from "@components/partials/home/Tools.astro";
 import { generatePersonSchema } from "@core/SEO";
 
+export function getStaticPaths() {
+	return [
+		{ params: { locale: "en" } },
+		{ params: { locale: "id" } },
+	];
+}
+
 const schema = generatePersonSchema();
 ---
 

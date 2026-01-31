@@ -2,7 +2,6 @@
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
-import svelte from "@astrojs/svelte";
 import { fileURLToPath } from "node:url";
 
 // https://astro.build/config
@@ -18,8 +17,6 @@ export default defineConfig({
 			},
 		},
 	},
-
-	integrations: [svelte()],
 
 	i18n: {
 		defaultLocale: "en",

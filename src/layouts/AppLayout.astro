@@ -6,7 +6,6 @@ import "../styles/global.css";
 import Head from "./partials/Head.astro";
 import Header from "@components/partials/common/Header.astro";
 import Footer from "@components/partials/common/Footer.astro";
-import CommandPalette from "@components/ui/CommandPalette.svelte";
 
 import "aos/dist/aos.css";
 
@@ -33,7 +32,6 @@ const lang = Astro.currentLocale || "en";
 
 	<body class="flex flex-col min-h-screen overflow-x-hidden font-mono font-light size-full max-w-screen">
 		<Header />
-		<CommandPalette client:load lang={lang} />
 
 		<main class="container flex flex-col flex-1 gap-8 p-4 mx-auto size-full">
 			<slot />

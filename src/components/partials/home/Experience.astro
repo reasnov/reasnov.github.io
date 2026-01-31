@@ -13,17 +13,21 @@ const locale = Astro.currentLocale || "en";
 
     <div class="flex flex-col gap-0 border border-neutral-200 dark:border-neutral-900">
         {experiences.map((exp, index) => (
-            <div class={`p-6 border-b border-neutral-100 dark:border-neutral-900 last:border-0 group hover:bg-neutral-50 dark:hover:bg-neutral-900/10 transition-colors`}>
+            <div 
+                class={`p-6 border-b border-neutral-100 dark:border-neutral-900 last:border-0 group hover:bg-neutral-50 dark:hover:bg-neutral-900/10 transition-colors`}
+                data-aos="fade-up"
+                data-aos-delay={index * 50}
+            >
                 <div class="flex flex-col md:flex-row md:items-start gap-4">
                     <div class="flex flex-col min-w-[100px]">
-                        <span class="text-xs font-bold text-primary px-2 py-0.5 border border-primary/20 w-fit">
+                        <span class="text-xs font-bold text-black dark:text-white px-2 py-0.5 border border-black dark:border-white w-fit">
                             {exp.year}
                         </span>
                     </div>
                     
                     <div class="flex flex-col gap-2 flex-1">
                         <div class="flex flex-col">
-                            <h3 class="text-lg font-bold group-hover:text-primary transition-colors">{exp.title}</h3>
+                            <h3 class="text-lg font-bold group-hover:underline transition-colors">{exp.title}</h3>
                             <span class="text-xs font-bold text-neutral-500 uppercase">{exp.company}</span>
                         </div>
                         
