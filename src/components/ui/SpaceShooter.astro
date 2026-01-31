@@ -12,7 +12,7 @@ const { manual = false } = Astro.props;
 
 <div
 	id="game-splash"
-	class={`bg-bg fixed inset-0 z-[500] flex flex-col items-center justify-center font-mono ${manual ? "hidden" : ""}`}
+	class={`bg-base fixed inset-0 z-[500] flex flex-col items-center justify-center font-mono ${manual ? "hidden" : ""}`}
 >
 	<!-- Game UI Overlay -->
 	<div class="tui-window relative h-[600px] w-full max-w-4xl overflow-hidden shadow-2xl">
@@ -35,8 +35,7 @@ const { manual = false } = Astro.props;
 				<defs>
 					<!-- Player Ship -->
 					<g id="svg-player">
-						<path d="M0 -15 L10 10 L0 5 L-10 10 Z" fill="none" stroke="currentColor" stroke-width="2"
-						></path>
+						<path d="M0 -15 L10 10 L0 5 L-10 10 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
 						<path d="M0 -5 L3 2 L0 0 L-3 2 Z" fill="var(--accent)"></path>
 					</g>
 					<!-- Enemy Bug -->
@@ -58,20 +57,20 @@ const { manual = false } = Astro.props;
 				<div class="absolute bottom-8 left-8 flex gap-4">
 					<div
 						id="m-left"
-						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/20 bg-white/5 font-bold text-white active:bg-white/20"
+						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/10 bg-white/5 font-bold text-white active:bg-white/20"
 					>
 						&lt;
 					</div>
 					<div
 						id="m-right"
-						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/20 bg-white/5 font-bold text-white active:bg-white/20"
+						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/10 bg-white/5 font-bold text-white active:bg-white/20"
 					>
 						&gt;
 					</div>
 				</div>
 				<div
 					id="m-shoot"
-					class="border-accent/40 bg-accent/10 active:bg-accent/30 text-accent pointer-events-auto absolute right-8 bottom-8 flex size-16 items-center justify-center border-2 font-bold"
+					class="pointer-events-auto absolute bottom-8 right-8 flex size-16 items-center justify-center border-2 border-accent/20 bg-accent/10 font-bold text-accent active:bg-accent/30"
 				>
 					FIRE
 				</div>
@@ -80,36 +79,36 @@ const { manual = false } = Astro.props;
 			<!-- Start Screen -->
 			<div
 				id="start-screen"
-				class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 p-8 text-center"
+				class="absolute inset-0 flex flex-col items-center justify-center bg-neutral-950/80 p-8 text-center"
 			>
-				<h2 class="font-display text-accent mb-4 text-3xl">SECURITY THREAT DETECTED</h2>
-				<p class="mb-8 max-w-md text-xs tracking-widest text-neutral-400 uppercase">
+				<h2 class="font-display mb-4 text-3xl text-accent">SECURITY THREAT DETECTED</h2>
+				<p class="mb-8 max-w-md text-xs tracking-widest text-white/40 uppercase">
 					Multiple 'Unclean_Code' bugs detected in home directory. Please execute cleanup protocol to proceed.
 				</p>
 				<button id="start-btn" class="tui-btn-primary tui-btn-lg">INITIALIZE_CLEANUP</button>
 				<div class="mt-6 flex flex-col gap-2">
-					<p class="text-[9px] text-neutral-500 uppercase">Desktop: [ARROWS] to Move, [SPACE] to Shoot</p>
-					<p class="text-[9px] text-neutral-500 uppercase">Mobile: Use On-Screen Controls</p>
+					<p class="text-[9px] text-white/20 uppercase">Desktop: [ARROWS] to Move, [SPACE] to Shoot</p>
+					<p class="text-[9px] text-white/20 uppercase">Mobile: Use On-Screen Controls</p>
 				</div>
 			</div>
 
 			<!-- Victory Screen -->
 			<div
 				id="victory-screen"
-				class="absolute inset-0 flex hidden flex-col items-center justify-center bg-black/90 p-8 text-center"
+				class="absolute inset-0 hidden flex flex-col items-center justify-center bg-neutral-950/90 p-8 text-center"
 			>
-				<h2 class="font-display text-accent mb-4 text-3xl">SYSTEM_SECURED</h2>
-				<p class="mb-8 text-xs tracking-widest text-neutral-400 uppercase">
+				<h2 class="font-display mb-4 text-3xl text-accent">SYSTEM_SECURED</h2>
+				<p class="mb-8 text-xs tracking-widest text-white/40 uppercase">
 					Integrity check passed. Redirecting to core...
 				</p>
-				<div class="h-1 w-48 overflow-hidden bg-neutral-800">
-					<div class="bg-accent h-full animate-[loading_2s_ease-in-out]"></div>
+				<div class="h-1 w-48 overflow-hidden bg-white/10">
+					<div class="h-full animate-[loading_2s_ease-in-out] bg-accent"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<p class="mt-4 text-[10px] font-bold tracking-[0.3em] text-neutral-500 uppercase">
-		Authorized Access Only // @reasnov
+	<p class="mt-4 text-[10px] font-bold tracking-[0.3em] text-content/20 uppercase">
+		Authorized Access Only // Andreas Novyanto
 	</p>
 </div>
 

@@ -14,18 +14,18 @@ const locale = Astro.currentLocale || "en";
 	<section class="my-10 flex flex-col gap-12" data-aos="fade-in">
 		<!-- Breadcrumb / Directory Style Header -->
 		<div class="flex flex-col gap-2">
-			<div class="flex items-center gap-2 text-[10px] font-bold tracking-widest text-neutral-500 uppercase">
+			<div class="flex items-center gap-2 text-[10px] font-bold tracking-widest text-content/40 uppercase">
 				<span>ROOT</span>
 				<span>/</span>
 				<span>PROJECTS</span>
 				<span>/</span>
-				<span class="text-black underline dark:text-white">{locale.toUpperCase()}</span>
+				<span class="text-content underline">{locale.toUpperCase()}</span>
 			</div>
-			<div class="mt-4 flex flex-col gap-4 border-l-4 border-black pl-6 dark:border-white">
-				<h1 class="text-4xl leading-none font-black tracking-tighter uppercase md:text-6xl">
+			<div class="mt-4 flex flex-col gap-4 border-l-4 border-border pl-6">
+				<h1 class="leading-none font-black tracking-tighter uppercase">
 					{trans("pages.showcase.title", {}, locale)}
 				</h1>
-				<p class="text-xs font-bold tracking-widest text-neutral-500 uppercase md:text-sm">
+				<p class="text-xs font-bold tracking-widest text-content/40 uppercase md:text-sm">
 					// {trans("pages.showcase.subtitle", {}, locale)}
 				</p>
 			</div>
@@ -67,7 +67,7 @@ const locale = Astro.currentLocale || "en";
 								{project.title}
 							</h3>
 
-							<p class="text-fg/60 flex-1 text-xs leading-relaxed">{project.description}</p>
+							<p class="text-content/60 flex-1 text-xs leading-relaxed">{project.description}</p>
 
 							<a
 								href={project.link}

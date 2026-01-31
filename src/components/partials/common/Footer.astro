@@ -7,9 +7,9 @@ const year = new Date().getFullYear();
 const version = app_info("app.version");
 ---
 
-<footer class="border-border bg-primary text-primary-fg mt-20 w-full border-t-2 py-4">
+<footer class="border-border bg-primary text-primary-content mt-20 w-full border-t-2 py-4">
 	<div
-		class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-[10px] font-bold tracking-widest uppercase md:flex-row"
+		class="tui-container flex flex-col items-center justify-between gap-4 text-[10px] font-bold tracking-widest uppercase md:flex-row"
 	>
 		<p set:html={trans("footer.copyright", { year }, locale)} />
 

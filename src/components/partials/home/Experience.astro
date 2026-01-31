@@ -6,18 +6,18 @@ const locale = Astro.currentLocale || "en";
 ---
 
 <section class="my-20 flex w-full flex-col gap-8" data-aos="fade-in">
-	<div class="flex flex-col gap-2 border-l-4 border-black pl-4 dark:border-white">
-		<h2 class="text-xl font-black tracking-widest uppercase">{trans("experience.title", {}, locale)}</h2>
-		<p class="text-xs font-bold tracking-tighter text-neutral-500 uppercase">
+	<div class="flex flex-col gap-2 border-l-4 border-border pl-4">
+		<h2 class="text-xl font-black uppercase tracking-widest">{trans("experience.title", {}, locale)}</h2>
+		<p class="text-xs font-bold tracking-tighter text-content/50 uppercase">
 			-- {trans("experience.subtitle", {}, locale)}
 		</p>
 	</div>
 
-	<div class="flex flex-col gap-0 border border-neutral-200 dark:border-neutral-900">
+	<div class="flex flex-col gap-0 border border-border/10">
 		{
 			experiences.map((exp, index) => (
 				<div
-					class={`group border-b border-neutral-100 p-6 transition-colors last:border-0 hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/10`}
+					class={`group border-b border-border/5 p-6 transition-colors last:border-0 hover:bg-primary/5`}
 					data-aos="fade-up"
 					data-aos-delay={index * 50}
 				>
@@ -34,7 +34,7 @@ const locale = Astro.currentLocale || "en";
 								<span class="text-xs font-bold text-neutral-500 uppercase">{exp.company}</span>
 							</div>
 
-							<p class="max-w-3xl text-xs leading-relaxed text-neutral-600 md:text-sm dark:text-neutral-400">
+							<p class="max-w-3xl text-xs leading-relaxed text-content/70 md:text-sm">
 								{exp.description}
 							</p>
 						</div>

@@ -38,7 +38,7 @@ oneWeekAgo.setDate(today.getDate() - 7);
 
 <AppLayout>
 	<div class="my-10 flex flex-col gap-8" data-aos="fade-up">
-		<h1 class="border-primary w-fit border-b-4 pb-2 text-4xl font-bold">{trans("nav.blog", {}, locale)}</h1>
+		<h1 class="border-accent w-fit border-b-4 pb-2 font-black">{trans("nav.blog", {}, locale)}</h1>
 
 		<div class="flex w-full flex-col">
 			{
@@ -48,7 +48,7 @@ oneWeekAgo.setDate(today.getDate() - 7);
 
 					return (
 						<div
-							class="group flex flex-col justify-between border-b border-neutral-100 px-4 py-6 transition-colors hover:bg-neutral-50 md:flex-row md:items-center dark:border-neutral-900 dark:hover:bg-neutral-900/30"
+							class="group flex flex-col justify-between border-b border-border/10 px-4 py-6 transition-colors hover:bg-primary/5 md:flex-row md:items-center"
 							data-aos="fade-up"
 						>
 							<div class="flex flex-1 items-center gap-4">
@@ -59,12 +59,12 @@ oneWeekAgo.setDate(today.getDate() - 7);
 								)}
 								<a
 									href={getRelativeLocaleUrl(locale, `blog/${blog.id.replace(`${locale}/`, "")}`)}
-									class="group-hover:text-primary text-xl font-bold transition-colors"
+									class="group-hover:text-accent text-xl font-bold transition-colors"
 								>
 									{blog.data.title}
 								</a>
-							</div>{" "}
-							<div class="mt-2 text-sm font-bold text-neutral-400 md:mt-0">
+							</div>
+							<div class="mt-2 text-sm font-bold text-content/40 md:mt-0">
 								{postDate.toLocaleDateString(locale, {
 									year: "numeric",
 									month: "long",

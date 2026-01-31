@@ -16,18 +16,18 @@ const locale = Astro.currentLocale || "en";
 	<section class="my-10 flex flex-col gap-12" data-aos="fade-in">
 		<!-- Breadcrumb / Directory Style Header -->
 		<div class="flex flex-col gap-2">
-			<div class="flex items-center gap-2 text-[10px] font-bold tracking-widest text-neutral-500 uppercase">
+			<div class="flex items-center gap-2 text-[10px] font-bold tracking-widest text-content/40 uppercase">
 				<span>ROOT</span>
 				<span>/</span>
 				<span>PLAYGROUNDS</span>
 				<span>/</span>
-				<span class="text-black underline dark:text-white">{locale.toUpperCase()}</span>
+				<span class="text-content underline">{locale.toUpperCase()}</span>
 			</div>
-			<div class="mt-4 flex flex-col gap-4 border-l-4 border-black pl-6 dark:border-white">
-				<h1 class="text-4xl leading-none font-black tracking-tighter uppercase md:text-6xl">
+			<div class="mt-4 flex flex-col gap-4 border-l-4 border-border pl-6">
+				<h1 class="leading-none font-black tracking-tighter uppercase">
 					{trans("pages.playgrounds.title", {}, locale)}
 				</h1>
-				<p class="text-xs font-bold tracking-widest text-neutral-500 uppercase md:text-sm">
+				<p class="text-xs font-bold tracking-widest text-content/40 uppercase md:text-sm">
 					// {trans("pages.playgrounds.subtitle", {}, locale)}
 				</p>
 			</div>
@@ -71,7 +71,7 @@ const locale = Astro.currentLocale || "en";
 								{item.title}
 							</h2>
 
-							<p class="text-fg/60 flex-1 text-xs leading-relaxed italic">&gt; {item.description}</p>
+							<p class="text-content/60 flex-1 text-xs leading-relaxed italic">&gt; {item.description}</p>
 
 							<a href={item.link} target="_blank" class="tui-btn-primary tui-btn-sm mt-4 w-full">
 								{trans("pages.playgrounds.button", {}, locale)}
@@ -80,11 +80,11 @@ const locale = Astro.currentLocale || "en";
 
 						{/* Bottom Info Bar */}
 						<div class="border-border bg-primary/5 flex items-center justify-between border-t px-3 py-1">
-							<span class="text-fg/40 text-[7px] font-bold tracking-tighter uppercase">
+							<span class="text-content/40 text-[7px] font-bold tracking-tighter uppercase">
 								ACCESS: PUBLIC
 							</span>
 							<div class="flex gap-1">
-								<span class="bg-fg size-1.5 animate-pulse" />
+								<span class="bg-content size-1.5 animate-pulse" />
 							</div>
 						</div>
 					</div>

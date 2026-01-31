@@ -60,19 +60,19 @@ const schema = generateBlogPostingSchema({
 	<Content />
 
 	<div
-		class="mt-16 flex flex-col justify-between gap-8 border-t border-neutral-100 pt-8 sm:flex-row dark:border-neutral-900"
+		class="mt-16 flex flex-col justify-between gap-8 border-t border-border/10 pt-8 sm:flex-row"
 	>
 		{
 			prev && (
 				<a
 					href={getRelativeLocaleUrl(locale, `blog/${prev.id.replace(`${locale}/`, "")}`)}
-					class="group hover:border-primary/50 flex flex-1 flex-col gap-2 rounded-lg border border-neutral-100 p-4 transition-colors dark:border-neutral-800"
+					class="group flex flex-1 flex-col gap-2 border border-border/10 p-4 transition-colors hover:border-accent"
 				>
-					<span class="flex items-center gap-2 text-xs font-bold tracking-widest text-neutral-400 uppercase">
+					<span class="flex items-center gap-2 text-xs font-bold tracking-widest text-content/40 uppercase">
 						<span class="icon-[tabler--arrow-left] size-3" />
 						{trans("blog.prev", {}, locale)}
 					</span>
-					<span class="group-hover:text-primary line-clamp-2 font-bold transition-colors">
+					<span class="group-hover:text-accent line-clamp-2 font-bold transition-colors">
 						{prev.data.title}
 					</span>
 				</a>
@@ -82,13 +82,13 @@ const schema = generateBlogPostingSchema({
 			next && (
 				<a
 					href={getRelativeLocaleUrl(locale, `blog/${next.id.replace(`${locale}/`, "")}`)}
-					class="group hover:border-primary/50 flex flex-1 flex-col gap-2 rounded-lg border border-neutral-100 p-4 text-right transition-colors dark:border-neutral-800"
+					class="group flex flex-1 flex-col gap-2 border border-border/10 p-4 text-right transition-colors hover:border-accent"
 				>
-					<span class="flex items-center justify-end gap-2 text-xs font-bold tracking-widest text-neutral-400 uppercase">
+					<span class="flex items-center justify-end gap-2 text-xs font-bold tracking-widest text-content/40 uppercase">
 						{trans("blog.next", {}, locale)}
 						<span class="icon-[tabler--arrow-right] size-3" />
 					</span>
-					<span class="group-hover:text-primary line-clamp-2 font-bold transition-colors">
+					<span class="group-hover:text-accent line-clamp-2 font-bold transition-colors">
 						{next.data.title}
 					</span>
 				</a>

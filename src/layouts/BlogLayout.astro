@@ -23,10 +23,10 @@ const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth < 4);
 	<div class="relative flex flex-col gap-12 py-8 lg:flex-row">
 		<!-- Main Content -->
 		<article class="prose dark:prose-invert max-w-none flex-1">
-			<div class="mb-12 border-b-2 border-black pb-8 dark:border-white">
-				<h1 class="mb-4 text-4xl font-black tracking-tighter uppercase md:text-6xl">{title}</h1>
+			<div class="mb-12 border-b-2 border-border pb-8">
+				<h1 class="mb-4 leading-none font-black tracking-tighter uppercase">{title}</h1>
 				<div
-					class="flex flex-wrap items-center gap-4 text-[10px] font-bold tracking-widest text-neutral-500 uppercase"
+					class="flex flex-wrap items-center gap-4 text-[10px] font-bold tracking-widest text-content/50 uppercase"
 				>
 					{
 						date && (
@@ -63,7 +63,7 @@ const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth < 4);
 								{filteredHeadings.map((h) => (
 									<a
 										href={`#${h.slug}`}
-										class={`hover:text-primary line-clamp-2 text-[10px] font-bold tracking-tight uppercase transition-colors ${h.depth === 3 ? "border-l border-neutral-200 pl-4 dark:border-neutral-800" : ""}`}
+										class={`hover:text-accent line-clamp-2 text-[10px] font-bold tracking-tight uppercase transition-colors ${h.depth === 3 ? "border-l border-border/10 pl-4" : ""}`}
 									>
 										{h.depth === 2 ? "> " : "- "}
 										{h.text}
@@ -72,11 +72,11 @@ const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth < 4);
 							</nav>
 						</div>
 
-						<div class="tui-panel mt-6 p-4 text-[10px] leading-tight font-bold text-neutral-500 uppercase">
+						<div class="tui-panel mt-6 p-4 text-[10px] leading-tight font-bold text-content/40 uppercase">
 							<p class="mb-2">TIP:</p>
 							<p>
-								Press <span class="text-primary">[T]</span> to switch theme or{" "}
-								<span class="text-primary">[CTRL+K]</span> for command palette.
+								Press <span class="text-accent">[T]</span> to switch theme or{" "}
+								<span class="text-accent">[CTRL+K]</span> for command palette.
 							</p>
 						</div>
 					</div>

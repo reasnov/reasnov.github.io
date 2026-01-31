@@ -5,25 +5,25 @@ const { title, icons } = Astro.props;
 <div class="flex w-full flex-col gap-2">
 	<div class="flex items-center gap-2">
 		<span
-			class="bg-black px-2 py-0.5 text-[10px] font-bold tracking-widest text-white uppercase dark:bg-white dark:text-black"
+			class="bg-primary px-2 py-0.5 text-[10px] font-bold tracking-widest text-primary-content uppercase"
 		>
 			{title}
 		</span>
-		<div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
+		<div class="h-px flex-1 bg-border/20"></div>
 	</div>
 
 	<div
-		class="tui-panel flex w-full flex-nowrap items-center gap-4 overflow-x-auto border-neutral-200 p-4 dark:border-neutral-900"
+		class="tui-panel flex w-full flex-nowrap items-center gap-4 overflow-x-auto border-border/10 p-4"
 	>
 		{
 			icons.map((icon: { icon: string; name: string }) => (
 				<div class="group flex shrink-0 flex-col items-center gap-2 transition-all" title={icon.name}>
 					<div
-						class={`flex size-10 items-center justify-center border border-transparent opacity-50 grayscale transition-all group-hover:border-black group-hover:bg-neutral-100 group-hover:opacity-100 group-hover:grayscale-0 md:size-12 dark:group-hover:border-white dark:group-hover:bg-neutral-900`}
+						class={`flex size-10 items-center justify-center border border-transparent opacity-50 grayscale transition-all group-hover:border-accent group-hover:bg-primary/5 group-hover:opacity-100 group-hover:grayscale-0 md:size-12`}
 					>
 						<span class={`${icon.icon} size-6 md:size-8`} />
 					</div>
-					<span class="text-[8px] font-bold text-neutral-500 uppercase opacity-0 transition-opacity group-hover:opacity-100">
+					<span class="text-[8px] font-bold text-content/50 uppercase opacity-0 transition-opacity group-hover:opacity-100">
 						{icon.name}
 					</span>
 				</div>

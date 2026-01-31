@@ -7,10 +7,10 @@ const locale = Astro.currentLocale || "en";
 
 <section class="my-20 flex w-full flex-col gap-8" data-aos="fade-in">
 	<div class="flex flex-col gap-2">
-		<h2 class="w-fit border-b border-black pb-2 text-xl font-black tracking-widest uppercase dark:border-white">
+		<h2 class="w-fit border-b border-border pb-2 text-xl font-black tracking-widest uppercase">
 			&gt;&gt; {trans("useful_links.title", {}, locale)}
 		</h2>
-		<p class="text-[10px] font-bold text-neutral-500 uppercase">-- {trans("useful_links.subtitle", {}, locale)}</p>
+		<p class="text-[10px] font-bold text-content/50 uppercase">-- {trans("useful_links.subtitle", {}, locale)}</p>
 	</div>
 
 	<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -19,18 +19,18 @@ const locale = Astro.currentLocale || "en";
 				<a
 					href={link.url}
 					target="_blank"
-					class="group tui-panel hover:border-primary flex flex-col items-center gap-4 border-neutral-300 text-center transition-all hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900/10"
+					class="group tui-panel flex flex-col items-center gap-4 border-border/20 text-center transition-all hover:bg-primary/5 hover:border-accent"
 					data-aos="fade-up"
 					data-aos-delay={index * 50}
 				>
-					<div class="group-hover:border-primary group-hover:text-primary flex size-12 items-center justify-center border border-neutral-200 transition-all dark:border-neutral-800">
+					<div class="flex size-12 items-center justify-center border border-border/10 transition-all group-hover:border-accent group-hover:text-accent">
 						<span class={`${link.icon} size-6`} />
 					</div>
 					<div class="flex flex-col gap-1">
-						<span class="group-hover:text-primary text-xs font-bold tracking-tight uppercase transition-colors">
+						<span class="text-xs font-bold tracking-tight uppercase transition-colors group-hover:text-accent">
 							{link.title}
 						</span>
-						<span class="text-[8px] font-bold tracking-widest text-neutral-400 uppercase">
+						<span class="text-[8px] font-bold tracking-widest text-content/40 uppercase">
 							{link.category}
 						</span>
 					</div>

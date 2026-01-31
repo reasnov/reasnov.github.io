@@ -61,7 +61,7 @@ const commands = [
 						>
 							<div class="flex flex-col">
 								<span class="text-xs font-black tracking-widest uppercase">{cmd.label}</span>
-								<span class="text-accent/60 group-hover:text-primary-fg/60 text-[9px]">
+								<span class="text-accent/60 group-hover:text-primary-content/60 text-[9px]">
 									bash: {cmd.cmd}
 								</span>
 							</div>
@@ -71,7 +71,7 @@ const commands = [
 				}
 				<div id="help-hint" class="border-accent/20 bg-accent/5 mt-2 hidden border border-dashed p-4">
 					<p class="text-accent mb-2 text-[10px] font-bold uppercase">Manual Page: HELP.MAN</p>
-					<ul class="text-fg/60 space-y-1 font-mono text-[9px]">
+					<ul class="text-content/60 space-y-1 font-mono text-[9px]">
 						<li>[T] - TOGGLE_THEME</li>
 						<li>[G+H] - GOTO_HOME</li>
 						<li>[G+B] - GOTO_BLOG</li>
@@ -83,7 +83,7 @@ const commands = [
 			</div>
 
 			<div
-				class="border-border/5 text-fg/30 mt-4 flex justify-between border-t pt-2 text-[8px] font-bold tracking-[0.2em] uppercase"
+				class="border-border/5 text-content/30 mt-4 flex justify-between border-t pt-2 text-[8px] font-bold tracking-[0.2em] uppercase"
 			>
 				<span>Status: Awaiting Command</span>
 				<span>{version}</span>
