@@ -6,38 +6,47 @@ const locale = Astro.currentLocale || "en";
 ---
 
 <div class="flex flex-col items-center justify-center gap-12 lg:flex-row lg:gap-20">
-	<div class="flex flex-1 flex-col gap-8 md:gap-12" data-aos="fade-right">
-		<div class="flex flex-col gap-4">
-			<p class="text-accent animate-pulse text-[10px] font-bold tracking-[0.3em] uppercase md:text-xs">
+	<div class="flex flex-1 flex-col gap-10 md:gap-14" data-aos="fade-right">
+		<div class="flex flex-col gap-6">
+			<p class="text-accent animate-pulse text-xs font-bold tracking-[0.4em] uppercase">
 				&gt;&gt; {trans("hero.greeting", {}, locale)}
 			</p>
 
-			<h1 class="font-display text-content leading-none transition-all">
-				{trans("hero.name", {}, locale)}<span class="animate-blink text-t-green">_</span>
+			<h1 class="text-5xl leading-none sm:text-7xl md:text-8xl lg:text-9xl xl:text-[12rem]">
+				{trans("hero.name", {}, locale)}<span class="animate-blink text-accent">_</span>
 			</h1>
 
-			<div class="flex flex-wrap items-center gap-3">
-				<span class="text-content/40 text-[10px] font-bold tracking-widest uppercase md:text-xs"
+			<div class="flex flex-wrap items-center gap-4">
+				<span class="text-content/40 text-xs font-bold tracking-widest uppercase"
 					>{trans("hero.role_prefix", {}, locale)}</span
 				>
-				<span class="bg-primary text-primary-content px-3 py-1 text-xs font-bold uppercase md:text-sm">
+				<span class="bg-primary text-primary-content px-4 py-1.5 text-sm font-black uppercase md:text-base">
 					{trans("hero.role", {}, locale)}
 				</span>
 			</div>
 		</div>
 
-		<div class="tui-panel tui-panel-accent tui-panel-muted border-l-t-green">
+		<div class="tui-panel tui-panel-accent tui-panel-muted border-l-accent">
 			<p
-				class="text-content/70 text-sm leading-relaxed md:text-lg"
+				class="text-content/80 text-sm leading-relaxed md:text-lg"
 				set:html={trans("hero.description", {}, locale)}
 			/>
 		</div>
 
-		<div class="flex w-full flex-wrap gap-4">
-			<a href={import.meta.env.BASE_URL + locale + "/showcase"} id="hero-f1" class="tui-btn-primary">
+		<div class="flex w-full flex-wrap gap-6">
+			<a
+				href={import.meta.env.BASE_URL + locale + "/showcase"}
+				id="hero-f1"
+				class="tui-btn-primary flex-1 sm:flex-none"
+			>
 				{trans("hero.buttons.explore", {}, locale)} [F1]
 			</a>
-			<a href="https://linkedin.com/in/reasnov" id="hero-f2" target="__blank" class="tui-btn-secondary">
+			<a
+				href="https://linkedin.com/in/reasnov"
+				id="hero-f2"
+				target="__blank"
+				class="tui-btn-secondary flex-1 sm:flex-none"
+			>
 				{trans("hero.buttons.connect", {}, locale)} [F2]
 			</a>
 		</div>

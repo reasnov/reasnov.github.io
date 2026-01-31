@@ -34,8 +34,6 @@
 	--accent-content: #fafafa;
 	--t-green: #22c55e;
 	--t-amber: #f59e0b;
-	--t-red: #ef4444;
-	--t-blue: #3b82f6;
 }
 
 .dark {
@@ -58,8 +56,6 @@
 	--color-accent-content: var(--accent-content);
 	--color-t-green: var(--t-green);
 	--color-t-amber: var(--t-amber);
-	--color-t-red: var(--t-red);
-	--color-t-blue: var(--t-blue);
 }
 
 @layer base {
@@ -70,18 +66,14 @@
 		@apply w-full overflow-x-hidden font-mono antialiased;
 		min-height: 100dvh;
 	}
-	/* Fluid Typography */
-	h1 {
-		@apply text-2xl leading-tight font-black tracking-tighter uppercase sm:text-4xl md:text-6xl lg:text-7xl;
-	}
-	h2 {
-		@apply text-lg leading-tight font-bold tracking-tight uppercase sm:text-xl md:text-2xl;
-	}
+	/* Tag-based hierarchy resets */
+	h1,
+	h2,
 	h3 {
-		@apply text-base font-bold sm:text-lg;
+		@apply font-black tracking-tighter uppercase;
 	}
 	p {
-		@apply text-xs leading-relaxed md:text-sm;
+		@apply leading-relaxed;
 	}
 
 	::selection {
@@ -101,17 +93,20 @@
 		@apply bg-primary text-primary-content mb-1 flex items-center justify-between px-2 py-0.5 text-[9px] font-bold uppercase md:text-xs;
 	}
 
-	/* Standardized Buttons */
+	/* BUTTON SYSTEM - BIG & BOLD */
 	.tui-btn-primary {
-		@apply border-border bg-primary text-primary-content hover:text-content inline-flex items-center justify-center border-2 px-4 py-1.5 text-[10px] font-bold uppercase transition-all hover:bg-transparent active:translate-x-0.5 active:translate-y-0.5 md:text-xs;
+		@apply border-border bg-primary text-primary-content hover:text-content inline-flex items-center justify-center border-2 px-8 py-3 text-xs font-black uppercase transition-all hover:bg-transparent active:translate-x-0.5 active:translate-y-0.5 md:text-sm;
 	}
 	.tui-btn-secondary {
-		@apply border-border text-content hover:bg-primary hover:text-primary-content inline-flex items-center justify-center border-2 bg-transparent px-4 py-1.5 text-[10px] font-bold uppercase transition-all active:translate-x-0.5 active:translate-y-0.5 md:text-xs;
+		@apply border-border text-content hover:bg-primary hover:text-primary-content inline-flex items-center justify-center border-2 bg-transparent px-8 py-3 text-xs font-black uppercase transition-all active:translate-x-0.5 active:translate-y-0.5 md:text-sm;
+	}
+	.tui-btn-ghost {
+		@apply hover:border-border hover:bg-primary/5 border-2 border-transparent px-4 py-1 text-[10px] font-bold uppercase transition-all;
 	}
 
-	/* Panel System */
+	/* PANEL SYSTEM */
 	.tui-panel {
-		@apply border-border w-full border-2 p-4 md:p-6;
+		@apply border-border w-full border-2 p-6 md:p-10;
 	}
 	.tui-panel-muted {
 		@apply border-border/10 bg-primary/5;
@@ -120,12 +115,16 @@
 		@apply border-l-accent border-l-4;
 	}
 
-	/* Overlays */
-	.tui-overlay {
-		@apply bg-base/95 fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm;
+	/* SCROLLBAR */
+	.custom-scrollbar::-webkit-scrollbar {
+		height: 4px;
+		width: 4px;
 	}
-	.tui-modal {
-		@apply border-border bg-base w-full max-w-2xl border-2 p-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)];
+	.custom-scrollbar::-webkit-scrollbar-track {
+		@apply bg-transparent;
+	}
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		@apply bg-border/20;
 	}
 }
 

@@ -37,7 +37,9 @@ const lang = Astro.currentLocale || "en";
 		<Header />
 		<CommandPalette />
 
-		<main class="tui-container flex flex-1 flex-col gap-12 py-12 md:gap-24 md:py-24">
+		<main
+			class="container mx-auto flex w-full flex-1 flex-col gap-16 px-6 py-12 sm:px-8 md:gap-32 md:py-24 lg:px-12"
+		>
 			<slot />
 		</main>
 
@@ -52,7 +54,7 @@ const lang = Astro.currentLocale || "en";
 				easing: "ease-out-cubic",
 			});
 
-			/* --- Keyboard Navigation --- */
+			/* --- Global Keyboard Listeners --- */
 			let lastKey = "";
 			const lang = document.documentElement.lang || "en";
 
@@ -61,6 +63,7 @@ const lang = Astro.currentLocale || "en";
 
 				const key = e.key.toLowerCase();
 
+				// Function Keys
 				if (e.key === "F1") {
 					e.preventDefault();
 					document.getElementById("hero-f1")?.click();
@@ -70,6 +73,7 @@ const lang = Astro.currentLocale || "en";
 					document.getElementById("hero-f2")?.click();
 				}
 
+				// Escape Handler
 				if (e.key === "Escape") {
 					const mobileMenu = document.getElementById("mobile-menu");
 					if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
@@ -77,9 +81,7 @@ const lang = Astro.currentLocale || "en";
 					}
 				}
 
-				if (key === "t") {
-					document.getElementById("theme-toggle")?.click();
-				}
+				if (key === "t") document.getElementById("theme-toggle")?.click();
 
 				if (lastKey === "g") {
 					if (key === "h") window.location.href = `/${lang}/`;
@@ -88,9 +90,7 @@ const lang = Astro.currentLocale || "en";
 					if (key === "p") window.location.href = `/${lang}/playgrounds/`;
 				}
 
-				if (key === "?") {
-					window.dispatchEvent(new CustomEvent("open-palette", { detail: { query: "help" } }));
-				}
+				if (key === "?") window.dispatchEvent(new CustomEvent("open-palette", { detail: { query: "help" } }));
 
 				lastKey = key;
 				setTimeout(() => {
@@ -99,13 +99,8 @@ const lang = Astro.currentLocale || "en";
 			});
 
 			window.addEventListener("open-palette", (e: any) => {
-				const paletteEvent = new KeyboardEvent("keydown", {
-					key: "k",
-					ctrlKey: true,
-					bubbles: true,
-				});
+				const paletteEvent = new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true });
 				window.dispatchEvent(paletteEvent);
-
 				if (e.detail?.query) {
 					setTimeout(() => {
 						const input = document.getElementById("palette-input") as HTMLInputElement;

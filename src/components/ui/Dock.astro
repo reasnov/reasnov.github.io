@@ -2,26 +2,28 @@
 const { title, icons } = Astro.props;
 ---
 
-<div class="flex w-full flex-col gap-2">
-	<div class="flex items-center gap-2">
+<div class="flex w-full flex-col gap-3">
+	<div class="flex items-center gap-3 px-1">
 		<span
-			class="bg-primary text-primary-content px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase md:text-[10px]"
+			class="bg-primary text-primary-content px-3 py-1 text-[9px] font-black tracking-widest uppercase md:text-[10px]"
 		>
 			{title}
 		</span>
 		<div class="bg-border/10 h-px flex-1"></div>
 	</div>
 
-	<div class="tui-panel border-border/5 flex w-full flex-wrap items-center justify-center gap-3 p-4 md:gap-4 md:p-6">
+	<div
+		class="custom-scrollbar border-border/5 bg-primary/5 flex w-full flex-nowrap items-center gap-4 overflow-x-auto border-2 p-4 sm:gap-6 sm:p-6"
+	>
 		{
 			icons.map((icon: { icon: string; name: string }) => (
-				<div class="group flex flex-col items-center gap-1 transition-all" title={icon.name}>
-					<div class="border-border/5 bg-primary/5 group-hover:border-accent group-hover:bg-primary/10 flex size-10 items-center justify-center border transition-all sm:size-12">
+				<div class="group flex shrink-0 flex-col items-center gap-2 transition-all" title={icon.name}>
+					<div class="border-border/10 bg-base group-hover:border-accent group-hover:bg-primary/5 flex size-14 items-center justify-center border-2 grayscale transition-all group-hover:grayscale-0 sm:size-16">
 						<span
-							class={`${icon.icon} size-6 opacity-40 transition-all group-hover:scale-110 group-hover:opacity-100 sm:size-7`}
+							class={`${icon.icon} size-8 opacity-40 transition-all group-hover:scale-110 group-hover:opacity-100 sm:size-10`}
 						/>
 					</div>
-					<span class="text-content/30 text-[7px] font-bold uppercase opacity-0 transition-opacity group-hover:opacity-100">
+					<span class="text-content/40 text-[8px] font-bold uppercase transition-opacity group-hover:opacity-100">
 						{icon.name}
 					</span>
 				</div>

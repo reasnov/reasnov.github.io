@@ -12,25 +12,25 @@ const i18n = {
 };
 ---
 
-<div class="relative flex h-80 w-full flex-col overflow-hidden bg-neutral-950 font-mono">
+<div class="bg-base relative flex h-80 w-full flex-col overflow-hidden font-mono">
 	<!-- Terminal Header (Inside the window) -->
-	<div class="flex items-center justify-between border-b border-neutral-800 bg-neutral-900 px-3 py-1">
+	<div class="border-border/10 bg-primary flex items-center justify-between border-b px-3 py-1">
 		<div class="flex items-center gap-4">
-			<span class="flex items-center gap-2 text-[10px] font-bold tracking-widest text-neutral-500 uppercase">
-				<span class="bg-t-green size-2 animate-pulse rounded-full"></span>
+			<span class="text-primary-content flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase">
+				<span class="bg-accent size-2 animate-pulse rounded-full"></span>
 				{trans("terminal.header", {}, locale)}
 			</span>
 		</div>
-		<span id="live-clock" class="text-[10px] font-bold text-neutral-600"></span>
+		<span id="live-clock" class="text-primary-content/60 text-[10px] font-bold"></span>
 	</div>
 
 	<div class="custom-scrollbar flex w-full flex-1 flex-col overflow-y-auto p-4">
 		<div id="typewriter-output" class="flex w-full flex-col gap-1 text-[11px] md:text-xs"></div>
 
 		<p class="mt-2 flex w-full items-center gap-2 text-nowrap">
-			<span class="text-t-amber font-bold">{i18n.path}</span>
+			<span class="text-accent font-bold">{i18n.path}</span>
 			<span class="animate-blink text-accent">█</span>
-			<span class="ml-2 text-[10px] text-white/40 italic">{trans("terminal.prompt", {}, locale)}</span>
+			<span class="text-content/40 ml-2 text-[10px] italic">{trans("terminal.prompt", {}, locale)}</span>
 		</p>
 	</div>
 </div>
@@ -45,7 +45,7 @@ const i18n = {
 		@apply bg-transparent;
 	}
 	.custom-scrollbar::-webkit-scrollbar-thumb {
-		@apply bg-neutral-800;
+		@apply bg-border/20;
 	}
 </style>
 
@@ -88,7 +88,7 @@ const i18n = {
 
 	function createLineElement() {
 		const el = document.createElement("div");
-		el.className = "line text-neutral-400 break-all leading-tight";
+		el.className = "line text-content/60 break-all leading-tight";
 		output.appendChild(el);
 		output.parentElement.scrollTop = output.parentElement.scrollHeight;
 		return el;
@@ -128,7 +128,7 @@ const i18n = {
 
 		if (line.trim().startsWith("$")) {
 			const cmd = document.createElement("div");
-			cmd.className = "mt-4 mb-1 text-primary font-bold";
+			cmd.className = "mt-4 mb-1 text-accent font-bold";
 			cmd.textContent = `${i18n.path} ${line}`;
 			output.appendChild(cmd);
 			lineIndex++;
