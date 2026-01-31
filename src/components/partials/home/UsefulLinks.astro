@@ -1,0 +1,37 @@
+---
+import { trans } from "@core/Translator";
+import links from "@data/links.json";
+
+const locale = Astro.currentLocale || "en";
+---
+
+<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-up">
+    <div class="flex flex-col gap-2">
+        <h2 class="text-2xl font-bold border-b-2 border-primary pb-2 w-fit">{trans("useful_links.title", {}, locale)}</h2>
+        <p class="text-sm text-neutral-500">{trans("useful_links.subtitle", {}, locale)}</p>
+    </div>
+
+    <div class="flex flex-col gap-3 max-w-2xl mx-auto w-full">
+        {links.map((link, index) => (
+            <a 
+                href={link.url} 
+                target="_blank" 
+                class="group flex items-center justify-between p-4 bg-neutral-900/50 border border-neutral-800 hover:border-primary/50 hover:bg-neutral-800 transition-all duration-300 rounded-lg"
+                data-aos="fade-up"
+                data-aos-delay={index * 50}
+            >
+                <div class="flex items-center gap-4">
+                    <div class="p-2 bg-neutral-800 rounded-md group-hover:text-primary transition-colors">
+                        <span class={`${link.icon} size-6`}></span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold group-hover:text-primary transition-colors">{link.title}</span>
+                        <span class="text-[10px] uppercase tracking-widest text-neutral-600">{link.category}</span>
+                    </div>
+                </div>
+                
+                <span class="icon-[tabler--chevron-right] size-5 text-neutral-700 group-hover:text-primary group-hover:translate-x-1 transition-all"></span>
+            </a>
+        ))}
+    </div>
+</section>

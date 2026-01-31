@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import { trans } from "@core/Translator";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { ContentService } from "@core/Content";
+
+const locale = Astro.currentLocale || "en";
+
+const posts = await getCollection("blog", (entry) => {
+    const isNotDraft = import.meta.env.PROD ? !entry.data.draft : true;
+    return isNotDraft && entry.id.startsWith(`${locale}/`);
+});
+
+const latestPosts = posts
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    .slice(0, 3);
+---
+
+<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-up">
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold border-b-2 border-primary pb-2">{trans("latest_blog.title", {}, locale)}</h2>
+        <a href={getRelativeLocaleUrl(locale, "blog")} class="text-sm font-bold text-neutral-500 hover:text-primary transition-colors flex items-center gap-2">
+            {trans("latest_blog.view_all", {}, locale)}
+            <span class="icon-[tabler--arrow-right] size-4"></span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {latestPosts.map((post) => {
+            const readingTime = ContentService.getReadingTime(post.body ?? "");
+            return (
+                <a 
+                    href={getRelativeLocaleUrl(locale, `blog/${post.id.replace(`${locale}/`, "")}`)}
+                    class="group flex flex-col p-6 bg-neutral-900/30 border border-neutral-800 hover:border-primary/50 transition-all duration-300 rounded-lg"
+                >
+                    <span class="text-[10px] text-neutral-600 font-bold uppercase tracking-widest mb-2">
+                        {post.data.pubDate.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' })}
+                        <span class="mx-2">•</span>
+                        {readingTime} min read
+                    </span>
+                    <h3 class="text-lg font-bold group-hover:text-primary transition-colors mb-4 line-clamp-2">
+                        {post.data.title}
+                    </h3>
+                    <p class="text-sm text-neutral-500 line-clamp-3 mb-4 flex-1">
+                        {post.data.description}
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        {post.data.tags?.slice(0, 2).map(tag => (
+                            <span class="text-[9px] font-bold uppercase px-2 py-0.5 bg-neutral-800 text-neutral-500 group-hover:text-primary transition-colors">
+                                #{tag}
+                            </span>
+                        ))}
+                    </div>
+                </a>
+            )
+        })}
+    </div>
+</section>

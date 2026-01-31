@@ -20,4 +20,13 @@ export default defineConfig({
 	},
 
 	integrations: [svelte()],
+
+	i18n: {
+		defaultLocale: "en",
+		locales: ["en", "id"],
+		routing: {
+			prefixDefaultLocale: true,
+			fallbackType: "redirect",
+		},
+	},
 });

@@ -5,9 +5,12 @@ import type { GetStaticPaths, Page } from "astro";
 import type { CollectionEntry } from "astro:content";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-	const blogs = await getCollection("blog");
+	const blogs = await getCollection("blog", (entry) => {
+		const isNotDraft = import.meta.env.PROD ? !entry.data.draft : true;
+		return isNotDraft && entry.id.startsWith("en/");
+	});
 
-	blogs.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+	blogs.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 	return paginate(blogs, { pageSize: 15 });
 };
 
@@ -25,14 +28,17 @@ oneWeekAgo.setDate(today.getDate() - 7);
 		<!-- Map Blogs -->
 		{
 			page.data.map((blog) => {
-				const postDate = blog.data.date;
+				const postDate = blog.data.pubDate;
 				const isNew = postDate >= oneWeekAgo;
 
 				return (
-					<div class="flex items-center justify-between p-3 transition-all ease-in-out border-y border-neutral-800 hover:bg-neutral-800">
+					<div 
+						class="flex items-center justify-between p-3 transition-all ease-in-out border-y border-neutral-800 hover:bg-neutral-800"
+						data-aos="fade-up"
+					>
 						<div class="flex items-center gap-6">
 							{isNew && <span class="font-medium text-emerald-500 animate-blink">NEW!</span>}
-							<a href={`/blog/${blog.id}`} class="w-full font-bold truncate">
+							<a href={`/en/blog/${blog.id.replace("en/", "")}`} class="w-full font-bold truncate">
 								{blog.data.title}
 							</a>
 						</div>

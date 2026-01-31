@@ -1,0 +1,56 @@
+---
+import { trans } from "@core/Translator";
+import projects from "@data/projects.json";
+
+const locale = Astro.currentLocale || "en";
+---
+
+<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-up">
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold border-b-2 border-primary pb-2">{trans("showcase.title", {}, locale)}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, index) => (
+            <div 
+                class="group relative flex flex-col overflow-hidden border border-neutral-800 bg-neutral-900/50 hover:border-primary/50 transition-all duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+            >
+                <div class="aspect-video overflow-hidden">
+                    <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110"
+                        loading="lazy"
+                    />
+                </div>
+                
+                <div class="flex flex-col flex-1 p-6 gap-4">
+                    <div class="flex flex-wrap gap-2">
+                        {project.tags.map(tag => (
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-neutral-800 text-neutral-400 group-hover:text-primary transition-colors">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
+                    <h3 class="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+                    
+                    <p class="text-sm text-neutral-400 leading-relaxed flex-1">
+                        {project.description}
+                    </p>
+
+                    <a 
+                        href={project.link} 
+                        target="_blank" 
+                        class="mt-4 flex items-center gap-2 text-sm font-bold group-hover:translate-x-2 transition-transform"
+                    >
+                        {trans("showcase.view_project", {}, locale)}
+                        <span class="icon-[tabler--arrow-right] size-4"></span>
+                    </a>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

@@ -1,0 +1,29 @@
+import Hero from "@components/partials/home/Hero.astro";
+import Showcase from "@components/partials/home/Showcase.astro";
+import Experience from "@components/partials/home/Experience.astro";
+import LatestBlog from "@components/partials/home/LatestBlog.astro";
+import Contact from "@components/partials/home/Contact.astro";
+import UsefulLinks from "@components/partials/home/UsefulLinks.astro";
+import { SEOService } from "@core/SEO";
+
+const schema = SEOService.generatePersonSchema();
+---
+
+<AppLayout schema={schema}>
+	<Hero />
+
+	<div class="flex justify-center gap-8" data-aos="fade-up" data-aos-delay="200">
+		<Skills />
+		<Tools />
+	</div>
+
+	<Showcase />
+
+	<Experience />
+
+	<LatestBlog />
+
+	<Contact />
+
+	<UsefulLinks />
+</AppLayout>

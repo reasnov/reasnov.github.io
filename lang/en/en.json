@@ -14,5 +14,29 @@
 			"explore": "Explore Projects",
 			"connect": "Connect on LinkedIn"
 		}
+	},
+	"footer": {
+		"copyright": "{year} &copy Reas Vyn | Fullstack Web Developer"
+	},
+	"showcase": {
+		"title": "Selected Projects",
+		"view_project": "View Project"
+	},
+	"useful_links": {
+		"title": "Useful Links",
+		"subtitle": "A collection of my social profiles and favorite resources."
+	},
+	"latest_blog": {
+		"title": "Latest Writing",
+		"view_all": "View All Posts"
+	},
+	"contact": {
+		"title": "Get In Touch",
+		"description": "I'm always open to new opportunities, collaborations, or just a friendly hello. Feel free to reach out!",
+		"button": "Send Message"
+	},
+	"experience": {
+		"title": "Journey & Experience",
+		"subtitle": "My professional path and continuous learning journey."
 	}
 }

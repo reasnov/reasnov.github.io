@@ -14,5 +14,29 @@
 			"explore": "Jelajahi Proyek",
 			"connect": "Terhubung di LinkedIn"
 		}
+	},
+	"footer": {
+		"copyright": "{year} &copy Reas Vyn | Pengembang Web Fullstack"
+	},
+	"showcase": {
+		"title": "Proyek Terpilih",
+		"view_project": "Lihat Proyek"
+	},
+	"useful_links": {
+		"title": "Tautan Bermanfaat",
+		"subtitle": "Koleksi profil sosial dan sumber daya favorit saya."
+	},
+	"latest_blog": {
+		"title": "Tulisan Terbaru",
+		"view_all": "Lihat Semua Postingan"
+	},
+	"contact": {
+		"title": "Hubungi Saya",
+		"description": "Saya selalu terbuka untuk peluang baru, kolaborasi, atau sekadar sapaan ramah. Jangan ragu untuk menghubungi saya!",
+		"button": "Kirim Pesan"
+	},
+	"experience": {
+		"title": "Perjalanan & Pengalaman",
+		"subtitle": "Jalur profesional dan perjalanan belajar berkelanjutan saya."
 	}
 }

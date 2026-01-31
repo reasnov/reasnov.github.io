@@ -1,0 +1,23 @@
+[
+	{
+		"title": "Project Alpha",
+		"description": "A cutting-edge web application built with Astro and Svelte, focusing on performance and user experience.",
+		"tags": ["Astro", "Svelte", "TailwindCSS"],
+		"link": "https://github.com/reasnov/project-alpha",
+		"image": "https://placehold.co/600x400/000000/FFFFFF/png?text=Project+Alpha"
+	},
+	{
+		"title": "Beta Dashboard",
+		"description": "An intuitive management dashboard designed for real-time data visualization and simplified workflows.",
+		"tags": ["Laravel", "VueJS", "MySQL"],
+		"link": "https://github.com/reasnov/beta-dashboard",
+		"image": "https://placehold.co/600x400/000000/FFFFFF/png?text=Beta+Dashboard"
+	},
+	{
+		"title": "Gamma E-Commerce",
+		"description": "A scalable e-commerce platform featuring a headless architecture and integrated payment gateways.",
+		"tags": ["NodeJS", "React", "PostgreSQL"],
+		"link": "https://github.com/reasnov/gamma-ecommerce",
+		"image": "https://placehold.co/600x400/000000/FFFFFF/png?text=Gamma+Ecommerce"
+	}
+]

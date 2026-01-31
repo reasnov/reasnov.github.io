@@ -1,3 +1,10 @@
+---
+import { trans } from "@core/Translator";
+
+const locale = Astro.currentLocale || "en";
+const year = new Date().getFullYear();
+---
+
 <footer class="container flex items-center justify-center w-full p-3 mx-auto text-sm">
-	<p>{new Date().getFullYear()} &copy Reas Vyn | Fullstack Web Developer</p>
+	<p set:html={trans("footer.copyright", { year }, locale)} />
 </footer>

@@ -1,0 +1,23 @@
+[
+	{
+		"year": "2020 - Present",
+		"title": "Freelance Fullstack Web Developer",
+		"company": "Self-Employed",
+		"description": "Developing robust web solutions for various clients, specializing in Laravel ecosystem and modern frontend frameworks like Svelte and React.",
+		"type": "Professional"
+	},
+	{
+		"year": "2019 - Present",
+		"title": "Laravel Ecosystem Specialist",
+		"company": "Learning & Open Source",
+		"description": "Deep-diving into advanced design patterns, Event-Sourcing, and CQRS. Actively contributing to the developer community.",
+		"type": "Learning"
+	},
+	{
+		"year": "2024 - Present",
+		"title": "Project Lead: Internara",
+		"company": "Personal Project",
+		"description": "Developing an Internship Management System to streamline the connection between students and companies.",
+		"type": "Project"
+	}
+]

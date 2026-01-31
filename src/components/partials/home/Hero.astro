@@ -1,26 +1,28 @@
 ---
 import FakeTerminal from "@components/FakeTerminal.astro";
 import { trans } from "@core/Translator";
+
+const locale = Astro.currentLocale;
 ---
 
-<div class="flex flex-col items-center justify-center flex-1 gap-20 py-20 size-full lg:flex-row">
+<div class="flex flex-col items-center justify-center flex-1 gap-20 py-20 size-full lg:flex-row" data-aos="fade-up">
 	<div class="flex flex-col flex-1 gap-12">
 		<div class="leading-none">
-			<p class="text-sm">{trans("hero.greeting")}</p>
-			<p class="text-[6rem] font-display text-primary">{trans("hero.name")}</p>
-			<p>{trans("hero.role_prefix")} <span class="text-xl font-bold text-black bg-white">{trans("hero.role")}</span></p>
+			<p class="text-sm">{trans("hero.greeting", {}, locale)}</p>
+			<p class="text-[6rem] font-display text-primary">{trans("hero.name", {}, locale)}</p>
+			<p>{trans("hero.role_prefix", {}, locale)} <span class="text-xl font-bold text-black bg-white">{trans("hero.role", {}, locale)}</span></p>
 		</div>
 
 		<div class="w-full">
-			<p class="leading-normal" set:html={trans("hero.description")} />
+			<p class="leading-normal" set:html={trans("hero.description", {}, locale)} />
 		</div>
 
 		<div class="flex w-full gap-6">
 			<a href="https://github.com/reasnov" type="button" class="btn btn-primary btn-md"
-				>{trans("hero.buttons.explore")} <span class="icon-[tabler--arrow-narrow-right]"></span></a
+				>{trans("hero.buttons.explore", {}, locale)} <span class="icon-[tabler--arrow-narrow-right]"></span></a
 			>
 			<a href="https://linkedin.com/in/reasnov" target="__blank" type="button" class="btn btn-secondary btn-md"
-				><span class="icon-[tabler--brand-linkedin]"></span>{trans("hero.buttons.connect")}</a
+				><span class="icon-[tabler--brand-linkedin]"></span>{trans("hero.buttons.connect", {}, locale)}</a
 			>
 		</div>
 	</div>

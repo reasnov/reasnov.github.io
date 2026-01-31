@@ -1,0 +1,32 @@
+[
+	{
+		"title": "GitHub Profile",
+		"url": "https://github.com/reasnov",
+		"icon": "icon-[tabler--brand-github]",
+		"category": "Social"
+	},
+	{
+		"title": "LinkedIn",
+		"url": "https://linkedin.com/in/reasnov",
+		"icon": "icon-[tabler--brand-linkedin]",
+		"category": "Social"
+	},
+	{
+		"title": "Technical Blog (Medium)",
+		"url": "https://medium.com/reasnov",
+		"icon": "icon-[tabler--brand-medium]",
+		"category": "Social"
+	},
+	{
+		"title": "Astro Documentation",
+		"url": "https://docs.astro.build",
+		"icon": "icon-[tabler--external-link]",
+		"category": "Resources"
+	},
+	{
+		"title": "Svelte Framework",
+		"url": "https://svelte.dev",
+		"icon": "icon-[tabler--external-link]",
+		"category": "Resources"
+	}
+]

@@ -1,6 +1,9 @@
 ---
 title: "Another Exciting Blog Entry"
-date: "2025-12-05"
+description: "Exploring the intricacies of building scalable static sites with Astro 5."
+pubDate: "2025-12-05"
+draft: false
+lang: en
 layout: /src/layouts/BlogLayout.astro
 ---
 

@@ -1,5 +1,6 @@
 ---
 import { config } from "@core/Config";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
 	name?: string;
@@ -7,7 +8,8 @@ interface Props {
 	size?: string;
 }
 
-const { name = config("settings.site_name"), url = "/", size = "sm" } = Astro.props;
+const lang = Astro.currentLocale || "en";
+const { name = config("settings.site_name"), url = getRelativeLocaleUrl(lang, "/"), size = "sm" } = Astro.props;
 
 const sizeClass = `text-${size}`;
 ---

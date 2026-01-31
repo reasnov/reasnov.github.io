@@ -1,6 +1,9 @@
 ---
 title: "My First Blog Post"
-date: "2025-12-01"
+description: "An introduction to my journey into web development and the technologies I use."
+pubDate: "2025-12-01"
+draft: false
+lang: en
 layout: /src/layouts/BlogLayout.astro
 ---
 
