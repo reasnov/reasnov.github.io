@@ -1,5 +1,12 @@
 [
 	{
+		"title": "System Integrity Check",
+		"description": "The SVG-based space shooter used for system validation. Clean the bugs from the home directory.",
+		"tags": ["SVG", "Game", "VanillaJS"],
+		"link": "#run-integrity-check",
+		"image": "https://placehold.co/600x400/171717/10b981/png?text=SYSTEM_INTEGRITY"
+	},
+	{
 		"title": "CSS Art: Terminal CRT",
 		"description": "A pure CSS experiment to recreate retro CRT monitor flicker and scanline effects.",
 		"tags": ["CSS", "Retro"],

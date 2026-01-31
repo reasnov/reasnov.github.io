@@ -2,6 +2,7 @@
 import AppLayout from "@layouts/AppLayout.astro";
 import { trans } from "@core/Translator";
 import playgrounds from "@data/playgrounds.json";
+import SpaceShooter from "@components/ui/SpaceShooter.astro";
 
 export function getStaticPaths() {
 	return [{ params: { locale: "en" } }, { params: { locale: "id" } }];
@@ -11,6 +12,7 @@ const locale = Astro.currentLocale || "en";
 ---
 
 <AppLayout title={trans("pages.playgrounds.title", {}, locale)}>
+	<SpaceShooter manual={true} />
 	<section class="my-10 flex flex-col gap-12" data-aos="fade-in">
 		<!-- Breadcrumb / Directory Style Header -->
 		<div class="flex flex-col gap-2">
@@ -101,3 +103,18 @@ const locale = Astro.currentLocale || "en";
 		</div>
 	</section>
 </AppLayout>
+
+<script>
+	const runGameLink = document.querySelector('a[href="#run-integrity-check"]');
+	const gameSplash = document.getElementById("game-splash");
+
+	runGameLink?.addEventListener("click", (e) => {
+		e.preventDefault();
+		if (gameSplash) {
+			gameSplash.classList.remove("hidden");
+			document.body.style.overflow = "hidden";
+			// Dispatch a custom event to tell the game to reset or re-init if needed
+			window.dispatchEvent(new CustomEvent("trigger-game-reset"));
+		}
+	});
+</script>
