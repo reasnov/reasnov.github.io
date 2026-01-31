@@ -59,16 +59,14 @@ const schema = generateBlogPostingSchema({
 >
 	<Content />
 
-	<div
-		class="mt-16 flex flex-col justify-between gap-8 border-t border-border/10 pt-8 sm:flex-row"
-	>
+	<div class="border-border/10 mt-16 flex flex-col justify-between gap-8 border-t pt-8 sm:flex-row">
 		{
 			prev && (
 				<a
 					href={getRelativeLocaleUrl(locale, `blog/${prev.id.replace(`${locale}/`, "")}`)}
-					class="group flex flex-1 flex-col gap-2 border border-border/10 p-4 transition-colors hover:border-accent"
+					class="group border-border/10 hover:border-accent flex flex-1 flex-col gap-2 border p-4 transition-colors"
 				>
-					<span class="flex items-center gap-2 text-xs font-bold tracking-widest text-content/40 uppercase">
+					<span class="text-content/40 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
 						<span class="icon-[tabler--arrow-left] size-3" />
 						{trans("blog.prev", {}, locale)}
 					</span>
@@ -82,9 +80,9 @@ const schema = generateBlogPostingSchema({
 			next && (
 				<a
 					href={getRelativeLocaleUrl(locale, `blog/${next.id.replace(`${locale}/`, "")}`)}
-					class="group flex flex-1 flex-col gap-2 border border-border/10 p-4 text-right transition-colors hover:border-accent"
+					class="group border-border/10 hover:border-accent flex flex-1 flex-col gap-2 border p-4 text-right transition-colors"
 				>
-					<span class="flex items-center justify-end gap-2 text-xs font-bold tracking-widest text-content/40 uppercase">
+					<span class="text-content/40 flex items-center justify-end gap-2 text-xs font-bold tracking-widest uppercase">
 						{trans("blog.next", {}, locale)}
 						<span class="icon-[tabler--arrow-right] size-3" />
 					</span>

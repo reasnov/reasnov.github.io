@@ -23,10 +23,10 @@ const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth < 4);
 	<div class="relative flex flex-col gap-12 py-8 lg:flex-row">
 		<!-- Main Content -->
 		<article class="prose dark:prose-invert max-w-none flex-1">
-			<div class="mb-12 border-b-2 border-border pb-8">
+			<div class="border-border mb-12 border-b-2 pb-8">
 				<h1 class="mb-4 leading-none font-black tracking-tighter uppercase">{title}</h1>
 				<div
-					class="flex flex-wrap items-center gap-4 text-[10px] font-bold tracking-widest text-content/50 uppercase"
+					class="text-content/50 flex flex-wrap items-center gap-4 text-[10px] font-bold tracking-widest uppercase"
 				>
 					{
 						date && (
@@ -63,7 +63,7 @@ const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth < 4);
 								{filteredHeadings.map((h) => (
 									<a
 										href={`#${h.slug}`}
-										class={`hover:text-accent line-clamp-2 text-[10px] font-bold tracking-tight uppercase transition-colors ${h.depth === 3 ? "border-l border-border/10 pl-4" : ""}`}
+										class={`hover:text-accent line-clamp-2 text-[10px] font-bold tracking-tight uppercase transition-colors ${h.depth === 3 ? "border-border/10 border-l pl-4" : ""}`}
 									>
 										{h.depth === 2 ? "> " : "- "}
 										{h.text}
@@ -72,7 +72,7 @@ const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth < 4);
 							</nav>
 						</div>
 
-						<div class="tui-panel mt-6 p-4 text-[10px] leading-tight font-bold text-content/40 uppercase">
+						<div class="tui-panel text-content/40 mt-6 p-4 text-[10px] leading-tight font-bold uppercase">
 							<p class="mb-2">TIP:</p>
 							<p>
 								Press <span class="text-accent">[T]</span> to switch theme or{" "}

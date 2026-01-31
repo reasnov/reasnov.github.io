@@ -27,7 +27,10 @@ const locale = Astro.currentLocale || "en";
 		</div>
 
 		<div class="tui-panel tui-panel-accent tui-panel-muted border-l-t-green">
-			<p class="text-content/70 text-sm leading-relaxed md:text-lg" set:html={trans("hero.description", {}, locale)} />
+			<p
+				class="text-content/70 text-sm leading-relaxed md:text-lg"
+				set:html={trans("hero.description", {}, locale)}
+			/>
 		</div>
 
 		<div class="flex w-full flex-wrap gap-4">

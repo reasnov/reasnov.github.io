@@ -48,7 +48,7 @@ oneWeekAgo.setDate(today.getDate() - 7);
 
 					return (
 						<div
-							class="group flex flex-col justify-between border-b border-border/10 px-4 py-6 transition-colors hover:bg-primary/5 md:flex-row md:items-center"
+							class="group border-border/10 hover:bg-primary/5 flex flex-col justify-between border-b px-4 py-6 transition-colors md:flex-row md:items-center"
 							data-aos="fade-up"
 						>
 							<div class="flex flex-1 items-center gap-4">
@@ -64,7 +64,7 @@ oneWeekAgo.setDate(today.getDate() - 7);
 									{blog.data.title}
 								</a>
 							</div>
-							<div class="mt-2 text-sm font-bold text-content/40 md:mt-0">
+							<div class="text-content/40 mt-2 text-sm font-bold md:mt-0">
 								{postDate.toLocaleDateString(locale, {
 									year: "numeric",
 									month: "long",

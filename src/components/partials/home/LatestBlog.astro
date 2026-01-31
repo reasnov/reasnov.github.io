@@ -29,12 +29,12 @@ const latestPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 				return (
 					<a
 						href={getRelativeLocaleUrl(locale, `blog/${post.id.replace(`${locale}/`, "")}`)}
-						class="group tui-panel flex flex-col gap-4 border-border/20 transition-all hover:border-accent hover:bg-primary/5"
+						class="group tui-panel border-border/20 hover:border-accent hover:bg-primary/5 flex flex-col gap-4 transition-all"
 						data-aos="fade-up"
 						data-aos-delay={index * 100}
 					>
 						<div class="flex items-start justify-between">
-							<span class="text-[9px] font-bold text-content/50 uppercase">
+							<span class="text-content/50 text-[9px] font-bold uppercase">
 								{post.data.pubDate.toLocaleDateString(locale, {
 									year: "numeric",
 									month: "2-digit",
@@ -46,19 +46,19 @@ const latestPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 							</span>
 						</div>
 
-						<h3 class="line-clamp-2 text-base leading-tight font-bold transition-colors group-hover:underline decoration-accent decoration-2 underline-offset-4">
+						<h3 class="decoration-accent line-clamp-2 text-base leading-tight font-bold decoration-2 underline-offset-4 transition-colors group-hover:underline">
 							{post.data.title}
 						</h3>
 
-						<p class="line-clamp-3 text-xs text-content/60">{post.data.description}</p>
+						<p class="text-content/60 line-clamp-3 text-xs">{post.data.description}</p>
 
-						<div class="mt-auto flex items-center justify-between border-t border-border/10 pt-4">
+						<div class="border-border/10 mt-auto flex items-center justify-between border-t pt-4">
 							<div class="flex gap-2">
 								{post.data.tags?.slice(0, 1).map((tag) => (
-									<span class="text-[8px] font-bold text-content/40 uppercase">#{tag}</span>
+									<span class="text-content/40 text-[8px] font-bold uppercase">#{tag}</span>
 								))}
 							</div>
-							<span class="icon-[tabler--chevron-right] size-4 text-content/20 transition-all group-hover:translate-x-1 group-hover:text-accent" />
+							<span class="icon-[tabler--chevron-right] text-content/20 group-hover:text-accent size-4 transition-all group-hover:translate-x-1" />
 						</div>
 					</a>
 				);

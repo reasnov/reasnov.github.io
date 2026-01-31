@@ -7,19 +7,22 @@ const year = new Date().getFullYear();
 const version = app_info("app.version");
 ---
 
-<footer class="border-border bg-primary text-primary-content mt-20 w-full border-t-2 py-4">
+<footer class="border-border/10 bg-base text-content/40 mt-auto border-t py-6">
 	<div
-		class="tui-container flex flex-col items-center justify-between gap-4 text-[10px] font-bold tracking-widest uppercase md:flex-row"
+		class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-[9px] font-bold tracking-[0.2em] uppercase md:flex-row"
 	>
 		<p set:html={trans("footer.copyright", { year }, locale)} />
 
 		<div class="flex items-center gap-6">
 			<div class="flex items-center gap-2">
-				<span class="bg-accent size-2 animate-pulse"></span>
-				<span>SYSTEM_ONLINE</span>
+				<span class="bg-accent size-1.5 animate-pulse"></span>
+				<span>{version}</span>
 			</div>
-			<div class="hidden items-center gap-2 md:flex">
-				<span>{version.toUpperCase()}</span>
+			<div class="flex items-center gap-4">
+				<a href="https://github.com/reasnov" target="_blank" class="hover:text-content transition-colors">GH</a>
+				<a href="https://linkedin.com/in/reasnov" target="_blank" class="hover:text-content transition-colors"
+					>LI</a
+				>
 			</div>
 		</div>
 	</div>

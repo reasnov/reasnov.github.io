@@ -5,34 +5,34 @@ import links from "@data/links.json";
 const locale = Astro.currentLocale || "en";
 ---
 
-<section class="my-20 flex w-full flex-col gap-8" data-aos="fade-in">
+<section class="my-20 flex w-full flex-col gap-6" data-aos="fade-in">
 	<div class="flex flex-col gap-2">
-		<h2 class="w-fit border-b border-border pb-2 text-xl font-black tracking-widest uppercase">
+		<h2 class="border-border w-fit border-b pb-2">
 			&gt;&gt; {trans("useful_links.title", {}, locale)}
 		</h2>
-		<p class="text-[10px] font-bold text-content/50 uppercase">-- {trans("useful_links.subtitle", {}, locale)}</p>
 	</div>
 
-	<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+	<div class="flex flex-col gap-3">
 		{
 			links.map((link, index) => (
 				<a
 					href={link.url}
 					target="_blank"
-					class="group tui-panel flex flex-col items-center gap-4 border-border/20 text-center transition-all hover:bg-primary/5 hover:border-accent"
+					class="group border-border/10 hover:border-accent hover:bg-primary/5 flex items-center justify-between border-2 p-4 transition-all"
 					data-aos="fade-up"
 					data-aos-delay={index * 50}
 				>
-					<div class="flex size-12 items-center justify-center border border-border/10 transition-all group-hover:border-accent group-hover:text-accent">
-						<span class={`${link.icon} size-6`} />
-					</div>
-					<div class="flex flex-col gap-1">
-						<span class="text-xs font-bold tracking-tight uppercase transition-colors group-hover:text-accent">
+					<div class="flex items-center gap-4">
+						<span class={`${link.icon} text-content/40 group-hover:text-accent size-5 transition-colors`} />
+						<span class="group-hover:text-accent text-xs font-bold tracking-widest uppercase">
 							{link.title}
 						</span>
-						<span class="text-[8px] font-bold tracking-widest text-content/40 uppercase">
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="text-content/20 text-[8px] font-bold tracking-tighter uppercase">
 							{link.category}
 						</span>
+						<span class="icon-[tabler--arrow-right] size-3 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
 					</div>
 				</a>
 			))

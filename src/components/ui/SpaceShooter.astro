@@ -1,12 +1,11 @@
 ---
 /**
  * SpaceShooter Component
- * A terminal-themed mini-game for system integrity validation.
+ * Fixed for responsive SVG scaling and Escape key support.
  */
 interface Props {
 	manual?: boolean;
 }
-
 const { manual = false } = Astro.props;
 ---
 
@@ -14,226 +13,135 @@ const { manual = false } = Astro.props;
 	id="game-splash"
 	class={`bg-base fixed inset-0 z-[500] flex flex-col items-center justify-center font-mono ${manual ? "hidden" : ""}`}
 >
-	<!-- Game UI Overlay -->
-	<div class="tui-window relative h-[600px] w-full max-w-4xl overflow-hidden shadow-2xl">
+	<div class="tui-window relative h-[80dvh] w-[95vw] max-w-4xl overflow-hidden shadow-2xl">
 		<div class="tui-window-header">
 			<div class="flex items-center gap-2">
 				<span class="icon-[tabler--shield-check] text-accent size-3"></span>
 				<span>SYSTEM_INTEGRITY_CHECK.EXE</span>
 			</div>
 			<div class="flex items-center gap-4">
-				<span id="game-score" class="text-[10px] font-bold">BUGS_CLEARED: 0/10</span>
+				<span id="game-score" class="text-[9px] font-bold">BUGS: 0/10</span>
 				<button id="skip-game" class="hover:text-accent text-[9px] opacity-50 hover:opacity-100"
-					>[SKIP_PROTOCOL]</button
+					>[ESC_TO_SKIP]</button
 				>
 			</div>
 		</div>
 
 		<div id="game-container" class="relative h-[calc(100%-28px)] w-full cursor-none bg-neutral-950">
-			<!-- Background Stars -->
-			<svg id="game-canvas" class="absolute inset-0 h-full w-full">
+			<svg id="game-canvas" class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
 				<defs>
-					<!-- Player Ship -->
 					<g id="svg-player">
-						<path d="M0 -15 L10 10 L0 5 L-10 10 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
-						<path d="M0 -5 L3 2 L0 0 L-3 2 Z" fill="var(--accent)"></path>
+						<path d="M0 -12 L8 8 L0 4 L-8 8 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+						<path d="M0 -4 L2 2 L0 0 L-2 2 Z" fill="var(--accent)"></path>
 					</g>
-					<!-- Enemy Bug -->
 					<g id="svg-enemy">
-						<rect x="-8" y="-8" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"
+						<rect x="-6" y="-6" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"
 						></rect>
-						<path d="M-4 -4 L4 4 M-4 4 L4 -4" stroke="var(--accent)" stroke-width="1"></path>
-						<circle cx="0" cy="0" r="2" fill="currentColor"></circle>
+						<path d="M-3 -3 L3 3 M-3 3 L3 -3" stroke="var(--accent)" stroke-width="1"></path>
 					</g>
-					<!-- Bullet -->
-					<circle id="svg-bullet" r="2" fill="var(--accent)"></circle>
+					<circle id="svg-bullet" r="1.5" fill="var(--accent)"></circle>
 				</defs>
 				<g id="stars-group"></g>
 				<g id="entities-group"></g>
 			</svg>
 
-			<!-- Mobile Controls (Visible only on touch devices) -->
-			<div id="mobile-controls" class="pointer-events-none absolute inset-0 hidden select-none md:hidden">
-				<div class="absolute bottom-8 left-8 flex gap-4">
-					<div
+			<div id="mobile-controls" class="pointer-events-none absolute inset-0 hidden touch-none select-none">
+				<div class="absolute bottom-4 left-4 flex gap-2">
+					<button
 						id="m-left"
-						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/10 bg-white/5 font-bold text-white active:bg-white/20"
+						class="pointer-events-auto flex size-12 items-center justify-center border border-white/20 bg-white/5 font-bold text-white"
+						>&lt;</button
 					>
-						&lt;
-					</div>
-					<div
+					<button
 						id="m-right"
-						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/10 bg-white/5 font-bold text-white active:bg-white/20"
+						class="pointer-events-auto flex size-12 items-center justify-center border border-white/20 bg-white/5 font-bold text-white"
+						>&gt;</button
 					>
-						&gt;
-					</div>
 				</div>
-				<div
+				<button
 					id="m-shoot"
-					class="pointer-events-auto absolute bottom-8 right-8 flex size-16 items-center justify-center border-2 border-accent/20 bg-accent/10 font-bold text-accent active:bg-accent/30"
+					class="border-accent/40 bg-accent/10 text-accent pointer-events-auto absolute right-4 bottom-4 flex size-16 items-center justify-center border-2 font-bold"
+					>FIRE</button
 				>
-					FIRE
-				</div>
 			</div>
 
-			<!-- Start Screen -->
 			<div
 				id="start-screen"
-				class="absolute inset-0 flex flex-col items-center justify-center bg-neutral-950/80 p-8 text-center"
+				class="absolute inset-0 flex flex-col items-center justify-center bg-neutral-950/90 p-6 text-center"
 			>
-				<h2 class="font-display mb-4 text-3xl text-accent">SECURITY THREAT DETECTED</h2>
-				<p class="mb-8 max-w-md text-xs tracking-widest text-white/40 uppercase">
-					Multiple 'Unclean_Code' bugs detected in home directory. Please execute cleanup protocol to proceed.
-				</p>
-				<button id="start-btn" class="tui-btn-primary tui-btn-lg">INITIALIZE_CLEANUP</button>
-				<div class="mt-6 flex flex-col gap-2">
-					<p class="text-[9px] text-white/20 uppercase">Desktop: [ARROWS] to Move, [SPACE] to Shoot</p>
-					<p class="text-[9px] text-white/20 uppercase">Mobile: Use On-Screen Controls</p>
-				</div>
+				<h2 class="font-display text-accent mb-4 text-xl sm:text-2xl">THREAT DETECTED</h2>
+				<button id="start-btn" class="tui-btn-primary mb-4">INITIALIZE_CLEANUP</button>
+				<p class="text-[8px] text-white/30 uppercase">[ESC] OR BUTTON TO SKIP</p>
 			</div>
 
-			<!-- Victory Screen -->
 			<div
 				id="victory-screen"
-				class="absolute inset-0 hidden flex flex-col items-center justify-center bg-neutral-950/90 p-8 text-center"
+				class="absolute inset-0 flex hidden flex-col items-center justify-center bg-neutral-950/95 p-6 text-center"
 			>
-				<h2 class="font-display mb-4 text-3xl text-accent">SYSTEM_SECURED</h2>
-				<p class="mb-8 text-xs tracking-widest text-white/40 uppercase">
-					Integrity check passed. Redirecting to core...
-				</p>
-				<div class="h-1 w-48 overflow-hidden bg-white/10">
-					<div class="h-full animate-[loading_2s_ease-in-out] bg-accent"></div>
+				<h2 class="font-display text-accent mb-4 text-2xl uppercase">Secured</h2>
+				<div class="h-1 w-32 overflow-hidden bg-white/10">
+					<div class="bg-accent h-full animate-[loading_2s_linear]"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<p class="mt-4 text-[10px] font-bold tracking-[0.3em] text-content/20 uppercase">
-		Authorized Access Only // Andreas Novyanto
-	</p>
 </div>
-
-<style>
-	@keyframes loading {
-		from {
-			width: 0%;
-		}
-		to {
-			width: 100%;
-		}
-	}
-</style>
 
 <script>
 	const splash = document.getElementById("game-splash");
 	const container = document.getElementById("game-container");
 	const entitiesGroup = document.getElementById("entities-group");
-	const starsGroup = document.getElementById("stars-group");
 	const startBtn = document.getElementById("start-btn");
 	const skipBtn = document.getElementById("skip-game");
 	const scoreEl = document.getElementById("game-score");
-	const mobileControls = document.getElementById("mobile-controls");
 
 	let isPlaying = false;
 	let score = 0;
 	const targetScore = 10;
-
-	// Game State
-	let player = { x: 400, y: 500, el: null as any, vx: 0, vy: 0 };
+	let player = { x: 0, y: 0, el: null as any, vx: 0, vy: 0 };
 	let enemies = [] as any[];
 	let bullets = [] as any[];
-	let lastShootTime = 0;
 	let keys = {} as Record<string, boolean>;
-
-	// Touch State
-	let touchState = { left: false, right: false, shoot: false };
-
-	// Always show splash on refresh
-	document.body.style.overflow = "hidden";
+	let lastShoot = 0;
 
 	function exitGame() {
-		splash?.classList.add("opacity-0", "transition-opacity", "duration-1000");
-		document.body.style.overflow = "";
-		setTimeout(() => {
-			splash?.classList.add("hidden");
-			splash?.classList.remove("opacity-0");
-		}, 1000);
-	}
-
-	window.addEventListener("trigger-game-reset", () => {
-		score = 0;
-		if (scoreEl) scoreEl.textContent = `BUGS_CLEARED: 0/${targetScore}`;
-		document.getElementById("start-screen")?.classList.remove("hidden");
-		document.getElementById("victory-screen")?.classList.add("hidden");
+		if (!splash) return;
+		splash.classList.add("opacity-0");
 		isPlaying = false;
-		// Clear entities
-		if (entitiesGroup) entitiesGroup.innerHTML = "";
-		bullets = [];
-		enemies = [];
-	});
+		document.body.style.overflow = "";
+		setTimeout(() => splash.classList.add("hidden"), 500);
+	}
 
 	skipBtn?.addEventListener("click", exitGame);
-
-	function initStars() {
-		if (!starsGroup) return;
-		for (let i = 0; i < 50; i++) {
-			const star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-			star.setAttribute("r", (Math.random() * 1.5).toString());
-			star.setAttribute("cx", Math.random() * 100 + "%");
-			star.setAttribute("cy", Math.random() * 100 + "%");
-			star.setAttribute("fill", "white");
-			star.setAttribute("opacity", (Math.random() * 0.5).toString());
-			starsGroup.appendChild(star);
-		}
-	}
-
-	function spawnEnemy() {
-		if (!isPlaying || enemies.length > 5 || !container) return;
-		const x = Math.random() * container.clientWidth;
-		const el = document.createElementNS("http://www.w3.org/2000/svg", "use");
-		el.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#svg-enemy");
-		el.setAttribute("class", "text-neutral-400");
-		entitiesGroup?.appendChild(el);
-		enemies.push({ x, y: -20, el, speed: 1.5 + Math.random() * 2.5 });
-	}
-
-	function shoot() {
-		const now = Date.now();
-		if (now - lastShootTime < 200) return;
-		lastShootTime = now;
-
-		const el = document.createElementNS("http://www.w3.org/2000/svg", "use");
-		el.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#svg-bullet");
-		entitiesGroup?.appendChild(el);
-		bullets.push({ x: player.x, y: player.y - 20, el });
-	}
+	window.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && splash && !splash.classList.contains("hidden")) exitGame();
+	});
 
 	function gameLoop() {
 		if (!isPlaying || !container) return;
+		const w = container.clientWidth;
+		const h = container.clientHeight;
 
-		// Player Movement Logic
-		const speed = 6;
-		if (keys["ArrowLeft"] || touchState.left) player.vx = -speed;
-		else if (keys["ArrowRight"] || touchState.right) player.vx = speed;
-		else player.vx = 0;
+		if (keys["ArrowLeft"]) player.vx = -5;
+		else if (keys["ArrowRight"]) player.vx = 5;
+		else player.vx *= 0.8;
 
-		if (keys["ArrowUp"]) player.vy = -speed;
-		else if (keys["ArrowDown"]) player.vy = speed;
-		else player.vy = 0;
+		if (keys[" "]) {
+			const now = Date.now();
+			if (now - lastShoot > 200) {
+				const b = document.createElementNS("http://www.w3.org/2000/svg", "use");
+				b.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#svg-bullet");
+				entitiesGroup?.appendChild(b);
+				bullets.push({ x: player.x, y: player.y - 15, el: b });
+				lastShoot = now;
+			}
+		}
 
-		if (keys[" "] || touchState.shoot) shoot();
+		player.x = Math.max(15, Math.min(w - 15, player.x + player.vx));
+		player.el?.setAttribute("transform", `translate(${player.x}, ${player.y})`);
 
-		player.x += player.vx;
-		player.y += player.vy;
-
-		// Bounds
-		player.x = Math.max(20, Math.min(container.clientWidth - 20, player.x));
-		player.y = Math.max(20, Math.min(container.clientHeight - 20, player.y));
-
-		player.el.setAttribute("transform", `translate(${player.x}, ${player.y})`);
-
-		// Move Bullets
 		bullets.forEach((b, i) => {
-			b.y -= 12;
+			b.y -= 8;
 			b.el.setAttribute("transform", `translate(${b.x}, ${b.y})`);
 			if (b.y < -10) {
 				b.el.remove();
@@ -241,22 +149,18 @@ const { manual = false } = Astro.props;
 			}
 		});
 
-		// Move Enemies
 		enemies.forEach((en, i) => {
-			en.y += en.speed;
+			en.y += en.s;
 			en.el.setAttribute("transform", `translate(${en.x}, ${en.y})`);
 
-			// Collision with bullets
 			bullets.forEach((b, bi) => {
-				const dist = Math.hypot(en.x - b.x, en.y - b.y);
-				if (dist < 20) {
+				if (Math.hypot(en.x - b.x, en.y - b.y) < 15) {
 					score++;
-					if (scoreEl) scoreEl.textContent = `BUGS_CLEARED: ${score}/${targetScore}`;
+					if (scoreEl) scoreEl.textContent = `BUGS: ${score}/${targetScore}`;
 					en.el.remove();
 					enemies.splice(i, 1);
 					b.el.remove();
 					bullets.splice(bi, 1);
-
 					if (score >= targetScore) {
 						isPlaying = false;
 						document.getElementById("victory-screen")?.classList.remove("hidden");
@@ -265,77 +169,34 @@ const { manual = false } = Astro.props;
 				}
 			});
 
-			if (en.y > container.clientHeight + 20) {
+			if (en.y > h + 20) {
 				en.el.remove();
 				enemies.splice(i, 1);
 			}
 		});
 
-		if (Math.random() < 0.03) spawnEnemy();
+		if (Math.random() < 0.03 && enemies.length < 5) {
+			const el = document.createElementNS("http://www.w3.org/2000/svg", "use");
+			el.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#svg-enemy");
+			entitiesGroup?.appendChild(el);
+			enemies.push({ x: Math.random() * w, y: -20, el, s: 1.5 + Math.random() * 2 });
+		}
+
 		requestAnimationFrame(gameLoop);
 	}
 
 	startBtn?.addEventListener("click", () => {
 		document.getElementById("start-screen")?.classList.add("hidden");
 		isPlaying = true;
-
-		// Init player
 		const el = document.createElementNS("http://www.w3.org/2000/svg", "use");
 		el.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#svg-player");
-		el.setAttribute("class", "text-neutral-100");
 		entitiesGroup?.appendChild(el);
 		player.el = el;
-
-		// Center player
-		if (container) {
-			player.x = container.clientWidth / 2;
-			player.y = container.clientHeight - 80;
-		}
-
-		initStars();
+		player.x = (container?.clientWidth || 400) / 2;
+		player.y = (container?.clientHeight || 500) - 40;
 		gameLoop();
-
-		// Check if touch device
-		if ("ontouchstart" in window) {
-			mobileControls?.classList.remove("hidden");
-		}
 	});
 
-	// Keyboard Handlers
-	window.addEventListener("keydown", (e) => {
-		keys[e.key] = true;
-	});
-	window.addEventListener("keyup", (e) => {
-		keys[e.key] = false;
-	});
-
-	// Mouse fallback for movement
-	container?.addEventListener("mousemove", (e) => {
-		if (keys["ArrowLeft"] || keys["ArrowRight"] || keys["ArrowUp"] || keys["ArrowDown"]) return;
-		const rect = container.getBoundingClientRect();
-		player.x = e.clientX - rect.left;
-		player.y = e.clientY - rect.top;
-	});
-	container?.addEventListener("mousedown", shoot);
-
-	// Mobile Control Handlers
-	const mLeft = document.getElementById("m-left");
-	const mRight = document.getElementById("m-right");
-	const mShoot = document.getElementById("m-shoot");
-
-	mLeft?.addEventListener("touchstart", (e) => {
-		e.preventDefault();
-		touchState.left = true;
-	});
-	mLeft?.addEventListener("touchend", () => (touchState.left = false));
-	mRight?.addEventListener("touchstart", (e) => {
-		e.preventDefault();
-		touchState.right = true;
-	});
-	mRight?.addEventListener("touchend", () => (touchState.right = false));
-	mShoot?.addEventListener("touchstart", (e) => {
-		e.preventDefault();
-		touchState.shoot = true;
-	});
-	mShoot?.addEventListener("touchend", () => (touchState.shoot = false));
+	window.addEventListener("keydown", (e) => (keys[e.key] = true));
+	window.addEventListener("keyup", (e) => (keys[e.key] = false));
 </script>

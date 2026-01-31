@@ -1,5 +1,4 @@
 /* --- Fonts --- */
-
 @font-face {
 	font-family: "Geist Mono";
 	src: url("/fonts/GeistMono.woff2") format("woff2-variations");
@@ -7,7 +6,6 @@
 	font-style: normal;
 	font-display: swap;
 }
-
 @font-face {
 	font-family: "Plaster";
 	src: url("/fonts/Plaster.woff2") format("woff2");
@@ -19,7 +17,6 @@
 /* --- TailwindCSS --- */
 @import "tailwindcss";
 
-/* --- Iconify --- */
 @plugin "@iconify/tailwind4" {
 	scale: 1.2;
 }
@@ -31,14 +28,10 @@
 	--base: #fafafa;
 	--content: #171717;
 	--border: #171717;
-
 	--primary: #171717;
 	--primary-content: #fafafa;
-
 	--accent: #10b981;
 	--accent-content: #fafafa;
-
-	/* Terminal Specifics */
 	--t-green: #22c55e;
 	--t-amber: #f59e0b;
 	--t-red: #ef4444;
@@ -49,7 +42,6 @@
 	--base: #0a0a0a;
 	--content: #e5e5e5;
 	--border: #404040;
-
 	--primary: #fafafa;
 	--primary-content: #0a0a0a;
 }
@@ -57,17 +49,13 @@
 @theme {
 	--font-display: "Plaster", system-ui;
 	--font-mono: "Geist Mono", monospace;
-
 	--color-base: var(--base);
 	--color-content: var(--content);
 	--color-border: var(--border);
-
 	--color-primary: var(--primary);
 	--color-primary-content: var(--primary-content);
-
 	--color-accent: var(--accent);
 	--color-accent-content: var(--accent-content);
-
 	--color-t-green: var(--t-green);
 	--color-t-amber: var(--t-amber);
 	--color-t-red: var(--t-red);
@@ -76,142 +64,74 @@
 
 @layer base {
 	html {
-		@apply scroll-smooth bg-base text-content;
-		font-size: 14px;
+		@apply bg-base text-content scroll-smooth;
 	}
-
-	@screen md {
-		html {
-			font-size: 16px;
-		}
-	}
-
 	body {
-		@apply font-mono antialiased overflow-x-hidden w-full;
+		@apply w-full overflow-x-hidden font-mono antialiased;
 		min-height: 100dvh;
 	}
-
-	/* Hierarchy Fix - Fluid Scaling */
+	/* Fluid Typography */
 	h1 {
-		@apply text-3xl font-black leading-[1.1] tracking-tighter uppercase sm:text-5xl lg:text-7xl xl:text-8xl;
+		@apply text-2xl leading-tight font-black tracking-tighter uppercase sm:text-4xl md:text-6xl lg:text-7xl;
 	}
 	h2 {
-		@apply text-xl font-bold leading-tight tracking-tight uppercase sm:text-3xl;
+		@apply text-lg leading-tight font-bold tracking-tight uppercase sm:text-xl md:text-2xl;
 	}
 	h3 {
-		@apply text-lg font-bold sm:text-xl;
+		@apply text-base font-bold sm:text-lg;
 	}
 	p {
-		@apply text-sm leading-relaxed opacity-90 sm:text-base;
+		@apply text-xs leading-relaxed md:text-sm;
 	}
 
-	/* Force monochrome selection */
 	::selection {
 		@apply bg-primary text-primary-content;
 	}
-
-	/* Reset all radius for TUI style */
 	* {
 		border-radius: 0 !important;
 	}
 }
 
 @layer components {
-	/* --- Standardized Fluid Container --- */
-	.tui-container {
-		@apply mx-auto w-full max-w-full px-4 sm:px-6 lg:px-8 xl:max-w-7xl;
-	}
-
-	/* WINDOW SYSTEM */
+	/* Standardized Window */
 	.tui-window {
-		@apply border-2 border-border bg-base p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)] w-full;
+		@apply border-border bg-base w-full border-2 p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)];
 	}
-
 	.tui-window-header {
-		@apply mb-1 flex items-center justify-between bg-primary px-2 py-0.5 text-[10px] font-bold text-primary-content uppercase md:text-xs;
+		@apply bg-primary text-primary-content mb-1 flex items-center justify-between px-2 py-0.5 text-[9px] font-bold uppercase md:text-xs;
 	}
 
-	/* BUTTON SYSTEM */
+	/* Standardized Buttons */
 	.tui-btn-primary {
-		@apply inline-flex items-center justify-center border-2 border-border bg-primary px-4 py-2 text-xs font-bold text-primary-content uppercase transition-all hover:bg-transparent hover:text-content active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50 md:text-sm;
+		@apply border-border bg-primary text-primary-content hover:text-content inline-flex items-center justify-center border-2 px-4 py-1.5 text-[10px] font-bold uppercase transition-all hover:bg-transparent active:translate-x-0.5 active:translate-y-0.5 md:text-xs;
 	}
-
 	.tui-btn-secondary {
-		@apply inline-flex items-center justify-center border-2 border-border bg-transparent px-4 py-2 text-xs font-bold text-content uppercase transition-all hover:bg-primary hover:text-primary-content active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50 md:text-sm;
+		@apply border-border text-content hover:bg-primary hover:text-primary-content inline-flex items-center justify-center border-2 bg-transparent px-4 py-1.5 text-[10px] font-bold uppercase transition-all active:translate-x-0.5 active:translate-y-0.5 md:text-xs;
 	}
 
-	.tui-btn-accent {
-		@apply inline-flex items-center justify-center border-2 border-accent bg-accent px-4 py-2 text-xs font-bold text-accent-content uppercase transition-all hover:bg-transparent hover:text-accent active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50;
-	}
-
-	.tui-btn-ghost {
-		@apply inline-flex items-center justify-center border-2 border-transparent px-4 py-1 text-sm font-bold uppercase transition-all hover:border-border hover:bg-primary/5 active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50;
-	}
-
-	/* Sizes (Modifiers) */
-	.tui-btn-sm {
-		@apply px-2 py-0.5 text-[10px];
-	}
-
-	.tui-btn-lg {
-		@apply px-8 py-3 text-lg;
-	}
-
-	/* PANEL SYSTEM */
+	/* Panel System */
 	.tui-panel {
-		@apply border-2 border-border p-4 w-full;
+		@apply border-border w-full border-2 p-4 md:p-6;
 	}
-
 	.tui-panel-muted {
 		@apply border-border/10 bg-primary/5;
 	}
-
 	.tui-panel-accent {
-		@apply border-l-4 border-l-accent;
+		@apply border-l-accent border-l-4;
 	}
 
-	/* DECORATION */
-	.tui-divider {
-		@apply relative my-10 h-0.5 w-full bg-border/10;
-	}
-
-	.tui-divider::after {
-		content: "[SYSTEM_DIVIDER]";
-		@apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-base px-2 text-[8px] font-bold text-content/30 md:text-[10px];
-	}
-
-	/* MODAL/OVERLAY SYSTEM */
+	/* Overlays */
 	.tui-overlay {
-		@apply fixed inset-0 z-[100] flex items-center justify-center bg-base/90 p-4 backdrop-blur-sm;
+		@apply bg-base/95 fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm;
 	}
-
 	.tui-modal {
-		@apply w-full max-w-2xl border-2 border-border bg-base p-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.05)];
-	}
-
-	/* COMMAND PALETTE */
-	.tui-palette-input {
-		@apply w-full bg-transparent border-none outline-none text-lg font-bold text-accent placeholder:text-content/20 py-2;
-	}
-
-	.tui-palette-results {
-		@apply mt-4 max-h-[60vh] overflow-y-auto border-t border-border/10 pt-2;
-	}
-
-	.tui-palette-item {
-		@apply flex cursor-pointer items-center justify-between p-3 transition-colors hover:bg-primary hover:text-primary-content;
-	}
-
-	/* KBD SYSTEM */
-	kbd {
-		@apply rounded-sm border border-border bg-base px-1.5 py-0.5 font-mono text-[9px] font-bold text-content shadow-[2px_2px_0px_0px_rgba(0,0,0,0.1)] transition-all dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)];
+		@apply border-border bg-base w-full max-w-2xl border-2 p-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)];
 	}
 }
 
 @utility animate-blink {
 	animation: blink 1s step-end infinite;
 }
-
 @keyframes blink {
 	0%,
 	100% {
