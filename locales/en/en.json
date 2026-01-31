@@ -10,17 +10,17 @@
 		"playgrounds": "Playgrounds",
 		"medium": "Medium"
 	},
-    "pages": {
-        "showcase": {
-            "title": "Project Showcase",
-            "subtitle": "A collection of my professional and featured works."
-        },
-        "playgrounds": {
-            "title": "Code Playgrounds",
-            "subtitle": "Experimental mini-projects, creative coding, and logic puzzles.",
-            "button": "RUN_EXPERIMENT"
-        }
-    },
+	"pages": {
+		"showcase": {
+			"title": "Project Showcase",
+			"subtitle": "A collection of my professional and featured works."
+		},
+		"playgrounds": {
+			"title": "Code Playgrounds",
+			"subtitle": "Experimental mini-projects, creative coding, and logic puzzles.",
+			"button": "RUN_EXPERIMENT"
+		}
+	},
 	"skills": {
 		"title": "Skill Sets: [{{count}}+]"
 	},

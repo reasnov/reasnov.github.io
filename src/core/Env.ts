@@ -1,6 +1,6 @@
 /**
  * Utility for accessing environment variables with optional defaults.
- * 
+ *
  * @param key The environment variable key.
  * @param defaults The default value if the key is not found.
  * @returns The value of the environment variable or the default value.

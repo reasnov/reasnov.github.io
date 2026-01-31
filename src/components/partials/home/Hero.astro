@@ -5,28 +5,35 @@ import { trans } from "@core/Translator";
 const locale = Astro.currentLocale || "en";
 ---
 
-<div class="flex flex-col items-center justify-center flex-1 gap-12 py-12 lg:flex-row" data-aos="fade-in">
-	<div class="flex flex-col flex-1 gap-8">
-		<div class="leading-none flex flex-col gap-2">
-			<p class="text-xs font-bold text-neutral-500 uppercase tracking-[0.2em] animate-pulse">
-                &gt;&gt; {trans("hero.greeting", {}, locale)}
-            </p>
-			<h1 class="text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter">
-                {trans("hero.name", {}, locale)}<span class="animate-blink text-primary">_</span>
-            </h1>
-			<div class="flex items-center gap-3 mt-2">
-				<span class="text-neutral-500 font-bold uppercase text-xs tracking-widest">{trans("hero.role_prefix", {}, locale)}</span>
-				<span class="text-sm md:text-base font-bold px-2 py-0.5 bg-black text-white dark:bg-white dark:text-black uppercase">
+<div class="flex flex-1 flex-col items-center justify-center gap-12 py-12 lg:flex-row" data-aos="fade-in">
+	<div class="flex flex-1 flex-col gap-8">
+		<div class="flex flex-col gap-2 leading-none">
+			<p class="animate-pulse text-xs font-bold tracking-[0.2em] text-neutral-500 uppercase">
+				&gt;&gt; {trans("hero.greeting", {}, locale)}
+			</p>
+			<h1 class="text-6xl font-black tracking-tighter text-black md:text-8xl dark:text-white">
+				{trans("hero.name", {}, locale)}<span class="animate-blink text-primary">_</span>
+			</h1>
+			<div class="mt-2 flex items-center gap-3">
+				<span class="text-xs font-bold tracking-widest text-neutral-500 uppercase"
+					>{trans("hero.role_prefix", {}, locale)}</span
+				>
+				<span
+					class="bg-black px-2 py-0.5 text-sm font-bold text-white uppercase md:text-base dark:bg-white dark:text-black"
+				>
 					{trans("hero.role", {}, locale)}
 				</span>
 			</div>
 		</div>
 
-		<div class="tui-panel border-l-4 border-l-black dark:border-l-white bg-neutral-50 dark:bg-neutral-900/10">
-			<p class="leading-relaxed text-neutral-700 dark:text-neutral-400 text-sm md:text-base" set:html={trans("hero.description", {}, locale)} />
+		<div class="tui-panel border-l-4 border-l-black bg-neutral-50 dark:border-l-white dark:bg-neutral-900/10">
+			<p
+				class="text-sm leading-relaxed text-neutral-700 md:text-base dark:text-neutral-400"
+				set:html={trans("hero.description", {}, locale)}
+			/>
 		</div>
 
-		<div class="flex flex-wrap w-full gap-4">
+		<div class="flex w-full flex-wrap gap-4">
 			<a href="https://github.com/reasnov" class="tui-button-primary text-sm">
 				{trans("hero.buttons.explore", {}, locale)} [F1]
 			</a>
@@ -36,17 +43,17 @@ const locale = Astro.currentLocale || "en";
 		</div>
 	</div>
 
-	<div class="flex items-center justify-center flex-1 w-full">
+	<div class="flex w-full flex-1 items-center justify-center">
 		<div class="tui-window w-full">
-            <div class="tui-window-header">
-                <span>SYSTEM_BOOT.LOG</span>
-                <div class="flex gap-1">
-                    <span class="size-2 border border-white/20"></span>
-                    <span class="size-2 border border-white/20"></span>
-                    <span class="size-2 border border-white/20"></span>
-                </div>
-            </div>
-            <FakeTerminal />
-        </div>
+			<div class="tui-window-header">
+				<span>SYSTEM_BOOT.LOG</span>
+				<div class="flex gap-1">
+					<span class="size-2 border border-white/20"></span>
+					<span class="size-2 border border-white/20"></span>
+					<span class="size-2 border border-white/20"></span>
+				</div>
+			</div>
+			<FakeTerminal />
+		</div>
 	</div>
 </div>

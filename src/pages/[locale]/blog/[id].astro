@@ -8,7 +8,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 
 export async function getStaticPaths() {
 	const locales = ["en", "id"];
-	
+
 	const allPaths = await Promise.all(
 		locales.map(async (locale) => {
 			const posts = await getCollection("blog", (entry) => {
@@ -19,9 +19,9 @@ export async function getStaticPaths() {
 			posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 			return posts.map((post, index) => ({
-				params: { 
+				params: {
 					locale,
-					id: post.id.replace(`${locale}/`, "") 
+					id: post.id.replace(`${locale}/`, ""),
 				},
 				props: {
 					post,
@@ -50,21 +50,31 @@ const schema = generateBlogPostingSchema({
 });
 ---
 
-<BlogLayout title={post.data.title} date={post.data.pubDate} readingTime={readingTime} schema={schema} headings={headings}>
+<BlogLayout
+	title={post.data.title}
+	date={post.data.pubDate}
+	readingTime={readingTime}
+	schema={schema}
+	headings={headings}
+>
 	<Content />
 
-	<div class="mt-16 pt-8 border-t border-neutral-100 dark:border-neutral-900 flex flex-col sm:flex-row justify-between gap-8">
+	<div
+		class="mt-16 flex flex-col justify-between gap-8 border-t border-neutral-100 pt-8 sm:flex-row dark:border-neutral-900"
+	>
 		{
 			prev && (
 				<a
 					href={getRelativeLocaleUrl(locale, `blog/${prev.id.replace(`${locale}/`, "")}`)}
-					class="flex-1 group flex flex-col gap-2 p-4 border border-neutral-100 dark:border-neutral-800 hover:border-primary/50 transition-colors rounded-lg"
+					class="group hover:border-primary/50 flex flex-1 flex-col gap-2 rounded-lg border border-neutral-100 p-4 transition-colors dark:border-neutral-800"
 				>
-					<span class="text-xs font-bold text-neutral-400 uppercase tracking-widest flex items-center gap-2">
+					<span class="flex items-center gap-2 text-xs font-bold tracking-widest text-neutral-400 uppercase">
 						<span class="icon-[tabler--arrow-left] size-3" />
 						{trans("blog.prev", {}, locale)}
 					</span>
-					<span class="font-bold group-hover:text-primary transition-colors line-clamp-2">{prev.data.title}</span>
+					<span class="group-hover:text-primary line-clamp-2 font-bold transition-colors">
+						{prev.data.title}
+					</span>
 				</a>
 			)
 		}
@@ -72,13 +82,15 @@ const schema = generateBlogPostingSchema({
 			next && (
 				<a
 					href={getRelativeLocaleUrl(locale, `blog/${next.id.replace(`${locale}/`, "")}`)}
-					class="flex-1 group flex flex-col gap-2 p-4 border border-neutral-100 dark:border-neutral-800 hover:border-primary/50 text-right transition-colors rounded-lg"
+					class="group hover:border-primary/50 flex flex-1 flex-col gap-2 rounded-lg border border-neutral-100 p-4 text-right transition-colors dark:border-neutral-800"
 				>
-					<span class="text-xs font-bold text-neutral-400 uppercase tracking-widest flex items-center justify-end gap-2">
+					<span class="flex items-center justify-end gap-2 text-xs font-bold tracking-widest text-neutral-400 uppercase">
 						{trans("blog.next", {}, locale)}
 						<span class="icon-[tabler--arrow-right] size-3" />
 					</span>
-					<span class="font-bold group-hover:text-primary transition-colors line-clamp-2">{next.data.title}</span>
+					<span class="group-hover:text-primary line-clamp-2 font-bold transition-colors">
+						{next.data.title}
+					</span>
 				</a>
 			)
 		}

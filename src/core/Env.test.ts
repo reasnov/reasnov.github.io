@@ -8,8 +8,8 @@ describe("Env Utility", () => {
 				EXISTING_KEY: "some-value",
 			},
 		});
-		
-		// Also mock import.meta.env if possible, 
+
+		// Also mock import.meta.env if possible,
 		// but since we are in Vitest, process.env is usually sufficient.
 	});
 

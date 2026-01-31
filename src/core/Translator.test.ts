@@ -6,10 +6,10 @@ import { trans } from "./Translator";
 // Here we might need to mock config as well since trans uses it.
 
 vi.mock("./Config", () => ({
-    config: vi.fn((key, defaults) => {
-        if (key === "app.locale") return "en";
-        return defaults;
-    })
+	config: vi.fn((key, defaults) => {
+		if (key === "app.locale") return "en";
+		return defaults;
+	}),
 }));
 
 describe("Translator Utility", () => {

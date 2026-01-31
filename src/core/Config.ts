@@ -12,7 +12,7 @@ function getConfigModules(): Record<string, any> {
 
 /**
  * Access configuration values using dot notation (e.g., 'app.name').
- * 
+ *
  * @param key The configuration key.
  * @param defaults The default value if the key is not found.
  * @returns The configuration value or the default value.

@@ -5,41 +5,38 @@ const locale = Astro.currentLocale || "en";
 const email = "reasnov.official@gmail.com";
 ---
 
-<section class="flex flex-col items-center justify-center w-full gap-8 my-32" data-aos="fade-in">
-    <div class="tui-window w-full max-w-3xl">
-        <div class="tui-window-header">
-            <span>SEND_MESSAGE.EXE</span>
-            <div class="flex gap-1">
-                <span class="size-3 border border-white/20 flex items-center justify-center text-[8px]">-</span>
-                <span class="size-3 border border-white/20 flex items-center justify-center text-[8px]">□</span>
-                <span class="size-3 border border-white/20 flex items-center justify-center text-[8px]">×</span>
-            </div>
-        </div>
+<section class="my-32 flex w-full flex-col items-center justify-center gap-8" data-aos="fade-in">
+	<div class="tui-window w-full max-w-3xl">
+		<div class="tui-window-header">
+			<span>SEND_MESSAGE.EXE</span>
+			<div class="flex gap-1">
+				<span class="flex size-3 items-center justify-center border border-white/20 text-[8px]">-</span>
+				<span class="flex size-3 items-center justify-center border border-white/20 text-[8px]">□</span>
+				<span class="flex size-3 items-center justify-center border border-white/20 text-[8px]">×</span>
+			</div>
+		</div>
 
-        <div class="p-8 md:p-12 flex flex-col items-center text-center gap-8">
-            <div class="flex flex-col gap-4">
-                <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">
-                    {trans("contact.title", {}, locale)}
-                </h2>
-                <p class="text-neutral-500 dark:text-neutral-400 text-sm md:text-base max-w-lg mx-auto">
-                    {trans("contact.description", {}, locale)}
-                </p>
-            </div>
+		<div class="flex flex-col items-center gap-8 p-8 text-center md:p-12">
+			<div class="flex flex-col gap-4">
+				<h2 class="text-3xl leading-none font-black tracking-tighter uppercase md:text-5xl">
+					{trans("contact.title", {}, locale)}
+				</h2>
+				<p class="mx-auto max-w-lg text-sm text-neutral-500 md:text-base dark:text-neutral-400">
+					{trans("contact.description", {}, locale)}
+				</p>
+			</div>
 
-            <div class="flex flex-col items-center gap-4 w-full">
-                <a 
-                    href={`mailto:${email}`} 
-                    class="tui-button-primary w-full md:w-fit px-12 py-4 text-lg"
-                >
-                    &gt; {trans("contact.button", {}, locale)}
-                </a>
-                
-                <div class="flex items-center gap-4 w-full opacity-30">
-                    <div class="flex-1 h-px bg-neutral-500"></div>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.5em]">{email}</span>
-                    <div class="flex-1 h-px bg-neutral-500"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="flex w-full flex-col items-center gap-4">
+				<a href={`mailto:${email}`} class="tui-button-primary w-full px-12 py-4 text-lg md:w-fit">
+					&gt; {trans("contact.button", {}, locale)}
+				</a>
+
+				<div class="flex w-full items-center gap-4 opacity-30">
+					<div class="h-px flex-1 bg-neutral-500"></div>
+					<span class="text-[10px] font-bold tracking-[0.5em] uppercase">{email}</span>
+					<div class="h-px flex-1 bg-neutral-500"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

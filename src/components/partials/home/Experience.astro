@@ -5,38 +5,42 @@ import experiences from "@data/experience.json";
 const locale = Astro.currentLocale || "en";
 ---
 
-<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-in">
-    <div class="flex flex-col gap-2 border-l-4 border-black dark:border-white pl-4">
-        <h2 class="text-xl font-black uppercase tracking-widest">{trans("experience.title", {}, locale)}</h2>
-        <p class="text-xs font-bold text-neutral-500 uppercase tracking-tighter">-- {trans("experience.subtitle", {}, locale)}</p>
-    </div>
+<section class="my-20 flex w-full flex-col gap-8" data-aos="fade-in">
+	<div class="flex flex-col gap-2 border-l-4 border-black pl-4 dark:border-white">
+		<h2 class="text-xl font-black tracking-widest uppercase">{trans("experience.title", {}, locale)}</h2>
+		<p class="text-xs font-bold tracking-tighter text-neutral-500 uppercase">
+			-- {trans("experience.subtitle", {}, locale)}
+		</p>
+	</div>
 
-    <div class="flex flex-col gap-0 border border-neutral-200 dark:border-neutral-900">
-        {experiences.map((exp, index) => (
-            <div 
-                class={`p-6 border-b border-neutral-100 dark:border-neutral-900 last:border-0 group hover:bg-neutral-50 dark:hover:bg-neutral-900/10 transition-colors`}
-                data-aos="fade-up"
-                data-aos-delay={index * 50}
-            >
-                <div class="flex flex-col md:flex-row md:items-start gap-4">
-                    <div class="flex flex-col min-w-[100px]">
-                        <span class="text-xs font-bold text-black dark:text-white px-2 py-0.5 border border-black dark:border-white w-fit">
-                            {exp.year}
-                        </span>
-                    </div>
-                    
-                    <div class="flex flex-col gap-2 flex-1">
-                        <div class="flex flex-col">
-                            <h3 class="text-lg font-bold group-hover:underline transition-colors">{exp.title}</h3>
-                            <span class="text-xs font-bold text-neutral-500 uppercase">{exp.company}</span>
-                        </div>
-                        
-                        <p class="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl">
-                            {exp.description}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        ))}
-    </div>
+	<div class="flex flex-col gap-0 border border-neutral-200 dark:border-neutral-900">
+		{
+			experiences.map((exp, index) => (
+				<div
+					class={`group border-b border-neutral-100 p-6 transition-colors last:border-0 hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/10`}
+					data-aos="fade-up"
+					data-aos-delay={index * 50}
+				>
+					<div class="flex flex-col gap-4 md:flex-row md:items-start">
+						<div class="flex min-w-[100px] flex-col">
+							<span class="w-fit border border-black px-2 py-0.5 text-xs font-bold text-black dark:border-white dark:text-white">
+								{exp.year}
+							</span>
+						</div>
+
+						<div class="flex flex-1 flex-col gap-2">
+							<div class="flex flex-col">
+								<h3 class="text-lg font-bold transition-colors group-hover:underline">{exp.title}</h3>
+								<span class="text-xs font-bold text-neutral-500 uppercase">{exp.company}</span>
+							</div>
+
+							<p class="max-w-3xl text-xs leading-relaxed text-neutral-600 md:text-sm dark:text-neutral-400">
+								{exp.description}
+							</p>
+						</div>
+					</div>
+				</div>
+			))
+		}
+	</div>
 </section>

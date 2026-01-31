@@ -9,12 +9,12 @@ interface Props {
 	schema?: object;
 }
 
-const { 
-	title = config("settings.site_title"), 
-	desc = config("settings.site_name"), 
-	keywords, 
-	author = config("app.author"), 
-	schema 
+const {
+	title = config("settings.site_title"),
+	desc = config("settings.site_name"),
+	keywords,
+	author = config("app.author"),
+	schema,
 } = Astro.props;
 
 const siteUrl = config("settings.site_url");

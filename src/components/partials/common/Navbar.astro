@@ -8,134 +8,162 @@ import { trans } from "@core/Translator";
 const lang = Astro.currentLocale || "en";
 ---
 
-<nav class="sticky top-0 z-50 w-full bg-white dark:bg-black border-b-2 border-black dark:border-white">
-    <div class="container mx-auto">
-        <!-- Top status bar look -->
-        <div class="flex items-center justify-between px-4 h-12">
-            <div class="flex items-center gap-6">
-                <Brand />
-                
-                <div class="hidden md:flex items-center gap-4 text-xs font-bold uppercase tracking-tighter">
-                    <a href={getRelativeLocaleUrl(lang, "blog")} class="hover:text-primary transition-colors">
-                        &lt;{trans("nav.blog", {}, lang)}&gt;
-                    </a>
-                    <span class="text-neutral-300 dark:text-neutral-800">|</span>
-                    <a href="https://medium.com/reasnov" class="hover:text-primary transition-colors">
-                        &lt;{trans("nav.medium", {}, lang)}&gt;
-                    </a>
-                </div>
-            </div>
+<nav class="sticky top-0 z-50 w-full border-b-2 border-black bg-white dark:border-white dark:bg-black">
+	<div class="container mx-auto">
+		<!-- Top status bar look -->
+		<div class="flex h-12 items-center justify-between px-4">
+			<div class="flex items-center gap-6">
+				<Brand />
 
-            <div class="flex items-center gap-4 h-12">
-                <div class="hidden md:flex items-center gap-2 border-x border-neutral-200 dark:border-neutral-800 px-4 h-12">
-                    <ThemeSwitcher />
-                    <LangSwitcher />
-                </div>
-                
-                <div class="hidden md:flex items-center gap-3 text-neutral-500">
-                    <a href="https://github.com/reasnov" target="__blank" class="icon-[tabler--brand-github] hover:text-black dark:hover:text-white transition-colors"></a>
-                    <a href="https://linkedin.com/in/reasnov" target="__blank" class="icon-[tabler--brand-linkedin] hover:text-black dark:hover:text-white transition-colors"></a>
-                </div>
+				<div class="hidden items-center gap-4 text-xs font-bold tracking-tighter uppercase md:flex">
+					<a href={getRelativeLocaleUrl(lang, "blog")} class="hover:text-primary transition-colors">
+						&lt;{trans("nav.blog", {}, lang)}&gt;
+					</a>
+					<span class="text-neutral-300 dark:text-neutral-800">|</span>
+					<a href="https://medium.com/reasnov" class="hover:text-primary transition-colors">
+						&lt;{trans("nav.medium", {}, lang)}&gt;
+					</a>
+				</div>
+			</div>
 
-                <!-- Mobile Menu Button -->
-                <button 
-                    id="mobile-menu-toggle"
-                    class="md:hidden flex items-center gap-2 text-[10px] font-black uppercase tracking-widest px-2 py-1 border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
-                >
-                    <span id="menu-icon-open">[MENU]</span>
-                    <span id="menu-icon-close" class="hidden">[CLOSE]</span>
-                </button>
-            </div>
-        </div>
-    </div>
+			<div class="flex h-12 items-center gap-4">
+				<div
+					class="hidden h-12 items-center gap-2 border-x border-neutral-200 px-4 md:flex dark:border-neutral-800"
+				>
+					<ThemeSwitcher />
+					<LangSwitcher />
+				</div>
 
-    <!-- Mobile Menu Overlay -->
-    <div 
-        id="mobile-menu" 
-        class="hidden fixed inset-0 z-40 bg-white dark:bg-black pt-12"
-    >
-        <div class="p-4 flex flex-col gap-8">
-            <div class="tui-window">
-                <div class="tui-window-header">
-                    <span>NAVIGATION.SYS</span>
-                </div>
-                <div class="flex flex-col">
-                    <a href={getRelativeLocaleUrl(lang, "/")} class="p-4 text-lg font-black uppercase border-b border-neutral-100 dark:border-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-900/50">
-                        &gt; {trans("nav.home", {}, lang) || "Home"}
-                    </a>
-                    <a href={getRelativeLocaleUrl(lang, "blog")} class="p-4 text-lg font-black uppercase border-b border-neutral-100 dark:border-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-900/50">
-                        &gt; {trans("nav.blog", {}, lang)}
-                    </a>
-                    <a href="https://medium.com/reasnov" class="p-4 text-lg font-black uppercase border-b border-neutral-100 dark:border-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-900/50">
-                        &gt; {trans("nav.medium", {}, lang)}
-                    </a>
-                </div>
-            </div>
+				<div class="hidden items-center gap-3 text-neutral-500 md:flex">
+					<a
+						href="https://github.com/reasnov"
+						target="__blank"
+						class="icon-[tabler--brand-github] transition-colors hover:text-black dark:hover:text-white"
+					></a>
+					<a
+						href="https://linkedin.com/in/reasnov"
+						target="__blank"
+						class="icon-[tabler--brand-linkedin] transition-colors hover:text-black dark:hover:text-white"
+					></a>
+				</div>
 
-            <div class="tui-window">
-                <div class="tui-window-header">
-                    <span>SETTINGS.EXE</span>
-                </div>
-                <div class="p-4 flex flex-col gap-6">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-widest">Theme:</span>
-                        <ThemeSwitcher />
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-widest">Language:</span>
-                        <LangSwitcher />
-                    </div>
-                </div>
-            </div>
+				<!-- Mobile Menu Button -->
+				<button
+					id="mobile-menu-toggle"
+					class="flex items-center gap-2 border border-black px-2 py-1 text-[10px] font-black tracking-widest uppercase transition-all hover:bg-black hover:text-white md:hidden dark:border-white dark:hover:bg-white dark:hover:text-black"
+				>
+					<span id="menu-icon-open">[MENU]</span>
+					<span id="menu-icon-close" class="hidden">[CLOSE]</span>
+				</button>
+			</div>
+		</div>
+	</div>
 
-            <div class="tui-window">
-                <div class="tui-window-header">
-                    <span>SOCIAL.LOG</span>
-                </div>
-                <div class="p-4 flex justify-around">
-                    <a href="https://github.com/reasnov" target="__blank" class="icon-[tabler--brand-github] size-8 text-neutral-500 hover:text-black dark:hover:text-white transition-colors"></a>
-                    <a href="https://x.com/reasnov" target="__blank" class="icon-[tabler--brand-x] size-8 text-neutral-500 hover:text-black dark:hover:text-white transition-colors"></a>
-                    <a href="https://linkedin.com/in/reasnov" target="__blank" class="icon-[tabler--brand-linkedin] size-8 text-neutral-500 hover:text-black dark:hover:text-white transition-colors"></a>
-                </div>
-            </div>
+	<!-- Mobile Menu Overlay -->
+	<div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-white pt-12 dark:bg-black">
+		<div class="flex flex-col gap-8 p-4">
+			<div class="tui-window">
+				<div class="tui-window-header">
+					<span>NAVIGATION.SYS</span>
+				</div>
+				<div class="flex flex-col">
+					<a
+						href={getRelativeLocaleUrl(lang, "/")}
+						class="border-b border-neutral-100 p-4 text-lg font-black uppercase hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/50"
+					>
+						&gt; {trans("nav.home", {}, lang) || "Home"}
+					</a>
+					<a
+						href={getRelativeLocaleUrl(lang, "blog")}
+						class="border-b border-neutral-100 p-4 text-lg font-black uppercase hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/50"
+					>
+						&gt; {trans("nav.blog", {}, lang)}
+					</a>
+					<a
+						href="https://medium.com/reasnov"
+						class="border-b border-neutral-100 p-4 text-lg font-black uppercase hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/50"
+					>
+						&gt; {trans("nav.medium", {}, lang)}
+					</a>
+				</div>
+			</div>
 
-            <p class="text-[10px] text-center font-bold text-neutral-500 uppercase tracking-[0.3em] mt-auto">
-                System: 0.0.1_beta // Root: me
-            </p>
-        </div>
-    </div>
+			<div class="tui-window">
+				<div class="tui-window-header">
+					<span>SETTINGS.EXE</span>
+				</div>
+				<div class="flex flex-col gap-6 p-4">
+					<div class="flex items-center justify-between">
+						<span class="text-xs font-bold tracking-widest uppercase">Theme:</span>
+						<ThemeSwitcher />
+					</div>
+					<div class="flex items-center justify-between">
+						<span class="text-xs font-bold tracking-widest uppercase">Language:</span>
+						<LangSwitcher />
+					</div>
+				</div>
+			</div>
+
+			<div class="tui-window">
+				<div class="tui-window-header">
+					<span>SOCIAL.LOG</span>
+				</div>
+				<div class="flex justify-around p-4">
+					<a
+						href="https://github.com/reasnov"
+						target="__blank"
+						class="icon-[tabler--brand-github] size-8 text-neutral-500 transition-colors hover:text-black dark:hover:text-white"
+					></a>
+					<a
+						href="https://x.com/reasnov"
+						target="__blank"
+						class="icon-[tabler--brand-x] size-8 text-neutral-500 transition-colors hover:text-black dark:hover:text-white"
+					></a>
+					<a
+						href="https://linkedin.com/in/reasnov"
+						target="__blank"
+						class="icon-[tabler--brand-linkedin] size-8 text-neutral-500 transition-colors hover:text-black dark:hover:text-white"
+					></a>
+				</div>
+			</div>
+
+			<p class="mt-auto text-center text-[10px] font-bold tracking-[0.3em] text-neutral-500 uppercase">
+				System: 0.0.1_beta // Root: me
+			</p>
+		</div>
+	</div>
 </nav>
 
 <script>
-    const btn = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const iconOpen = document.getElementById('menu-icon-open');
-    const iconClose = document.getElementById('menu-icon-close');
+	const btn = document.getElementById("mobile-menu-toggle");
+	const menu = document.getElementById("mobile-menu");
+	const iconOpen = document.getElementById("menu-icon-open");
+	const iconClose = document.getElementById("menu-icon-close");
 
-    btn?.addEventListener('click', () => {
-        const isOpen = !menu?.classList.contains('hidden');
-        
-        if (isOpen) {
-            menu?.classList.add('hidden');
-            iconOpen?.classList.remove('hidden');
-            iconClose?.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        } else {
-            menu?.classList.remove('hidden');
-            iconOpen?.classList.add('hidden');
-            iconClose?.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-    });
+	btn?.addEventListener("click", () => {
+		const isOpen = !menu?.classList.contains("hidden");
 
-    // Close menu when a link is clicked
-    const links = menu?.querySelectorAll('a');
-    links?.forEach(link => {
-        link.addEventListener('click', () => {
-            menu?.classList.add('hidden');
-            iconOpen?.classList.remove('hidden');
-            iconClose?.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    });
+		if (isOpen) {
+			menu?.classList.add("hidden");
+			iconOpen?.classList.remove("hidden");
+			iconClose?.classList.add("hidden");
+			document.body.style.overflow = "auto";
+		} else {
+			menu?.classList.remove("hidden");
+			iconOpen?.classList.add("hidden");
+			iconClose?.classList.remove("hidden");
+			document.body.style.overflow = "hidden";
+		}
+	});
+
+	// Close menu when a link is clicked
+	const links = menu?.querySelectorAll("a");
+	links?.forEach((link) => {
+		link.addEventListener("click", () => {
+			menu?.classList.add("hidden");
+			iconOpen?.classList.remove("hidden");
+			iconClose?.classList.add("hidden");
+			document.body.style.overflow = "auto";
+		});
+	});
 </script>

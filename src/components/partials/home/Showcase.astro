@@ -5,53 +5,55 @@ import projects from "@data/projects.json";
 const locale = Astro.currentLocale || "en";
 ---
 
-<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-in">
-    <div class="flex items-center gap-4">
-        <h2 class="text-xl font-black uppercase tracking-widest">&gt; {trans("showcase.title", {}, locale)}</h2>
-        <div class="flex-1 h-px bg-black dark:bg-white opacity-20"></div>
-    </div>
+<section class="my-20 flex w-full flex-col gap-8" data-aos="fade-in">
+	<div class="flex items-center gap-4">
+		<h2 class="text-xl font-black tracking-widest uppercase">&gt; {trans("showcase.title", {}, locale)}</h2>
+		<div class="h-px flex-1 bg-black opacity-20 dark:bg-white"></div>
+	</div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-black dark:border-white">
-        {projects.map((project, index) => (
-            <div class="group flex flex-col border-black dark:border-white [&:not(:last-child)]:border-b md:[&:not(:nth-child(2n))]:border-r lg:[&:not(:nth-child(3n))]:border-r">
-                <div class="aspect-video relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-                    <img 
-                        src={project.image} 
-                        alt={project.title} 
-                        class="w-full h-full object-cover"
-                        loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors"></div>
-                    <div class="absolute top-2 left-2 px-2 py-0.5 bg-black text-white text-[8px] font-bold uppercase tracking-widest border border-white/20">
-                        {index + 1}.IMG
-                    </div>
-                </div>
-                
-                <div class="flex flex-col p-6 gap-4 bg-white dark:bg-black group-hover:bg-neutral-50 dark:group-hover:bg-neutral-900/10 transition-colors flex-1">
-                    <div class="flex flex-wrap gap-1">
-                        {project.tags.map(tag => (
-                            <span class="text-[8px] font-bold uppercase px-1 border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:text-primary group-hover:border-primary/30">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
+	<div class="grid grid-cols-1 gap-0 border border-black md:grid-cols-2 lg:grid-cols-3 dark:border-white">
+		{
+			projects.map((project, index) => (
+				<div class="group flex flex-col border-black dark:border-white [&:not(:last-child)]:border-b md:[&:not(:nth-child(2n))]:border-r lg:[&:not(:nth-child(3n))]:border-r">
+					<div class="relative aspect-video overflow-hidden grayscale transition-all duration-500 group-hover:grayscale-0">
+						<img
+							src={project.image}
+							alt={project.title}
+							class="h-full w-full object-cover"
+							loading="lazy"
+						/>
+						<div class="absolute inset-0 bg-black/40 transition-colors group-hover:bg-transparent" />
+						<div class="absolute top-2 left-2 border border-white/20 bg-black px-2 py-0.5 text-[8px] font-bold tracking-widest text-white uppercase">
+							{index + 1}.IMG
+						</div>
+					</div>
 
-                    <h3 class="text-lg font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                    
-                    <p class="text-xs text-neutral-600 dark:text-neutral-500 leading-relaxed flex-1">
-                        {project.description}
-                    </p>
+					<div class="flex flex-1 flex-col gap-4 bg-white p-6 transition-colors group-hover:bg-neutral-50 dark:bg-black dark:group-hover:bg-neutral-900/10">
+						<div class="flex flex-wrap gap-1">
+							{project.tags.map((tag) => (
+								<span class="group-hover:text-primary group-hover:border-primary/30 border border-neutral-200 px-1 text-[8px] font-bold text-neutral-500 uppercase dark:border-neutral-800">
+									{tag}
+								</span>
+							))}
+						</div>
 
-                    <a 
-                        href={project.link} 
-                        target="_blank" 
-                        class="mt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest hover:text-primary transition-colors"
-                    >
-                        <span>[{trans("showcase.view_project", {}, locale)}]</span>
-                        <span class="icon-[tabler--arrow-up-right] size-4"></span>
-                    </a>
-                </div>
-            </div>
-        ))}
-    </div>
+						<h3 class="group-hover:text-primary text-lg font-bold transition-colors">{project.title}</h3>
+
+						<p class="flex-1 text-xs leading-relaxed text-neutral-600 dark:text-neutral-500">
+							{project.description}
+						</p>
+
+						<a
+							href={project.link}
+							target="_blank"
+							class="hover:text-primary mt-4 flex items-center justify-between text-[10px] font-black tracking-widest uppercase transition-colors"
+						>
+							<span>[{trans("showcase.view_project", {}, locale)}]</span>
+							<span class="icon-[tabler--arrow-up-right] size-4" />
+						</a>
+					</div>
+				</div>
+			))
+		}
+	</div>
 </section>

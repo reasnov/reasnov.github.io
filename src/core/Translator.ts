@@ -36,7 +36,7 @@ if (!i18next.isInitialized) {
 		defaultNS: "translations",
 		resources: {
 			[DEFAULT_LOCALE]: {
-				translations: loadResources(DEFAULT_LOCALE)[DEFAULT_LOCALE] || {}
+				translations: loadResources(DEFAULT_LOCALE)[DEFAULT_LOCALE] || {},
 			},
 		},
 		initImmediate: false,

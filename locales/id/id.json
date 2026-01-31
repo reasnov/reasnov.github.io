@@ -10,17 +10,17 @@
 		"playgrounds": "Playgrounds",
 		"medium": "Medium"
 	},
-    "pages": {
-        "showcase": {
-            "title": "Showcase Proyek",
-            "subtitle": "Kumpulan karya profesional dan proyek unggulan saya."
-        },
-        "playgrounds": {
-            "title": "Code Playgrounds",
-            "subtitle": "Proyek mini eksperimental, pemrograman kreatif, dan teka-teki logika.",
-            "button": "JALANKAN_EKSPERIMEN"
-        }
-    },
+	"pages": {
+		"showcase": {
+			"title": "Showcase Proyek",
+			"subtitle": "Kumpulan karya profesional dan proyek unggulan saya."
+		},
+		"playgrounds": {
+			"title": "Code Playgrounds",
+			"subtitle": "Proyek mini eksperimental, pemrograman kreatif, dan teka-teki logika.",
+			"button": "JALANKAN_EKSPERIMEN"
+		}
+	},
 	"skills": {
 		"title": "Keahlian: [{{count}}+]"
 	},

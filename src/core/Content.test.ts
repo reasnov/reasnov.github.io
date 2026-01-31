@@ -19,8 +19,8 @@ describe("Content Logic", () => {
 			const time = getReadingTime("");
 			expect(time).toBe(0);
 		});
-        
-        it("should respect custom words per minute", () => {
+
+		it("should respect custom words per minute", () => {
 			const text = "word ".repeat(100);
 			const time = getReadingTime(text, 50);
 			expect(time).toBe(2);

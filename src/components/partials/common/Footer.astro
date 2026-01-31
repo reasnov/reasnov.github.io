@@ -5,18 +5,22 @@ const locale = Astro.currentLocale || "en";
 const year = new Date().getFullYear();
 ---
 
-<footer class="w-full bg-black text-white py-4 mt-20 border-t-2 border-black dark:border-white dark:bg-black dark:text-neutral-400">
-	<div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest">
+<footer
+	class="mt-20 w-full border-t-2 border-black bg-black py-4 text-white dark:border-white dark:bg-black dark:text-neutral-400"
+>
+	<div
+		class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-[10px] font-bold tracking-widest uppercase md:flex-row"
+	>
 		<p set:html={trans("footer.copyright", { year }, locale)} />
-        
-        <div class="flex items-center gap-6">
-            <div class="flex items-center gap-2">
-                <span class="size-2 bg-primary animate-pulse"></span>
-                <span>SYSTEM_ONLINE</span>
-            </div>
-            <div class="hidden md:flex items-center gap-2">
-                <span>V0.0.1_BETA</span>
-            </div>
-        </div>
+
+		<div class="flex items-center gap-6">
+			<div class="flex items-center gap-2">
+				<span class="bg-primary size-2 animate-pulse"></span>
+				<span>SYSTEM_ONLINE</span>
+			</div>
+			<div class="hidden items-center gap-2 md:flex">
+				<span>V0.0.1_BETA</span>
+			</div>
+		</div>
 	</div>
 </footer>

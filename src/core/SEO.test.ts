@@ -2,15 +2,15 @@ import { describe, it, expect, vi } from "vitest";
 import { generatePersonSchema, generateBlogPostingSchema } from "./SEO";
 
 vi.mock("./Config", () => ({
-    config: vi.fn((key, defaults) => {
-        const mockConfig: Record<string, any> = {
-            "settings.site_name": "Test Site",
-            "settings.site_url": "https://test.com",
-            "settings.job_title": "Developer",
-            "settings.social_links": ["https://github.com/test"]
-        };
-        return mockConfig[key] ?? defaults;
-    })
+	config: vi.fn((key, defaults) => {
+		const mockConfig: Record<string, any> = {
+			"settings.site_name": "Test Site",
+			"settings.site_url": "https://test.com",
+			"settings.job_title": "Developer",
+			"settings.social_links": ["https://github.com/test"],
+		};
+		return mockConfig[key] ?? defaults;
+	}),
 }));
 
 describe("SEO Utility", () => {
@@ -31,7 +31,7 @@ describe("SEO Utility", () => {
 				description: "Post Desc",
 				pubDate: new Date("2025-01-01"),
 				url: "https://test.com/post",
-				heroImage: "/image.jpg"
+				heroImage: "/image.jpg",
 			};
 			const schema = generateBlogPostingSchema(post);
 			expect(schema["@type"]).toBe("BlogPosting");

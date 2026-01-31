@@ -45,7 +45,7 @@
 
 @layer base {
 	html {
-		@apply bg-white text-black dark:bg-black dark:text-neutral-300 scroll-smooth;
+		@apply scroll-smooth bg-white text-black dark:bg-black dark:text-neutral-300;
 	}
 
 	body {
@@ -64,43 +64,40 @@
 }
 
 @layer components {
-    /* TUI Window Style */
-    .tui-border {
-        @apply border border-black dark:border-white;
-    }
+	/* TUI Window Style */
+	.tui-border {
+		@apply border border-black dark:border-white;
+	}
 
-    .tui-window {
-        @apply border-2 border-black dark:border-white bg-white dark:bg-black p-1;
-    }
+	.tui-window {
+		@apply border-2 border-black bg-white p-1 dark:border-white dark:bg-black;
+	}
 
-    .tui-window-header {
-        @apply bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 text-xs font-bold uppercase mb-1 flex justify-between items-center;
-    }
+	.tui-window-header {
+		@apply mb-1 flex items-center justify-between bg-black px-2 py-0.5 text-xs font-bold text-white uppercase dark:bg-white dark:text-black;
+	}
 
-    .tui-button {
-        @apply border-2 border-black dark:border-white px-4 py-1 text-sm font-bold uppercase transition-all 
-               bg-transparent text-black dark:text-white
-               hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black
-               active:translate-x-0.5 active:translate-y-0.5;
-    }
+	.tui-button {
+		@apply border-2 border-black bg-transparent px-4 py-1 text-sm font-bold text-black uppercase transition-all hover:bg-black hover:text-white active:translate-x-0.5 active:translate-y-0.5 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black;
+	}
 
-    .tui-button-primary {
-        @apply bg-black text-white dark:bg-white dark:text-black hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white border-2 border-black dark:border-white;
-    }
+	.tui-button-primary {
+		@apply border-2 border-black bg-black text-white hover:bg-transparent hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-transparent dark:hover:text-white;
+	}
 
-    .tui-panel {
-        @apply border-2 border-black dark:border-white p-4;
-    }
+	.tui-panel {
+		@apply border-2 border-black p-4 dark:border-white;
+	}
 
-    /* TUI Decoration */
-    .tui-divider {
-        @apply h-0.5 bg-black dark:bg-white w-full my-4 relative;
-    }
+	/* TUI Decoration */
+	.tui-divider {
+		@apply relative my-4 h-0.5 w-full bg-black dark:bg-white;
+	}
 
-    .tui-divider::after {
-        content: "[SYSTEM_DIVIDER]";
-        @apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black px-2 text-[10px] font-bold text-black dark:text-white;
-    }
+	.tui-divider::after {
+		content: "[SYSTEM_DIVIDER]";
+		@apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[10px] font-bold text-black dark:bg-black dark:text-white;
+	}
 }
 
 @utility animate-blink {
@@ -108,6 +105,11 @@
 }
 
 @keyframes blink {
-	0%, 100% { opacity: 1; }
-	50% { opacity: 0; }
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
 }

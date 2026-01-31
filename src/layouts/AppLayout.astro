@@ -30,10 +30,10 @@ const lang = Astro.currentLocale || "en";
 		</script>
 	</head>
 
-	<body class="flex flex-col min-h-screen overflow-x-hidden font-mono font-light size-full max-w-screen">
+	<body class="flex size-full min-h-screen max-w-screen flex-col overflow-x-hidden font-mono font-light">
 		<Header />
 
-		<main class="container flex flex-col flex-1 gap-8 p-4 mx-auto size-full">
+		<main class="container mx-auto flex size-full flex-1 flex-col gap-8 p-4">
 			<slot />
 		</main>
 
@@ -71,7 +71,9 @@ const lang = Astro.currentLocale || "en";
 
 				lastKey = key;
 				// Reset lastKey after a short delay
-				setTimeout(() => { if (lastKey === key) lastKey = ""; }, 500);
+				setTimeout(() => {
+					if (lastKey === key) lastKey = "";
+				}, 500);
 			});
 		</script>
 	</body>

@@ -2,27 +2,30 @@
 const { title, icons } = Astro.props;
 ---
 
-<div class="flex flex-col w-full gap-2">
+<div class="flex w-full flex-col gap-2">
 	<div class="flex items-center gap-2">
-		<span class="text-[10px] font-bold px-2 py-0.5 uppercase tracking-widest text-white bg-black dark:text-black dark:bg-white">
-            {title}
-        </span>
-        <div class="flex-1 h-px bg-neutral-200 dark:bg-neutral-800"></div>
+		<span
+			class="bg-black px-2 py-0.5 text-[10px] font-bold tracking-widest text-white uppercase dark:bg-white dark:text-black"
+		>
+			{title}
+		</span>
+		<div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
 	</div>
 
-	<div class="flex items-center w-full gap-4 p-4 overflow-x-auto flex-nowrap tui-panel border-neutral-200 dark:border-neutral-900">
+	<div
+		class="tui-panel flex w-full flex-nowrap items-center gap-4 overflow-x-auto border-neutral-200 p-4 dark:border-neutral-900"
+	>
 		{
 			icons.map((icon: { icon: string; name: string }) => (
-				<div
-					class="group flex flex-col items-center gap-2 shrink-0 transition-all"
-					title={icon.name}
-				>
-					<div class={`size-10 md:size-12 flex items-center justify-center border border-transparent group-hover:border-black dark:group-hover:border-white group-hover:bg-neutral-100 dark:group-hover:bg-neutral-900 transition-all grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100`}>
-                        <span class={`${icon.icon} size-6 md:size-8`}></span>
-                    </div>
-                    <span class="text-[8px] font-bold uppercase text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                        {icon.name}
-                    </span>
+				<div class="group flex shrink-0 flex-col items-center gap-2 transition-all" title={icon.name}>
+					<div
+						class={`flex size-10 items-center justify-center border border-transparent opacity-50 grayscale transition-all group-hover:border-black group-hover:bg-neutral-100 group-hover:opacity-100 group-hover:grayscale-0 md:size-12 dark:group-hover:border-white dark:group-hover:bg-neutral-900`}
+					>
+						<span class={`${icon.icon} size-6 md:size-8`} />
+					</div>
+					<span class="text-[8px] font-bold text-neutral-500 uppercase opacity-0 transition-opacity group-hover:opacity-100">
+						{icon.name}
+					</span>
 				</div>
 			))
 		}
