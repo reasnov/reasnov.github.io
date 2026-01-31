@@ -1,57 +1,53 @@
 ---
-
+/**
+ * ThemeSwitcher Component
+ * Supports multiple instances by using classes instead of IDs.
+ */
 ---
 
-<button id="theme-toggle" class="hover:text-accent p-1 transition-colors focus:outline-none" aria-label="Toggle theme">
-	<span id="theme-toggle-dark-icon" class="icon-[tabler--moon] hidden size-4"></span>
-	<span id="theme-toggle-light-icon" class="icon-[tabler--sun] hidden size-4"></span>
+<button class="theme-toggle-btn hover:text-accent p-1 transition-colors focus:outline-none" aria-label="Toggle theme">
+	<span class="dark-icon icon-[tabler--moon] hidden size-4"></span>
+	<span class="light-icon icon-[tabler--sun] hidden size-4"></span>
 </button>
 
 <script>
-	const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-	const themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
-	const themeToggleBtn = document.getElementById("theme-toggle");
-
-	function updateIcons(theme: string) {
-		if (theme === "dark") {
-			themeToggleLightIcon?.classList.remove("hidden");
-			themeToggleDarkIcon?.classList.add("hidden");
-		} else {
-			themeToggleDarkIcon?.classList.remove("hidden");
-			themeToggleLightIcon?.classList.add("hidden");
-		}
+	function updateIcons() {
+		const isDark = document.documentElement.classList.contains("dark");
+		document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
+			const darkIcon = btn.querySelector(".dark-icon");
+			const lightIcon = btn.querySelector(".light-icon");
+			if (isDark) {
+				lightIcon?.classList.remove("hidden");
+				darkIcon?.classList.add("hidden");
+			} else {
+				darkIcon?.classList.remove("hidden");
+				lightIcon?.classList.add("hidden");
+			}
+		});
 	}
 
+	function toggleTheme() {
+		const isDark = document.documentElement.classList.toggle("dark");
+		localStorage.setItem("color-theme", isDark ? "dark" : "light");
+		updateIcons();
+	}
+
+	// Initialize
 	if (
 		localStorage.getItem("color-theme") === "dark" ||
 		(!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
 	) {
-		updateIcons("dark");
+		document.documentElement.classList.add("dark");
 	} else {
-		updateIcons("light");
+		document.documentElement.classList.remove("dark");
 	}
+	updateIcons();
 
-	themeToggleBtn?.addEventListener("click", function () {
-		if (localStorage.getItem("color-theme")) {
-			if (localStorage.getItem("color-theme") === "light") {
-				document.documentElement.classList.add("dark");
-				localStorage.setItem("color-theme", "dark");
-				updateIcons("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-				localStorage.setItem("color-theme", "light");
-				updateIcons("light");
-			}
-		} else {
-			if (document.documentElement.classList.contains("dark")) {
-				document.documentElement.classList.remove("dark");
-				localStorage.setItem("color-theme", "light");
-				updateIcons("light");
-			} else {
-				document.documentElement.classList.add("dark");
-				localStorage.setItem("color-theme", "dark");
-				updateIcons("dark");
-			}
-		}
+	// Add Listeners
+	document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
+		btn.addEventListener("click", toggleTheme);
 	});
+
+	// Listen for custom theme toggle events (from command palette)
+	window.addEventListener("theme-toggle", toggleTheme);
 </script>
