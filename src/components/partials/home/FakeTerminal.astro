@@ -17,7 +17,7 @@ const i18n = {
 	<div class="flex items-center justify-between border-b border-neutral-800 bg-neutral-900 px-3 py-1">
 		<div class="flex items-center gap-4">
 			<span class="flex items-center gap-2 text-[10px] font-bold tracking-widest text-neutral-500 uppercase">
-				<span class="size-2 rounded-full bg-white"></span>
+				<span class="size-2 rounded-full bg-accent animate-pulse"></span>
 				{trans("terminal.header", {}, locale)}
 			</span>
 		</div>
@@ -29,7 +29,7 @@ const i18n = {
 
 		<p class="mt-2 flex w-full items-center gap-2 text-nowrap">
 			<span class="text-primary font-bold">{i18n.path}</span>
-			<span class="animate-blink text-white opacity-80">█</span>
+			<span class="animate-blink text-accent">█</span>
 			<span class="ml-2 text-[10px] text-neutral-500 italic">{trans("terminal.prompt", {}, locale)}</span>
 		</p>
 	</div>

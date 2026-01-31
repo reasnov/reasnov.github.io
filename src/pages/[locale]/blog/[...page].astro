@@ -51,20 +51,19 @@ oneWeekAgo.setDate(today.getDate() - 7);
 							class="group flex flex-col justify-between border-b border-neutral-100 px-4 py-6 transition-colors hover:bg-neutral-50 md:flex-row md:items-center dark:border-neutral-900 dark:hover:bg-neutral-900/30"
 							data-aos="fade-up"
 						>
-							<div class="flex flex-1 items-center gap-4">
-								{isNew && (
-									<span class="animate-pulse border border-black px-2 py-0.5 text-[10px] font-bold text-black dark:border-white dark:text-white">
-										NEW
-									</span>
-								)}
-								<a
-									href={getRelativeLocaleUrl(locale, `blog/${blog.id.replace(`${locale}/`, "")}`)}
-									class="group-hover:text-primary text-xl font-bold transition-colors"
-								>
-									{blog.data.title}
-								</a>
-							</div>
-							<div class="mt-2 text-sm font-bold text-neutral-400 md:mt-0">
+							                            <div class="flex flex-1 items-center gap-4">
+							                                {isNew && (
+							                                    <span class="animate-pulse border border-accent px-2 py-0.5 text-[10px] font-bold text-accent">
+							                                        NEW
+							                                    </span>
+							                                )}
+							                                <a
+							                                    href={getRelativeLocaleUrl(locale, `blog/${blog.id.replace(`${locale}/`, "")}`)}
+							                                    class="group-hover:text-primary text-xl font-bold transition-colors"
+							                                >
+							                                    {blog.data.title}
+							                                </a>
+							                            </div>							<div class="mt-2 text-sm font-bold text-neutral-400 md:mt-0">
 								{postDate.toLocaleDateString(locale, {
 									year: "numeric",
 									month: "long",

@@ -11,8 +11,8 @@ const locale = Astro.currentLocale || "en";
 			<p class="animate-pulse text-xs font-bold tracking-[0.2em] text-neutral-500 uppercase">
 				&gt;&gt; {trans("hero.greeting", {}, locale)}
 			</p>
-			<h1 class="text-6xl font-black tracking-tighter text-black md:text-8xl dark:text-white">
-				{trans("hero.name", {}, locale)}<span class="animate-blink text-primary">_</span>
+			<h1 class="text-6xl font-black tracking-tighter text-neutral-900 md:text-8xl dark:text-neutral-50">
+				{trans("hero.name", {}, locale)}<span class="animate-blink text-accent">_</span>
 			</h1>
 			<div class="mt-2 flex items-center gap-3">
 				<span class="text-xs font-bold tracking-widest text-neutral-500 uppercase"

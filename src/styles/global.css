@@ -27,13 +27,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-	--primary: #000000;
-	--secondary: #ffffff;
+	--primary: #171717; /* neutral-900 */
+	--secondary: #fafafa; /* neutral-50 */
+	--accent: #10b981; /* emerald-500 */
 }
 
 .dark {
-	--primary: #ffffff;
-	--secondary: #000000;
+	--primary: #fafafa; /* neutral-50 */
+	--secondary: #0a0a0a; /* neutral-950 */
 }
 
 @theme {
@@ -41,20 +42,21 @@
 	--font-mono: "Geist Mono", monospace;
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);
+	--color-accent: var(--accent);
 }
 
 @layer base {
 	html {
-		@apply scroll-smooth bg-white text-black dark:bg-black dark:text-neutral-300;
+		@apply scroll-smooth bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-300;
 	}
 
 	body {
 		@apply font-mono antialiased;
 	}
 
-	/* Force monokrom for selection */
+	/* Force monokrom selection with slight tint */
 	::selection {
-		@apply bg-black text-white dark:bg-white dark:text-black;
+		@apply bg-neutral-900 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900;
 	}
 
 	/* Reset all radius for TUI style */
@@ -66,37 +68,37 @@
 @layer components {
 	/* TUI Window Style */
 	.tui-border {
-		@apply border border-black dark:border-white;
+		@apply border border-neutral-900 dark:border-neutral-50;
 	}
 
 	.tui-window {
-		@apply border-2 border-black bg-white p-1 dark:border-white dark:bg-black;
+		@apply border-2 border-neutral-900 bg-neutral-50 p-1 dark:border-neutral-50 dark:bg-neutral-950;
 	}
 
 	.tui-window-header {
-		@apply mb-1 flex items-center justify-between bg-black px-2 py-0.5 text-xs font-bold text-white uppercase dark:bg-white dark:text-black;
+		@apply mb-1 flex items-center justify-between bg-neutral-900 px-2 py-0.5 text-xs font-bold text-neutral-50 uppercase dark:bg-neutral-50 dark:text-neutral-900;
 	}
 
 	.tui-button {
-		@apply border-2 border-black bg-transparent px-4 py-1 text-sm font-bold text-black uppercase transition-all hover:bg-black hover:text-white active:translate-x-0.5 active:translate-y-0.5 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black;
+		@apply border-2 border-neutral-900 bg-transparent px-4 py-1 text-sm font-bold text-neutral-900 uppercase transition-all hover:bg-neutral-900 hover:text-neutral-50 active:translate-x-0.5 active:translate-y-0.5 dark:border-neutral-50 dark:text-neutral-50 dark:hover:bg-neutral-50 dark:hover:text-neutral-900;
 	}
 
 	.tui-button-primary {
-		@apply border-2 border-black bg-black text-white hover:bg-transparent hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-transparent dark:hover:text-white;
+		@apply border-2 border-neutral-900 bg-neutral-900 text-neutral-50 hover:bg-transparent hover:text-neutral-900 dark:border-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-transparent dark:hover:text-neutral-50;
 	}
 
 	.tui-panel {
-		@apply border-2 border-black p-4 dark:border-white;
+		@apply border-2 border-neutral-900 p-4 dark:border-neutral-50;
 	}
 
 	/* TUI Decoration */
 	.tui-divider {
-		@apply relative my-4 h-0.5 w-full bg-black dark:bg-white;
+		@apply relative my-4 h-0.5 w-full bg-neutral-900 dark:bg-neutral-50;
 	}
 
 	.tui-divider::after {
 		content: "[SYSTEM_DIVIDER]";
-		@apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[10px] font-bold text-black dark:bg-black dark:text-white;
+		@apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neutral-50 px-2 text-[10px] font-bold text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50;
 	}
 }
 
