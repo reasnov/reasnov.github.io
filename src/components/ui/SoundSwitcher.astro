@@ -1,0 +1,38 @@
+---
+/**
+ * SoundSwitcher Component
+ * Allows user to mute/unmute system sounds.
+ */
+---
+
+<button id="sound-toggle" class="hover:text-accent p-1 transition-colors focus:outline-none" aria-label="Toggle sound">
+	<span id="sound-on-icon" class="icon-[tabler--volume] size-4"></span>
+	<span id="sound-off-icon" class="icon-[tabler--volume-off] hidden size-4"></span>
+</button>
+
+<script>
+	import { sound } from "@core/Sound";
+
+	const toggleBtn = document.getElementById("sound-toggle");
+	const onIcon = document.getElementById("sound-on-icon");
+	const offIcon = document.getElementById("sound-off-icon");
+
+	function updateVisuals(isMuted: boolean) {
+		if (isMuted) {
+			onIcon?.classList.add("hidden");
+			offIcon?.classList.remove("hidden");
+		} else {
+			onIcon?.classList.remove("hidden");
+			offIcon?.classList.add("hidden");
+		}
+	}
+
+	// Init state
+	updateVisuals(sound.getMuteState());
+
+	toggleBtn?.addEventListener("click", () => {
+		const isMuted = sound.toggleMute();
+		updateVisuals(isMuted);
+		if (!isMuted) sound.playBlip();
+	});
+</script>

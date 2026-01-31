@@ -2,6 +2,7 @@
 import Brand from "@components/ui/Brand.astro";
 import LangSwitcher from "@components/ui/LangSwitcher.astro";
 import ThemeSwitcher from "@components/ui/ThemeSwitcher.astro";
+import SoundSwitcher from "@components/ui/SoundSwitcher.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { trans } from "@core/Translator";
 import { app_info } from "@core/AppInfo";
@@ -83,6 +84,7 @@ const socialLinks = [
 
 				<div class="hidden items-center gap-4 pr-4 lg:flex">
 					<ThemeSwitcher />
+					<SoundSwitcher />
 					<LangSwitcher />
 				</div>
 
@@ -124,8 +126,9 @@ const socialLinks = [
 					<div class="tui-window-header"><span>THEME_CONFIG.EXE</span></div>
 					<div class="flex items-center justify-between p-6">
 						<span class="text-xs font-black tracking-widest uppercase opacity-50">Visual Mode:</span>
-						<div class="bg-primary/5 border-border/10 flex items-center border p-1">
+						<div class="bg-primary/5 border-border/10 flex items-center gap-4 border p-1">
 							<ThemeSwitcher />
+							<SoundSwitcher />
 						</div>
 					</div>
 				</div>

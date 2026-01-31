@@ -1,7 +1,7 @@
 ---
 /**
  * SpaceShooter Component
- * Optimized for theme compatibility and responsiveness.
+ * Rebranded to 'System Warm-up' for better UX and playful vibe.
  */
 interface Props {
 	manual?: boolean;
@@ -16,26 +16,27 @@ const { manual = false } = Astro.props;
 	<div
 		class="tui-window relative h-[85dvh] w-[95vw] max-w-5xl overflow-hidden shadow-[32px_32px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[32px_32px_0px_0px_rgba(255,255,255,0.05)]"
 	>
-		<div class="tui-window-header border-border !bg-t-red border-b-2 !text-white">
+		<!-- Header: Changed to Cyan for positive 'Initialization' vibe -->
+		<div class="tui-window-header border-border !bg-t-blue border-b-2 !text-white">
 			<div class="flex items-center gap-3">
-				<span class="icon-[tabler--shield-lock] size-4"></span>
-				<span class="tracking-widest">CRITICAL_SYSTEM_INTEGRITY_CHECK.PROT</span>
+				<span class="icon-[tabler--loader-quarter] size-4 animate-spin"></span>
+				<span class="tracking-widest uppercase">System_Warmup_Protocol.exe</span>
 			</div>
 			<div class="flex items-center gap-6">
 				<div class="hidden items-center gap-2 sm:flex">
-					<span class="text-[9px] opacity-60">MEMORY_SECTOR:</span>
-					<span class="text-[9px] font-bold">0x00FF42A</span>
+					<span class="text-[9px] opacity-60">LOAD_STATUS:</span>
+					<span class="text-t-green text-[9px] font-bold uppercase">Ready_to_play</span>
 				</div>
 				<button
 					id="skip-game"
-					class="tui-btn-ghost tui-btn-sm hover:text-t-red border-white/20 py-0.5 text-white hover:bg-white"
+					class="tui-btn-ghost tui-btn-sm hover:text-t-blue border-white/20 py-0.5 text-white hover:bg-white"
 					>[ESC_TO_SKIP]</button
 				>
 			</div>
 		</div>
 
 		<div id="game-container" class="relative h-[calc(100%-32px)] w-full cursor-none overflow-hidden bg-neutral-950">
-			<!-- Scanlines -->
+			<!-- Scanlines Overlay -->
 			<div
 				class="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] opacity-20"
 			>
@@ -45,22 +46,16 @@ const { manual = false } = Astro.props;
 				<defs>
 					<g id="svg-player">
 						<path d="M0 -20 L12 12 L0 6 L-12 12 Z" fill="none" stroke="white" stroke-width="2.5"></path>
-						<path d="M0 -8 L4 4 L0 0 L-4 4 Z" fill="var(--accent)"></path>
-						<circle cx="0" cy="10" r="4" fill="var(--accent)" class="animate-pulse"></circle>
+						<path d="M0 -8 L4 4 L0 0 L-4 4 Z" fill="var(--t-cyan)"></path>
+						<circle cx="0" cy="10" r="4" fill="var(--t-cyan)" class="animate-pulse"></circle>
 					</g>
 					<g id="svg-enemy">
 						<path d="M-10 -10 L10 10 M-10 10 L10 -10" stroke="white" stroke-width="2"></path>
-						<rect
-							x="-8"
-							y="-8"
-							width="16"
-							height="16"
-							fill="none"
-							stroke="var(--color-t-red)"
-							stroke-width="1"></rect>
+						<rect x="-8" y="-8" width="16" height="16" fill="none" stroke="var(--t-amber)" stroke-width="1"
+						></rect>
 						<circle cx="0" cy="0" r="3" fill="white"></circle>
 					</g>
-					<rect id="svg-bullet" width="2" height="12" fill="var(--color-t-amber)"></rect>
+					<rect id="svg-bullet" width="2" height="12" fill="var(--t-green)"></rect>
 				</defs>
 				<g id="stars-group"></g>
 				<g id="entities-group"></g>
@@ -68,11 +63,11 @@ const { manual = false } = Astro.props;
 
 			<!-- On-Screen HUD -->
 			<div class="pointer-events-none absolute top-6 left-6 z-20 flex flex-col gap-1">
-				<span id="game-score" class="text-accent text-xl font-black tracking-tighter uppercase"
-					>Bugs_Purged: 00/10</span
+				<span id="game-score" class="text-t-cyan text-xl font-black tracking-tighter uppercase"
+					>Optimization_Score: 00/10</span
 				>
 				<div class="h-1 w-48 border border-white/10 bg-white/5">
-					<div id="score-bar" class="bg-accent h-full transition-all duration-300" style="width: 0%"></div>
+					<div id="score-bar" class="bg-t-cyan h-full transition-all duration-300" style="width: 0%"></div>
 				</div>
 			</div>
 
@@ -91,31 +86,33 @@ const { manual = false } = Astro.props;
 				</div>
 				<button
 					id="m-shoot"
-					class="border-accent/30 bg-accent/5 text-accent pointer-events-auto absolute right-10 bottom-10 flex size-24 items-center justify-center border-4 text-2xl font-black"
+					class="border-t-cyan/30 bg-t-cyan/5 text-t-cyan pointer-events-auto absolute right-10 bottom-10 flex size-24 items-center justify-center border-4 text-2xl font-black"
 					>FIRE</button
 				>
 			</div>
 
+			<!-- Start Screen: Refactored to be playful -->
 			<div
 				id="start-screen"
 				class="absolute inset-0 z-40 flex flex-col items-center justify-center bg-neutral-950/90 p-10 text-center backdrop-blur-sm"
 			>
 				<div class="mb-8 flex flex-col items-center gap-4">
-					<span class="icon-[tabler--alert-octagon] text-t-red size-16 animate-bounce"></span>
-					<h2 class="font-display text-t-red text-4xl tracking-tighter uppercase sm:text-6xl">
-						Threat_Detected
+					<span class="icon-[tabler--brand-space-invaders] text-t-blue size-16 animate-bounce"></span>
+					<h2 class="font-display text-t-blue text-4xl tracking-tighter uppercase sm:text-6xl">
+						Welcome_Operator
 					</h2>
 				</div>
-				<p class="mb-10 max-w-lg text-xs leading-relaxed tracking-[0.2em] text-white/40 uppercase md:text-sm">
-					Root directory compromise imminent. Detected multiple 'Unclean_Code' malware instances. Execute
-					mandatory cleanup protocol to restore core system access.
+				<p class="mb-10 max-w-lg text-xs leading-relaxed tracking-[0.2em] text-white/60 uppercase md:text-sm">
+					System initialization in progress. Please engage in a quick <span class="text-t-cyan font-bold"
+						>Optimization Minigame</span
+					> to warm up the core environment.
 				</p>
 				<button
 					id="start-btn"
-					class="tui-btn-primary tui-btn-lg !bg-t-red !border-t-red px-16 py-6 text-xl !text-white shadow-[0px_0px_30px_rgba(239,68,68,0.3)]"
-					>INITIALIZE_CLEANUP</button
+					class="tui-btn-primary tui-btn-lg !bg-t-blue !border-t-blue hover:!bg-t-cyan px-16 py-6 text-xl !text-white shadow-[0px_0px_30px_rgba(59,130,246,0.3)] transition-all"
+					>START_WARMUP</button
 				>
-				<div class="mt-12 flex gap-8 opacity-20 grayscale">
+				<div class="mt-12 flex gap-8 opacity-40 grayscale-0">
 					<div class="flex items-center gap-2 text-[10px] font-black text-white">
 						<kbd class="border-white/20 bg-white/10 text-white">ARROWS</kbd> MOVE
 					</div>
@@ -125,28 +122,30 @@ const { manual = false } = Astro.props;
 				</div>
 			</div>
 
+			<!-- Victory Screen -->
 			<div
 				id="victory-screen"
 				class="absolute inset-0 z-50 flex hidden flex-col items-center justify-center bg-neutral-950/95 p-10 text-center backdrop-blur-md"
 			>
-				<h2 class="font-display text-accent mb-6 text-5xl tracking-tighter uppercase">Secured</h2>
+				<h2 class="font-display text-t-green mb-6 text-5xl tracking-tighter uppercase">Ready_to_Go</h2>
 				<p class="mb-8 text-xs tracking-widest text-white/40 uppercase">
-					Integrity check passed. Redirecting to core terminal...
+					Warm-up complete. Accessing core terminal nodes...
 				</p>
 				<div class="h-1.5 w-64 overflow-hidden border border-white/10 bg-white/5">
-					<div class="bg-accent h-full animate-[loading_2s_linear]"></div>
+					<div class="bg-t-green h-full animate-[loading_2s_linear]"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="mt-6 flex items-center gap-4 opacity-30">
 		<div class="bg-content h-px w-24"></div>
-		<p class="text-content text-[10px] font-black tracking-[0.5em] uppercase">Authorized_Node_01_Access</p>
+		<p class="text-content text-[10px] font-black tracking-[0.5em] uppercase">Interactive_Initialization_V0.5</p>
 		<div class="bg-content h-px w-24"></div>
 	</div>
 </div>
 
 <script>
+	import { sound } from "@core/Sound";
 	const splash = document.getElementById("game-splash");
 	const container = document.getElementById("game-container");
 	const entitiesGroup = document.getElementById("entities-group");
@@ -196,6 +195,23 @@ const { manual = false } = Astro.props;
 		}
 	}
 
+	function shake() {
+		if (!container) return;
+		container.classList.add("animate-shake");
+		setTimeout(() => container.classList.remove("animate-shake"), 300);
+	}
+
+	function createExplosion(x: number, y: number) {
+		const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+		circle.setAttribute("cx", x.toString());
+		circle.setAttribute("cy", y.toString());
+		circle.setAttribute("r", "2");
+		circle.setAttribute("fill", "var(--t-amber)");
+		circle.setAttribute("class", "animate-ping");
+		entitiesGroup?.appendChild(circle);
+		setTimeout(() => circle.remove(), 500);
+	}
+
 	function gameLoop() {
 		if (!isPlaying || !container) return;
 		const w = container.clientWidth;
@@ -213,6 +229,7 @@ const { manual = false } = Astro.props;
 				entitiesGroup?.appendChild(b);
 				bullets.push({ x: player.x, y: player.y - 25, el: b });
 				lastShoot = now;
+				sound.playLaser();
 			}
 		}
 
@@ -236,8 +253,12 @@ const { manual = false } = Astro.props;
 				if (Math.hypot(en.x - b.x, en.y - b.y) < 20) {
 					score++;
 					if (scoreEl)
-						scoreEl.textContent = `BUGS_PURGED: ${score.toString().padStart(2, "0")}/${targetScore}`;
+						scoreEl.textContent = `OPTIMIZATION_SCORE: ${score.toString().padStart(2, "0")}/${targetScore}`;
 					if (scoreBar) scoreBar.style.width = (score / targetScore) * 100 + "%";
+
+					createExplosion(en.x, en.y);
+					shake();
+					sound.playExplosion();
 
 					en.el.remove();
 					enemies.splice(i, 1);
@@ -272,6 +293,7 @@ const { manual = false } = Astro.props;
 	startBtn?.addEventListener("click", () => {
 		document.getElementById("start-screen")?.classList.add("hidden");
 		isPlaying = true;
+		sound.playBoot();
 		const el = document.createElementNS("http://www.w3.org/2000/svg", "use");
 		el.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#svg-player");
 		el.setAttribute("class", "text-white");
@@ -294,7 +316,7 @@ const { manual = false } = Astro.props;
 
 	window.addEventListener("trigger-game-reset", () => {
 		score = 0;
-		if (scoreEl) scoreEl.textContent = `BUGS_PURGED: 00/${targetScore}`;
+		if (scoreEl) scoreEl.textContent = `OPTIMIZATION_SCORE: 00/${targetScore}`;
 		if (scoreBar) scoreBar.style.width = "0%";
 		document.getElementById("start-screen")?.classList.remove("hidden");
 		document.getElementById("victory-screen")?.classList.add("hidden");

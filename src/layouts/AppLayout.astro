@@ -47,12 +47,29 @@ const lang = Astro.currentLocale || "en";
 
 		<script>
 			import AOS from "aos";
+			import { sound } from "@core/Sound";
+
 			AOS.init({
 				duration: 800,
 				once: true,
 				offset: 50,
 				easing: "ease-out-cubic",
 			});
+
+			/* --- Global Sound Listeners --- */
+			function attachSoundListeners() {
+				// Click sounds for buttons and links
+				const clickables = document.querySelectorAll('button, a, [role="button"], .tui-palette-item');
+				clickables.forEach((el) => {
+					el.addEventListener("click", () => sound.playClick());
+					el.addEventListener("mouseenter", () => sound.playBlip());
+				});
+			}
+
+			// Initial attach
+			attachSoundListeners();
+			// Re-attach on dynamic changes (like palette opening)
+			window.addEventListener("open-palette", () => setTimeout(attachSoundListeners, 100));
 
 			/* --- Global Keyboard Listeners --- */
 			let lastKey = "";

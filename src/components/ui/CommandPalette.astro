@@ -58,20 +58,26 @@ const commands = [
 				{
 					commands.map((cmd) => (
 						<div
-							class="group hover:bg-primary hover:text-primary-content flex cursor-pointer items-center justify-between p-4 transition-colors"
+							class="group hover:bg-primary hover:text-primary-content focus:bg-primary focus:text-primary-content flex cursor-pointer items-center justify-between p-4 transition-all outline-none"
 							data-url={cmd.url}
 							data-action={cmd.action}
 							data-cmd={cmd.cmd}
+							tabindex="0"
 						>
 							<div class="flex flex-col">
 								<span class="text-xs font-black tracking-widest uppercase">{cmd.label}</span>
-								<span class="text-accent/60 group-hover:text-primary-content/60 text-[9px] italic">
+								<span class="text-accent/60 group-hover:text-primary-content/60 group-focus:text-primary-content/60 text-[9px] italic">
 									bash: {cmd.cmd}
 								</span>
 							</div>
-							<span class="font-mono text-[10px] tracking-widest uppercase opacity-20 group-hover:opacity-100">
-								Execute [Enter]
-							</span>
+							<div class="flex items-center gap-3">
+								<span class="font-mono text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 group-focus:opacity-100">
+									Execute
+								</span>
+								<kbd class="group-hover:border-primary-content group-hover:text-primary-content group-focus:border-primary-content group-focus:text-primary-content border-accent/20 text-accent">
+									ENT
+								</kbd>
+							</div>
 						</div>
 					))
 				}
