@@ -2,7 +2,7 @@
 	"name": "reasnov",
 	"description": "Personal Webfolio",
 	"type": "module",
-	"version": "0.0.1",
+	"version": "0.5.0",
 	"author": "Reas Vyn",
 	"scripts": {
 		"dev": "astro dev",

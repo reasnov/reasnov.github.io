@@ -26,37 +26,66 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* --- Semantic Theme Variables --- */
 :root {
+	--bg: #fafafa; /* neutral-50 */
+	--fg: #171717; /* neutral-900 */
+	--border: #171717; /* neutral-900 */
+
 	--primary: #171717; /* neutral-900 */
-	--secondary: #fafafa; /* neutral-50 */
+	--primary-fg: #fafafa; /* neutral-50 */
+
 	--accent: #10b981; /* emerald-500 */
+	--accent-fg: #fafafa;
+
+	/* Terminal Specifics */
+	--t-green: #22c55e;
+	--t-amber: #f59e0b;
+	--t-red: #ef4444;
+	--t-blue: #3b82f6;
 }
 
 .dark {
+	--bg: #0a0a0a; /* neutral-950 */
+	--fg: #e5e5e5; /* neutral-200 */
+	--border: #404040; /* neutral-700 */
+
 	--primary: #fafafa; /* neutral-50 */
-	--secondary: #0a0a0a; /* neutral-950 */
+	--primary-fg: #0a0a0a; /* neutral-950 */
 }
 
 @theme {
-	--font-display: "Geist Mono", monospace;
+	--font-display: "Plaster", system-ui;
 	--font-mono: "Geist Mono", monospace;
+
+	--color-bg: var(--bg);
+	--color-fg: var(--fg);
+	--color-border: var(--border);
+
 	--color-primary: var(--primary);
-	--color-secondary: var(--secondary);
+	--color-primary-fg: var(--primary-fg);
+
 	--color-accent: var(--accent);
+	--color-accent-fg: var(--accent-fg);
+
+	--color-t-green: var(--t-green);
+	--color-t-amber: var(--t-amber);
+	--color-t-red: var(--t-red);
+	--color-t-blue: var(--t-blue);
 }
 
 @layer base {
 	html {
-		@apply scroll-smooth bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-300;
+		@apply scroll-smooth bg-bg text-fg;
 	}
 
 	body {
 		@apply font-mono antialiased;
 	}
 
-	/* Force monokrom selection with slight tint */
+	/* Force monochrome selection */
 	::selection {
-		@apply bg-neutral-900 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900;
+		@apply bg-primary text-primary-fg;
 	}
 
 	/* Reset all radius for TUI style */
@@ -66,39 +95,93 @@
 }
 
 @layer components {
-	/* TUI Window Style */
-	.tui-border {
-		@apply border border-neutral-900 dark:border-neutral-50;
-	}
+	/* 
+       --- TUI Components (Standardized System) ---
+    */
 
+	/* WINDOW SYSTEM */
 	.tui-window {
-		@apply border-2 border-neutral-900 bg-neutral-50 p-1 dark:border-neutral-50 dark:bg-neutral-950;
+		@apply border-2 border-border bg-bg p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)];
 	}
 
 	.tui-window-header {
-		@apply mb-1 flex items-center justify-between bg-neutral-900 px-2 py-0.5 text-xs font-bold text-neutral-50 uppercase dark:bg-neutral-50 dark:text-neutral-900;
+		@apply mb-1 flex items-center justify-between bg-primary px-2 py-0.5 text-xs font-bold text-primary-fg uppercase;
 	}
 
-	.tui-button {
-		@apply border-2 border-neutral-900 bg-transparent px-4 py-1 text-sm font-bold text-neutral-900 uppercase transition-all hover:bg-neutral-900 hover:text-neutral-50 active:translate-x-0.5 active:translate-y-0.5 dark:border-neutral-50 dark:text-neutral-50 dark:hover:bg-neutral-50 dark:hover:text-neutral-900;
+	/* MODAL SYSTEM */
+	.tui-overlay {
+		@apply fixed inset-0 z-[100] flex items-center justify-center bg-bg/80 backdrop-blur-sm p-4;
 	}
 
-	.tui-button-primary {
-		@apply border-2 border-neutral-900 bg-neutral-900 text-neutral-50 hover:bg-transparent hover:text-neutral-900 dark:border-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-transparent dark:hover:text-neutral-50;
+	.tui-modal {
+		@apply w-full max-w-2xl border-2 border-border bg-bg p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)];
 	}
 
+	/* COMMAND PALETTE */
+	.tui-palette-input {
+		@apply w-full bg-transparent border-none outline-none text-lg font-bold text-accent placeholder:text-fg/20 py-2;
+	}
+
+	.tui-palette-results {
+		@apply mt-4 max-h-[60vh] overflow-y-auto border-t border-border/10 pt-2;
+	}
+
+	.tui-palette-item {
+		@apply flex items-center justify-between p-3 cursor-pointer transition-colors hover:bg-primary hover:text-primary-fg;
+	}
+
+	/* BUTTON SYSTEM */
+	.tui-btn-primary {
+		@apply inline-flex items-center justify-center border-2 border-border bg-primary px-4 py-1 text-sm font-bold text-primary-fg uppercase transition-all hover:bg-transparent hover:text-fg active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50;
+	}
+
+	.tui-btn-secondary {
+		@apply inline-flex items-center justify-center border-2 border-border bg-transparent px-4 py-1 text-sm font-bold text-fg uppercase transition-all hover:bg-primary hover:text-primary-fg active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50;
+	}
+
+	.tui-btn-accent {
+		@apply inline-flex items-center justify-center border-2 border-accent bg-accent px-4 py-1 text-sm font-bold text-accent-fg uppercase transition-all hover:bg-transparent hover:text-accent active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50;
+	}
+
+	.tui-btn-ghost {
+		@apply inline-flex items-center justify-center border-2 border-transparent px-4 py-1 text-sm font-bold uppercase transition-all hover:border-border hover:bg-primary/5 active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50;
+	}
+
+	/* Sizes (Modifiers) */
+	.tui-btn-sm {
+		@apply px-2 py-0.5 text-[10px];
+	}
+
+	.tui-btn-lg {
+		@apply px-8 py-3 text-lg;
+	}
+
+	/* PANEL SYSTEM */
 	.tui-panel {
-		@apply border-2 border-neutral-900 p-4 dark:border-neutral-50;
+		@apply border-2 border-border p-4;
 	}
 
-	/* TUI Decoration */
+	.tui-panel-muted {
+		@apply border-border/20 bg-primary/5;
+	}
+
+	.tui-panel-accent {
+		@apply border-l-4 border-l-accent;
+	}
+
+	/* KBD SYSTEM */
+	kbd {
+		@apply rounded-sm border border-border bg-bg px-1.5 py-0.5 font-mono text-[10px] font-bold text-fg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)];
+	}
+
+	/* DECORATION */
 	.tui-divider {
-		@apply relative my-4 h-0.5 w-full bg-neutral-900 dark:bg-neutral-50;
+		@apply relative my-8 h-0.5 w-full bg-border/10;
 	}
 
 	.tui-divider::after {
 		content: "[SYSTEM_DIVIDER]";
-		@apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neutral-50 px-2 text-[10px] font-bold text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50;
+		@apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg px-2 text-[10px] font-bold text-fg/30;
 	}
 }
 

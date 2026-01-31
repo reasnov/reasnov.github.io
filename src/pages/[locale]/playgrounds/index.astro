@@ -55,7 +55,7 @@ const locale = Astro.currentLocale || "en";
 							<div class="flex items-center justify-between">
 								<div class="flex flex-wrap gap-1">
 									{item.tags.map((tag) => (
-										<span class="border border-black px-1 text-[8px] font-bold uppercase opacity-40 dark:border-white">
+										<span class="border-border border px-1 text-[8px] font-bold uppercase opacity-40">
 											{tag}
 										</span>
 									))}
@@ -69,26 +69,20 @@ const locale = Astro.currentLocale || "en";
 								{item.title}
 							</h2>
 
-							<p class="flex-1 text-xs leading-relaxed text-neutral-600 italic dark:text-neutral-500">
-								&gt; {item.description}
-							</p>
+							<p class="text-fg/60 flex-1 text-xs leading-relaxed italic">&gt; {item.description}</p>
 
-							<a
-								href={item.link}
-								target="_blank"
-								class="tui-button-primary mt-4 w-full py-2 text-center text-[10px]"
-							>
+							<a href={item.link} target="_blank" class="tui-btn-primary tui-btn-sm mt-4 w-full">
 								{trans("pages.playgrounds.button", {}, locale)}
 							</a>
 						</div>
 
 						{/* Bottom Info Bar */}
-						<div class="flex items-center justify-between border-t border-black bg-neutral-100 px-3 py-1 dark:border-white dark:bg-neutral-900">
-							<span class="text-[7px] font-bold tracking-tighter text-neutral-500 uppercase">
+						<div class="border-border bg-primary/5 flex items-center justify-between border-t px-3 py-1">
+							<span class="text-fg/40 text-[7px] font-bold tracking-tighter uppercase">
 								ACCESS: PUBLIC
 							</span>
 							<div class="flex gap-1">
-								<span class="size-1.5 animate-pulse bg-black dark:bg-white" />
+								<span class="bg-fg size-1.5 animate-pulse" />
 							</div>
 						</div>
 					</div>

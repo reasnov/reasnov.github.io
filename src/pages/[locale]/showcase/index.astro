@@ -32,30 +32,30 @@ const locale = Astro.currentLocale || "en";
 		</div>
 
 		<!-- Terminal Grid -->
-		<div class="grid grid-cols-1 gap-0 border-2 border-black md:grid-cols-2 lg:grid-cols-3 dark:border-white">
+		<div class="border-border grid grid-cols-1 gap-0 border-2 md:grid-cols-2 lg:grid-cols-3">
 			{
 				projects.map((project, index) => (
 					<div
-						class="group flex flex-col border-black transition-all duration-300 dark:border-white [&:not(:last-child)]:border-b md:[&:not(:nth-child(2n))]:border-r lg:[&:not(:nth-child(3n))]:border-r"
+						class="group border-border flex flex-col transition-all duration-300 [&:not(:last-child)]:border-b md:[&:not(:nth-child(2n))]:border-r lg:[&:not(:nth-child(3n))]:border-r"
 						data-aos="fade-up"
 						data-aos-delay={index * 100}
 					>
-						<div class="relative aspect-video overflow-hidden border-b border-black grayscale transition-all duration-500 group-hover:invert dark:border-white">
+						<div class="border-border relative aspect-video overflow-hidden border-b grayscale transition-all duration-500 group-hover:invert">
 							<img
 								src={project.image}
 								alt={project.title}
 								class="h-full w-full object-cover"
 								loading="lazy"
 							/>
-							<div class="absolute top-2 left-2 border border-white/20 bg-black px-2 py-0.5 text-[8px] font-bold tracking-widest text-white uppercase">
+							<div class="border-primary-fg/20 bg-primary text-primary-fg absolute top-2 left-2 border px-2 py-0.5 text-[8px] font-bold tracking-widest uppercase">
 								PRJ_{String(index + 1).padStart(3, "0")}
 							</div>
 						</div>
 
-						<div class="flex flex-1 flex-col gap-4 bg-white p-6 transition-colors group-hover:bg-black group-hover:text-white dark:bg-black dark:group-hover:bg-white dark:group-hover:text-black">
+						<div class="bg-bg group-hover:bg-primary group-hover:text-primary-fg flex flex-1 flex-col gap-4 p-6 transition-colors">
 							<div class="flex flex-wrap gap-1">
 								{project.tags.map((tag) => (
-									<span class="border border-black px-1 text-[8px] font-bold uppercase opacity-60 group-hover:opacity-100 dark:border-white">
+									<span class="border-border group-hover:border-primary-fg/50 border px-1 text-[8px] font-bold uppercase opacity-60 group-hover:opacity-100">
 										{tag}
 									</span>
 								))}

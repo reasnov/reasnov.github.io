@@ -1,13 +1,13 @@
 ---
 import { trans } from "@core/Translator";
+import { app_info } from "@core/AppInfo";
 
 const locale = Astro.currentLocale || "en";
 const year = new Date().getFullYear();
+const version = app_info("app.version");
 ---
 
-<footer
-	class="mt-20 w-full border-t-2 border-black bg-black py-4 text-white dark:border-white dark:bg-black dark:text-neutral-400"
->
+<footer class="border-border bg-primary text-primary-fg mt-20 w-full border-t-2 py-4">
 	<div
 		class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-[10px] font-bold tracking-widest uppercase md:flex-row"
 	>
@@ -15,11 +15,11 @@ const year = new Date().getFullYear();
 
 		<div class="flex items-center gap-6">
 			<div class="flex items-center gap-2">
-				<span class="bg-primary size-2 animate-pulse"></span>
+				<span class="bg-accent size-2 animate-pulse"></span>
 				<span>SYSTEM_ONLINE</span>
 			</div>
 			<div class="hidden items-center gap-2 md:flex">
-				<span>V0.0.1_BETA</span>
+				<span>{version.toUpperCase()}</span>
 			</div>
 		</div>
 	</div>

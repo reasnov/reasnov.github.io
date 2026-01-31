@@ -4,11 +4,13 @@ import LangSwitcher from "@components/ui/LangSwitcher.astro";
 import ThemeSwitcher from "@components/ui/ThemeSwitcher.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { trans } from "@core/Translator";
+import { app_info } from "@core/AppInfo";
 
 const lang = Astro.currentLocale || "en";
+const version = app_info("app.version");
 ---
 
-<nav class="sticky top-0 z-50 w-full border-b-2 border-black bg-white dark:border-white dark:bg-black">
+<nav class="border-border bg-bg sticky top-0 z-50 w-full border-b-2">
 	<div class="container mx-auto">
 		<!-- Top status bar look -->
 		<div class="flex h-12 items-center justify-between px-4">
@@ -16,42 +18,48 @@ const lang = Astro.currentLocale || "en";
 				<Brand />
 
 				<div class="hidden items-center gap-4 text-xs font-bold tracking-tighter uppercase md:flex">
-					<a href={getRelativeLocaleUrl(lang, "blog")} class="hover:text-primary transition-colors">
+					<a href={getRelativeLocaleUrl(lang, "blog")} class="hover:text-accent transition-colors">
 						&lt;{trans("nav.blog", {}, lang)}&gt;
 					</a>
-					<span class="text-neutral-300 dark:text-neutral-800">|</span>
-					<a href="https://medium.com/reasnov" class="hover:text-primary transition-colors">
+					<span class="text-fg/20">|</span>
+					<a href="https://medium.com/reasnov" class="hover:text-accent transition-colors">
 						&lt;{trans("nav.medium", {}, lang)}&gt;
 					</a>
 				</div>
 			</div>
 
 			<div class="flex h-12 items-center gap-4">
-				<div
-					class="hidden h-12 items-center gap-2 border-x border-neutral-200 px-4 md:flex dark:border-neutral-800"
+				<!-- Command Palette Trigger Hint -->
+				<button 
+					onclick="window.dispatchEvent(new CustomEvent('open-palette'))"
+					class="hidden items-center gap-2 px-3 py-1 border border-border/20 hover:border-accent group transition-all md:flex"
 				>
+					<span class="icon-[tabler--search] size-3 text-fg/40 group-hover:text-accent"></span>
+					<span class="text-[10px] font-bold text-fg/40 group-hover:text-accent uppercase">Search</span>
+					<div class="flex items-center gap-1 ml-2">
+						<kbd class="group-hover:border-accent group-hover:text-accent transition-colors">CTRL</kbd>
+						<kbd class="group-hover:border-accent group-hover:text-accent transition-colors">K</kbd>
+					</div>
+				</button>
+
+				<div class="border-border/10 hidden h-12 items-center gap-2 border-x px-4 md:flex">
 					<ThemeSwitcher />
 					<LangSwitcher />
 				</div>
 
-				<div class="hidden items-center gap-3 text-neutral-500 md:flex">
+				<div class="text-fg/50 hidden items-center gap-3 md:flex">
 					<a
 						href="https://github.com/reasnov"
 						target="__blank"
-						class="icon-[tabler--brand-github] transition-colors hover:text-black dark:hover:text-white"
-					></a>
+						class="icon-[tabler--brand-github] hover:text-fg transition-colors"></a>
 					<a
 						href="https://linkedin.com/in/reasnov"
 						target="__blank"
-						class="icon-[tabler--brand-linkedin] transition-colors hover:text-black dark:hover:text-white"
-					></a>
+						class="icon-[tabler--brand-linkedin] hover:text-fg transition-colors"></a>
 				</div>
 
 				<!-- Mobile Menu Button -->
-				<button
-					id="mobile-menu-toggle"
-					class="flex items-center gap-2 border border-black px-2 py-1 text-[10px] font-black tracking-widest uppercase transition-all hover:bg-black hover:text-white md:hidden dark:border-white dark:hover:bg-white dark:hover:text-black"
-				>
+				<button id="mobile-menu-toggle" class="tui-btn-primary tui-btn-sm md:hidden">
 					<span id="menu-icon-open">[MENU]</span>
 					<span id="menu-icon-close" class="hidden">[CLOSE]</span>
 				</button>
@@ -60,7 +68,7 @@ const lang = Astro.currentLocale || "en";
 	</div>
 
 	<!-- Mobile Menu Overlay -->
-	<div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-white pt-12 dark:bg-black">
+	<div id="mobile-menu" class="bg-bg fixed inset-0 z-40 hidden pt-12">
 		<div class="flex flex-col gap-8 p-4">
 			<div class="tui-window">
 				<div class="tui-window-header">
@@ -69,19 +77,19 @@ const lang = Astro.currentLocale || "en";
 				<div class="flex flex-col">
 					<a
 						href={getRelativeLocaleUrl(lang, "/")}
-						class="border-b border-neutral-100 p-4 text-lg font-black uppercase hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/50"
+						class="border-border/10 hover:bg-primary hover:text-primary-fg border-b p-4 text-lg font-black uppercase"
 					>
 						&gt; {trans("nav.home", {}, lang) || "Home"}
 					</a>
 					<a
 						href={getRelativeLocaleUrl(lang, "blog")}
-						class="border-b border-neutral-100 p-4 text-lg font-black uppercase hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/50"
+						class="border-border/10 hover:bg-primary hover:text-primary-fg border-b p-4 text-lg font-black uppercase"
 					>
 						&gt; {trans("nav.blog", {}, lang)}
 					</a>
 					<a
 						href="https://medium.com/reasnov"
-						class="border-b border-neutral-100 p-4 text-lg font-black uppercase hover:bg-neutral-50 dark:border-neutral-900 dark:hover:bg-neutral-900/50"
+						class="border-border/10 hover:bg-primary hover:text-primary-fg border-b p-4 text-lg font-black uppercase"
 					>
 						&gt; {trans("nav.medium", {}, lang)}
 					</a>
@@ -128,7 +136,7 @@ const lang = Astro.currentLocale || "en";
 			</div>
 
 			<p class="mt-auto text-center text-[10px] font-bold tracking-[0.3em] text-neutral-500 uppercase">
-				System: 0.0.1_beta // Root: me
+				System: {version} // Root: me
 			</p>
 		</div>
 	</div>

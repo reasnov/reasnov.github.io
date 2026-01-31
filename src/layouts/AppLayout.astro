@@ -6,6 +6,7 @@ import "../styles/global.css";
 import Head from "./partials/Head.astro";
 import Header from "@components/partials/common/Header.astro";
 import Footer from "@components/partials/common/Footer.astro";
+import CommandPalette from "@components/ui/CommandPalette.astro";
 
 import "aos/dist/aos.css";
 
@@ -32,6 +33,7 @@ const lang = Astro.currentLocale || "en";
 
 	<body class="flex size-full min-h-screen max-w-screen flex-col overflow-x-hidden font-mono font-light">
 		<Header />
+		<CommandPalette />
 
 		<main class="container mx-auto flex size-full flex-1 flex-col gap-8 p-4">
 			<slot />
@@ -58,15 +60,40 @@ const lang = Astro.currentLocale || "en";
 
 				const key = e.key.toLowerCase();
 
+				// Function Keys (F1, F2)
+				if (e.key === "F1") {
+					e.preventDefault();
+					document.getElementById("hero-f1")?.click();
+				}
+				if (e.key === "F2") {
+					e.preventDefault();
+					document.getElementById("hero-f2")?.click();
+				}
+
+				// Close Mobile Menu (ESC)
+				if (e.key === "Escape") {
+					const mobileMenu = document.getElementById("mobile-menu");
+					if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+						document.getElementById("mobile-menu-toggle")?.click();
+					}
+				}
+
 				// Toggle Theme (T)
 				if (key === "t") {
 					document.getElementById("theme-toggle")?.click();
 				}
 
-				// Navigation (G then H/B)
+				// Navigation (G then H/B/S/P)
 				if (lastKey === "g") {
 					if (key === "h") window.location.href = `/${lang}/`;
 					if (key === "b") window.location.href = `/${lang}/blog/`;
+					if (key === "s") window.location.href = `/${lang}/showcase/`;
+					if (key === "p") window.location.href = `/${lang}/playgrounds/`;
+				}
+
+				// Help (?)
+				if (key === "?") {
+					window.dispatchEvent(new CustomEvent("open-palette", { detail: { query: "help" } }));
 				}
 
 				lastKey = key;
@@ -74,6 +101,26 @@ const lang = Astro.currentLocale || "en";
 				setTimeout(() => {
 					if (lastKey === key) lastKey = "";
 				}, 500);
+			});
+
+			// Listen for internal palette trigger
+			window.addEventListener("open-palette", (e: any) => {
+				const paletteEvent = new KeyboardEvent("keydown", {
+					key: "k",
+					ctrlKey: true,
+					bubbles: true,
+				});
+				window.dispatchEvent(paletteEvent);
+				
+				if (e.detail?.query) {
+					setTimeout(() => {
+						const input = document.getElementById("palette-input") as HTMLInputElement;
+						if (input) {
+							input.value = e.detail.query;
+							input.dispatchEvent(new Event("input"));
+						}
+					}, 50);
+				}
 			});
 		</script>
 	</body>

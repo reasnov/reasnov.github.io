@@ -11,33 +11,33 @@ const locale = Astro.currentLocale || "en";
 			<p class="animate-pulse text-xs font-bold tracking-[0.2em] text-neutral-500 uppercase">
 				&gt;&gt; {trans("hero.greeting", {}, locale)}
 			</p>
-			<h1 class="text-6xl font-black tracking-tighter text-neutral-900 md:text-8xl dark:text-neutral-50">
-				{trans("hero.name", {}, locale)}<span class="animate-blink text-accent">_</span>
+			<h1
+				class="font-display text-5xl tracking-tighter text-neutral-900 md:text-7xl lg:text-8xl dark:text-neutral-50"
+			>
+				{trans("hero.name", {}, locale)}<span class="animate-blink text-t-green">_</span>
 			</h1>
-			<div class="mt-2 flex items-center gap-3">
+			<div class="mt-4 flex items-center gap-3">
 				<span class="text-xs font-bold tracking-widest text-neutral-500 uppercase"
 					>{trans("hero.role_prefix", {}, locale)}</span
 				>
-				<span
-					class="bg-black px-2 py-0.5 text-sm font-bold text-white uppercase md:text-base dark:bg-white dark:text-black"
-				>
+				<span class="bg-primary text-primary-fg px-2 py-0.5 text-sm font-bold uppercase md:text-base">
 					{trans("hero.role", {}, locale)}
 				</span>
 			</div>
 		</div>
 
-		<div class="tui-panel border-l-4 border-l-black bg-neutral-50 dark:border-l-white dark:bg-neutral-900/10">
+		<div class="tui-panel tui-panel-accent tui-panel-muted">
 			<p
-				class="text-sm leading-relaxed text-neutral-700 md:text-base dark:text-neutral-400"
+				class="text-fg/80 text-sm leading-relaxed md:text-base"
 				set:html={trans("hero.description", {}, locale)}
 			/>
 		</div>
 
 		<div class="flex w-full flex-wrap gap-4">
-			<a href="https://github.com/reasnov" class="tui-button-primary text-sm">
+			<a href="https://github.com/reasnov" id="hero-f1" class="tui-btn-primary">
 				{trans("hero.buttons.explore", {}, locale)} [F1]
 			</a>
-			<a href="https://linkedin.com/in/reasnov" target="__blank" class="tui-button text-sm">
+			<a href="https://linkedin.com/in/reasnov" id="hero-f2" target="__blank" class="tui-btn-secondary">
 				{trans("hero.buttons.connect", {}, locale)} [F2]
 			</a>
 		</div>

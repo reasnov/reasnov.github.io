@@ -1,0 +1,161 @@
+--- 
+import { trans } from "@core/Translator";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { app_info } from "@core/AppInfo";
+
+const lang = Astro.currentLocale || "en";
+const version = app_info("app.version");
+
+const commands = [
+	{ id: "home", label: trans("nav.home", {}, lang), cmd: "goto home", url: getRelativeLocaleUrl(lang, "/") },
+	{ id: "blog", label: trans("nav.blog", {}, lang), cmd: "goto blog", url: getRelativeLocaleUrl(lang, "blog") },
+	{ id: "showcase", label: trans("nav.showcase", {}, lang), cmd: "goto showcase", url: getRelativeLocaleUrl(lang, "showcase") },
+	{
+		id: "playgrounds",
+		label: trans("nav.playgrounds", {}, lang),
+		cmd: "goto playgrounds",
+		url: getRelativeLocaleUrl(lang, "playgrounds"),
+	},
+	{ id: "theme", label: "Toggle Theme", cmd: "theme toggle", action: "toggle-theme" },
+	{ id: "help", label: "Show Help", cmd: "help", action: "show-help" },
+];
+---
+
+<div id="command-palette" class="tui-overlay hidden">
+	<div class="tui-modal">
+		<div class="tui-window-header">
+			<div class="flex items-center gap-2">
+				<span class="icon-[tabler--terminal] size-3"></span>
+				<span>COMMAND_EXECUTOR.EXE</span>
+			</div>
+			<span class="text-[9px] opacity-50">ESC to exit</span>
+		</div>
+
+		<div class="p-4">
+			<div class="flex items-center gap-3 border-b-2 border-accent/30 transition-colors focus-within:border-accent">
+				<span class="animate-pulse text-xl font-black text-accent">!</span>
+				<input
+					type="text"
+					id="palette-input"
+					class="tui-palette-input"
+					placeholder="Type a command (e.g. 'goto blog')..."
+					autocomplete="off"
+				/>
+			</div>
+
+			<div id="palette-results" class="tui-palette-results">
+				{
+					commands.map((cmd) => (
+						<div class="tui-palette-item group" data-url={cmd.url} data-action={cmd.action} data-cmd={cmd.cmd}>
+							<div class="flex flex-col">
+								<span class="text-xs font-black tracking-widest uppercase">{cmd.label}</span>
+								<span class="text-[9px] text-accent/60 group-hover:text-primary-fg/60">bash: {cmd.cmd}</span>
+							</div>
+							<span class="font-mono text-[10px] opacity-20 group-hover:opacity-100">ENTER</span>
+						</div>
+					))
+				}
+                <div id="help-hint" class="hidden p-4 border border-dashed border-accent/20 bg-accent/5 mt-2">
+                    <p class="text-[10px] font-bold text-accent uppercase mb-2">Manual Page: HELP.MAN</p>
+                    <ul class="text-[9px] font-mono text-fg/60 space-y-1">
+                        <li>[T]     - TOGGLE_THEME</li>
+                        <li>[G+H]   - GOTO_HOME</li>
+                        <li>[G+B]   - GOTO_BLOG</li>
+                        <li>[G+S]   - GOTO_SHOWCASE</li>
+                        <li>[/]     - OPEN_PALETTE</li>
+                        <li>[?]     - SHOW_THIS_HELP</li>
+                    </ul>
+                </div>
+			</div>
+
+			<div
+				class="mt-4 flex justify-between border-t border-border/5 pt-2 text-[8px] font-bold tracking-[0.2em] text-fg/30 uppercase"
+			>
+				<span>Status: Awaiting Command</span>
+				<span>{version}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const palette = document.getElementById("command-palette");
+	const input = document.getElementById("palette-input") as HTMLInputElement;
+	const items = document.querySelectorAll(".tui-palette-item");
+
+	function togglePalette() {
+		palette?.classList.toggle("hidden");
+		if (!palette?.classList.contains("hidden")) {
+			input?.focus();
+			input.value = "";
+			filterCommands("");
+		}
+	}
+
+	function filterCommands(query: string) {
+		const q = query.toLowerCase();
+        const helpHint = document.getElementById("help-hint");
+        
+        if (q === "help") {
+            helpHint?.classList.remove("hidden");
+        } else {
+            helpHint?.classList.add("hidden");
+        }
+
+		items.forEach((item) => {
+			const cmd = item.getAttribute("data-cmd") || "";
+			const label = item.querySelector("span")?.textContent?.toLowerCase() || "";
+			if (cmd.includes(q) || label.includes(q)) {
+				(item as HTMLElement).style.display = "flex";
+			} else {
+				(item as HTMLElement).style.display = "none";
+			}
+		});
+	}
+
+	// Keyboard triggers
+	window.addEventListener("keydown", (e) => {
+		if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+			e.preventDefault();
+			togglePalette();
+		}
+		if (e.key === "/" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
+			e.preventDefault();
+			togglePalette();
+		}
+		if (e.key === "Escape" && !palette?.classList.contains("hidden")) {
+			togglePalette();
+		}
+	});
+
+	input?.addEventListener("input", (e) => {
+		filterCommands((e.target as HTMLInputElement).value);
+	});
+
+	items.forEach((item) => {
+		item.addEventListener("click", () => {
+			const url = item.getAttribute("data-url");
+			const action = item.getAttribute("data-action");
+
+			if (url) {
+				window.location.href = url;
+			} else if (action === "toggle-theme") {
+				document.getElementById("theme-toggle")?.click();
+				togglePalette();
+			} else if (action === "show-help") {
+				input.value = "help";
+                filterCommands("help");
+			}
+		});
+	});
+
+	// Handle Enter key in input
+	input?.addEventListener("keydown", (e) => {
+		if (e.key === "Enter") {
+			const visibleItems = Array.from(items).filter((i) => (i as HTMLElement).style.display !== "none");
+			if (visibleItems.length > 0) {
+				(visibleItems[0] as HTMLElement).click();
+			}
+		}
+	});
+</script>
