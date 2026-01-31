@@ -44,6 +44,7 @@ const socialLinks = [
 		<div class="flex h-16 items-center justify-between gap-4">
 			<Brand />
 
+			<!-- Desktop Nav -->
 			<div class="hidden flex-1 items-center justify-center gap-2 lg:flex">
 				{
 					navLinks.map((item) => (
@@ -86,8 +87,8 @@ const socialLinks = [
 				</div>
 
 				<button id="mobile-menu-toggle" class="tui-btn-primary px-4 py-1.5 lg:hidden">
-					<span id="label-open">[MENU]</span>
-					<span id="label-close" class="hidden">[CLOSE]</span>
+					<span id="menu-label-open">[MENU]</span>
+					<span id="menu-label-close" class="hidden">[CLOSE]</span>
 				</button>
 			</div>
 		</div>
@@ -123,7 +124,9 @@ const socialLinks = [
 					<div class="tui-window-header"><span>THEME_CONFIG.EXE</span></div>
 					<div class="flex items-center justify-between p-6">
 						<span class="text-xs font-black tracking-widest uppercase opacity-50">Visual Mode:</span>
-						<ThemeSwitcher />
+						<div class="bg-primary/5 border-border/10 flex items-center border p-1">
+							<ThemeSwitcher />
+						</div>
 					</div>
 				</div>
 				<div class="tui-window">
@@ -164,8 +167,8 @@ const socialLinks = [
 	const menuToggle = document.getElementById("mobile-menu-toggle");
 	const mobileClose = document.getElementById("mobile-close-btn");
 	const mobileMenu = document.getElementById("mobile-menu");
-	const lOpen = document.getElementById("label-open");
-	const lClose = document.getElementById("label-close");
+	const labelOpen = document.getElementById("menu-label-open");
+	const labelClose = document.getElementById("menu-label-close");
 
 	function toggleMenu() {
 		if (!mobileMenu) return;
@@ -173,14 +176,14 @@ const socialLinks = [
 		if (isHidden) {
 			mobileMenu.classList.remove("hidden");
 			mobileMenu.classList.add("flex");
-			lOpen?.classList.add("hidden");
-			lClose?.classList.remove("hidden");
+			labelOpen?.classList.add("hidden");
+			labelClose?.classList.remove("hidden");
 			document.body.style.overflow = "hidden";
 		} else {
 			mobileMenu.classList.add("hidden");
 			mobileMenu.classList.remove("flex");
-			lOpen?.classList.remove("hidden");
-			lClose?.classList.add("hidden");
+			labelOpen?.classList.remove("hidden");
+			labelClose?.classList.add("hidden");
 			document.body.style.overflow = "";
 		}
 	}

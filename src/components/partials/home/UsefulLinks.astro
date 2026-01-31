@@ -13,26 +13,27 @@ const locale = Astro.currentLocale || "en";
 		<p class="text-content/40 text-[10px] font-bold uppercase">-- {trans("useful_links.subtitle", {}, locale)}</p>
 	</div>
 
-	<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+	<div class="flex flex-col gap-3">
 		{
 			links.map((link, index) => (
 				<a
 					href={link.url}
 					target="_blank"
-					class="group tui-panel border-border/10 hover:bg-t-cyan/5 hover:border-t-cyan flex flex-col items-center gap-4 text-center transition-all"
+					class="group border-border/10 hover:border-t-cyan hover:bg-t-cyan/5 flex items-center justify-between border-2 p-4 transition-all"
 					data-aos="fade-up"
 					data-aos-delay={index * 50}
 				>
-					<div class="border-border/10 group-hover:border-t-cyan group-hover:text-t-cyan flex size-12 items-center justify-center border transition-all">
-						<span class={`${link.icon} size-6`} />
-					</div>
-					<div class="flex flex-col gap-1">
-						<span class="group-hover:text-t-cyan text-[10px] font-black tracking-tight uppercase transition-colors">
+					<div class="flex items-center gap-4">
+						<span class={`${link.icon} text-content/40 group-hover:text-t-cyan size-5 transition-colors`} />
+						<span class="group-hover:text-t-cyan text-xs font-black tracking-widest uppercase transition-colors">
 							{link.title}
 						</span>
-						<span class="text-content/30 text-[8px] font-bold tracking-widest uppercase">
+					</div>
+					<div class="flex items-center gap-3">
+						<span class="border-t-cyan/20 text-t-cyan/40 group-hover:text-t-cyan/60 border px-1 text-[8px] font-bold tracking-tighter uppercase transition-colors">
 							{link.category}
 						</span>
+						<span class="icon-[tabler--arrow-right] text-content/20 group-hover:text-t-cyan size-3 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
 					</div>
 				</a>
 			))

@@ -1,7 +1,7 @@
 ---
 /**
  * SpaceShooter Component
- * Fully Restored rich UI and narrative.
+ * Optimized for theme compatibility and responsiveness.
  */
 interface Props {
 	manual?: boolean;
@@ -14,7 +14,7 @@ const { manual = false } = Astro.props;
 	class={`bg-base fixed inset-0 z-[500] flex flex-col items-center justify-center font-mono transition-opacity duration-500 ${manual ? "hidden" : ""}`}
 >
 	<div
-		class="tui-window relative h-[85dvh] w-[95vw] max-w-5xl overflow-hidden shadow-[32px_32px_0px_0px_rgba(0,0,0,0.1)]"
+		class="tui-window relative h-[85dvh] w-[95vw] max-w-5xl overflow-hidden shadow-[32px_32px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[32px_32px_0px_0px_rgba(255,255,255,0.05)]"
 	>
 		<div class="tui-window-header border-border !bg-t-red border-b-2 !text-white">
 			<div class="flex items-center gap-3">
@@ -44,13 +44,12 @@ const { manual = false } = Astro.props;
 			<svg id="game-canvas" class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
 				<defs>
 					<g id="svg-player">
-						<path d="M0 -20 L12 12 L0 6 L-12 12 Z" fill="none" stroke="currentColor" stroke-width="2.5"
-						></path>
+						<path d="M0 -20 L12 12 L0 6 L-12 12 Z" fill="none" stroke="white" stroke-width="2.5"></path>
 						<path d="M0 -8 L4 4 L0 0 L-4 4 Z" fill="var(--accent)"></path>
 						<circle cx="0" cy="10" r="4" fill="var(--accent)" class="animate-pulse"></circle>
 					</g>
 					<g id="svg-enemy">
-						<path d="M-10 -10 L10 10 M-10 10 L10 -10" stroke="currentColor" stroke-width="2"></path>
+						<path d="M-10 -10 L10 10 M-10 10 L10 -10" stroke="white" stroke-width="2"></path>
 						<rect
 							x="-8"
 							y="-8"
@@ -59,7 +58,7 @@ const { manual = false } = Astro.props;
 							fill="none"
 							stroke="var(--color-t-red)"
 							stroke-width="1"></rect>
-						<circle cx="0" cy="0" r="3" fill="currentColor"></circle>
+						<circle cx="0" cy="0" r="3" fill="white"></circle>
 					</g>
 					<rect id="svg-bullet" width="2" height="12" fill="var(--color-t-amber)"></rect>
 				</defs>
@@ -117,8 +116,12 @@ const { manual = false } = Astro.props;
 					>INITIALIZE_CLEANUP</button
 				>
 				<div class="mt-12 flex gap-8 opacity-20 grayscale">
-					<div class="flex items-center gap-2 text-[10px] font-black"><kbd>ARROWS</kbd> MOVE</div>
-					<div class="flex items-center gap-2 text-[10px] font-black"><kbd>SPACE</kbd> SHOOT</div>
+					<div class="flex items-center gap-2 text-[10px] font-black text-white">
+						<kbd class="border-white/20 bg-white/10 text-white">ARROWS</kbd> MOVE
+					</div>
+					<div class="flex items-center gap-2 text-[10px] font-black text-white">
+						<kbd class="border-white/20 bg-white/10 text-white">SPACE</kbd> SHOOT
+					</div>
 				</div>
 			</div>
 
@@ -168,7 +171,10 @@ const { manual = false } = Astro.props;
 		splash.classList.add("opacity-0");
 		isPlaying = false;
 		document.body.style.overflow = "";
-		setTimeout(() => splash.classList.add("hidden"), 500);
+		setTimeout(() => {
+			splash.classList.add("hidden");
+			splash.classList.remove("opacity-0");
+		}, 500);
 	}
 
 	skipBtn?.addEventListener("click", exitGame);
@@ -285,6 +291,18 @@ const { manual = false } = Astro.props;
 
 	window.addEventListener("keydown", (e) => (keys[e.key] = true));
 	window.addEventListener("keyup", (e) => (keys[e.key] = false));
+
+	window.addEventListener("trigger-game-reset", () => {
+		score = 0;
+		if (scoreEl) scoreEl.textContent = `BUGS_PURGED: 00/${targetScore}`;
+		if (scoreBar) scoreBar.style.width = "0%";
+		document.getElementById("start-screen")?.classList.remove("hidden");
+		document.getElementById("victory-screen")?.classList.add("hidden");
+		isPlaying = false;
+		if (entitiesGroup) entitiesGroup.innerHTML = "";
+		bullets = [];
+		enemies = [];
+	});
 
 	const mL = document.getElementById("m-left");
 	const mR = document.getElementById("m-right");
