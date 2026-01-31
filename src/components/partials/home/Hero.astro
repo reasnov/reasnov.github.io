@@ -5,7 +5,8 @@ import { trans } from "@core/Translator";
 const locale = Astro.currentLocale || "en";
 ---
 
-<div class="flex flex-col items-center justify-center gap-16 lg:flex-row lg:gap-24">
+<div class="my-16 flex flex-col items-center justify-center gap-16 lg:my-32 lg:flex-row lg:gap-24">
+	<!-- LEFT SIDE (50%) -->
 	<div class="flex flex-1 flex-col gap-12 md:gap-16" data-aos="fade-right">
 		<div class="flex flex-col gap-8">
 			<div class="flex items-center gap-4">
@@ -20,7 +21,7 @@ const locale = Astro.currentLocale || "en";
 			</div>
 
 			<h1
-				class="font-display text-content text-6xl leading-none drop-shadow-[4px_4px_0px_var(--color-accent)]/10 sm:text-8xl md:text-9xl xl:text-[13rem]"
+				class="text-6xl leading-[0.85] drop-shadow-[4px_4px_0px_var(--color-accent)]/10 sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem]"
 			>
 				{trans("hero.name", {}, locale)}<span class="animate-blink text-t-cyan">█</span>
 			</h1>
@@ -67,12 +68,13 @@ const locale = Astro.currentLocale || "en";
 		</div>
 	</div>
 
+	<!-- RIGHT SIDE (50%) -->
 	<div class="flex w-full flex-1 items-center justify-center lg:justify-end" data-aos="fade-left">
-		<div class="tui-window w-full max-w-2xl">
+		<div class="tui-window w-full">
 			<div class="tui-window-header !bg-t-blue">
 				<div class="flex items-center gap-2">
 					<span class="icon-[tabler--terminal-2] size-4"></span>
-					<span class="tracking-widest">MONITOR_SESSION.LOG</span>
+					<span class="tracking-widest uppercase">Monitor_Session.log</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<span class="size-2 border border-white/40"></span>
@@ -80,9 +82,11 @@ const locale = Astro.currentLocale || "en";
 					<span class="size-2 border border-white/40"></span>
 				</div>
 			</div>
-			<FakeTerminal height="h-[450px]" />
+			<FakeTerminal height="h-[400px] lg:h-[500px]" />
 			<div class="bg-primary/5 border-border/10 flex items-center justify-between border-t p-2">
-				<span class="text-content/30 text-[8px] font-bold uppercase">Localhost:8080 // Secure_Tunnel</span>
+				<span class="text-content/30 text-[8px] font-bold tracking-tighter uppercase"
+					>Localhost:8080 // Secure_Tunnel</span
+				>
 				<span class="text-t-green animate-pulse text-[8px] font-bold">● DATA_TRANSCEIVING</span>
 			</div>
 		</div>

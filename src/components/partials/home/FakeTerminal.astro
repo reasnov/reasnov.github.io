@@ -66,12 +66,13 @@ const i18n = {
 		updateClock();
 		setInterval(updateClock, 1000);
 
-		        let lineIndex = 0;
-		        let charIndex = 0;
-		        let currentEl = null;
-		        let isResetting = false;
-		
-		        function timestamp() {			const now = new Date();
+		let lineIndex = 0;
+		let charIndex = 0;
+		let currentEl = null;
+		let isResetting = false;
+
+		function timestamp() {
+			const now = new Date();
 			return now.toLocaleTimeString([], { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
 		}
 

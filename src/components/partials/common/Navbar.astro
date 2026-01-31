@@ -38,12 +38,12 @@ const socialLinks = [
 ];
 ---
 
-<nav class="border-border bg-base/90 fixed top-0 right-0 left-0 z-[100] w-full border-b-2 backdrop-blur-md">
+<!-- NAVBAR (Z-10) -->
+<nav class="border-border bg-base/90 fixed top-0 right-0 left-0 z-10 w-full border-b-2 backdrop-blur-md">
 	<div class="container mx-auto px-4 md:px-8">
 		<div class="flex h-16 items-center justify-between gap-4">
 			<Brand />
 
-			<!-- Desktop Nav -->
 			<div class="hidden flex-1 items-center justify-center gap-2 lg:flex">
 				{
 					navLinks.map((item) => (
@@ -58,26 +58,14 @@ const socialLinks = [
 			</div>
 
 			<div class="flex items-center gap-2">
-				<!-- Search Trigger -->
 				<button
 					onclick="window.dispatchEvent(new CustomEvent('open-palette'))"
-					class="border-border/20 group hover:border-accent hidden items-center gap-2 border px-3 py-1.5 transition-all lg:flex"
+					class="border-border/20 hover:border-accent hidden items-center gap-2 border px-3 py-1 transition-all lg:flex"
 				>
-					<span class="icon-[tabler--search] text-content/40 group-hover:text-accent size-3"></span>
-					<div class="flex items-center gap-1">
-						<kbd
-							class="group-hover:border-accent group-hover:text-accent border-border/20 transition-colors"
-							>CTRL</kbd
-						>
-						<kbd
-							class="group-hover:border-accent group-hover:text-accent border-border/20 transition-colors"
-							>K</kbd
-						>
-					</div>
+					<kbd class="text-[9px]">CTRL + K</kbd>
 				</button>
 
-				<!-- Social Links -->
-				<div class="border-border/10 hidden items-center gap-3 border-x px-4 lg:flex">
+				<div class="border-border/10 hidden h-16 items-center gap-4 border-x px-6 lg:flex">
 					{
 						socialLinks.map((link) => (
 							<a
@@ -98,21 +86,24 @@ const socialLinks = [
 				</div>
 
 				<button id="mobile-menu-toggle" class="tui-btn-primary px-4 py-1.5 lg:hidden">
-					<span id="menu-label-open">[MENU]</span>
-					<span id="menu-label-close" class="hidden">[CLOSE]</span>
+					<span id="label-open">[MENU]</span>
+					<span id="label-close" class="hidden">[CLOSE]</span>
 				</button>
 			</div>
 		</div>
 	</div>
 
-	<!-- Mobile Menu Overlay (Truly Full Screen & Fixed) -->
+	<!-- MOBILE MENU (Z-50) -->
 	<div
 		id="mobile-menu"
-		class="bg-base border-border fixed inset-0 z-[110] hidden h-screen w-screen flex-col border-t-2 lg:hidden"
+		class="bg-base border-border fixed inset-0 z-50 hidden h-screen w-screen flex-col border-t-2 lg:hidden"
 	>
-		<div class="container mx-auto flex h-full flex-col gap-8 overflow-y-auto px-6 pt-24 pb-12">
+		<div class="no-scrollbar container mx-auto flex h-full flex-col gap-8 overflow-y-auto px-6 pt-24 pb-12">
 			<div class="tui-window shrink-0">
-				<div class="tui-window-header"><span>DIRECTORY_NAV.SYS</span></div>
+				<div class="tui-window-header">
+					<span>DIRECTORY_NAV.SYS</span>
+					<button id="mobile-close-btn" class="text-accent font-black hover:underline">[X_CLOSE]</button>
+				</div>
 				<div class="flex flex-col">
 					{
 						navLinks.map((item) => (
@@ -128,13 +119,19 @@ const socialLinks = [
 			</div>
 
 			<div class="grid shrink-0 grid-cols-1 gap-6 sm:grid-cols-2">
-				<div class="tui-window flex items-center justify-between p-6">
-					<span class="text-xs font-black tracking-widest uppercase opacity-50">Theme Mode:</span>
-					<ThemeSwitcher />
+				<div class="tui-window">
+					<div class="tui-window-header"><span>THEME_CONFIG.EXE</span></div>
+					<div class="flex items-center justify-between p-6">
+						<span class="text-xs font-black tracking-widest uppercase opacity-50">Visual Mode:</span>
+						<ThemeSwitcher />
+					</div>
 				</div>
-				<div class="tui-window flex items-center justify-between p-6">
-					<span class="text-xs font-black tracking-widest uppercase opacity-50">Lang Select:</span>
-					<LangSwitcher />
+				<div class="tui-window">
+					<div class="tui-window-header"><span>LOCALE_SET.EXE</span></div>
+					<div class="flex items-center justify-between p-6">
+						<span class="text-xs font-black tracking-widest uppercase opacity-50">Lang Select:</span>
+						<LangSwitcher />
+					</div>
 				</div>
 			</div>
 
@@ -165,9 +162,10 @@ const socialLinks = [
 
 <script>
 	const menuToggle = document.getElementById("mobile-menu-toggle");
+	const mobileClose = document.getElementById("mobile-close-btn");
 	const mobileMenu = document.getElementById("mobile-menu");
-	const labelOpen = document.getElementById("menu-label-open");
-	const labelClose = document.getElementById("menu-label-close");
+	const lOpen = document.getElementById("label-open");
+	const lClose = document.getElementById("label-close");
 
 	function toggleMenu() {
 		if (!mobileMenu) return;
@@ -175,19 +173,20 @@ const socialLinks = [
 		if (isHidden) {
 			mobileMenu.classList.remove("hidden");
 			mobileMenu.classList.add("flex");
-			labelOpen?.classList.add("hidden");
-			labelClose?.classList.remove("hidden");
+			lOpen?.classList.add("hidden");
+			lClose?.classList.remove("hidden");
 			document.body.style.overflow = "hidden";
 		} else {
 			mobileMenu.classList.add("hidden");
 			mobileMenu.classList.remove("flex");
-			labelOpen?.classList.remove("hidden");
-			labelClose?.classList.add("hidden");
+			lOpen?.classList.remove("hidden");
+			lClose?.classList.add("hidden");
 			document.body.style.overflow = "";
 		}
 	}
 
 	menuToggle?.addEventListener("click", toggleMenu);
+	mobileClose?.addEventListener("click", toggleMenu);
 	mobileMenu
 		?.querySelectorAll("a")
 		.forEach((l) => l.addEventListener("click", () => !mobileMenu.classList.contains("hidden") && toggleMenu()));

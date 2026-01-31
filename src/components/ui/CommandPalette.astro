@@ -26,21 +26,22 @@ const commands = [
 ];
 ---
 
-<div id="command-palette" class="tui-overlay hidden">
+<!-- COMMAND PALETTE (Z-100) -->
+<div id="command-palette" class="tui-overlay !z-[100] hidden">
 	<div class="tui-modal">
-		<div class="tui-window-header">
+		<div class="tui-window-header border-border border-b-2">
 			<div class="flex items-center gap-2">
-				<span class="icon-[tabler--terminal] size-3"></span>
+				<span class="icon-[tabler--terminal] text-accent size-3"></span>
 				<span>COMMAND_EXECUTOR.EXE</span>
 			</div>
-			<span class="text-[9px] opacity-50">ESC to exit</span>
+			<span class="text-[9px] tracking-widest uppercase opacity-50">ESC to exit</span>
 		</div>
 
-		<div class="p-4">
+		<div class="p-6 md:p-10">
 			<div
-				class="border-accent/30 focus-within:border-accent flex items-center gap-3 border-b-2 transition-colors"
+				class="border-accent/30 focus-within:border-accent flex items-center gap-4 border-b-2 transition-colors"
 			>
-				<span class="text-accent animate-pulse text-xl font-black">!</span>
+				<span class="animate-blink text-accent text-2xl font-black">!</span>
 				<input
 					type="text"
 					id="palette-input"
@@ -50,32 +51,40 @@ const commands = [
 				/>
 			</div>
 
-			<div id="palette-results" class="tui-palette-results">
+			<div
+				id="palette-results"
+				class="no-scrollbar border-border/10 mt-6 max-h-[60vh] overflow-y-auto border-t pt-4"
+			>
 				{
 					commands.map((cmd) => (
 						<div
-							class="tui-palette-item group"
+							class="group hover:bg-primary hover:text-primary-content flex cursor-pointer items-center justify-between p-4 transition-colors"
 							data-url={cmd.url}
 							data-action={cmd.action}
 							data-cmd={cmd.cmd}
 						>
 							<div class="flex flex-col">
 								<span class="text-xs font-black tracking-widest uppercase">{cmd.label}</span>
-								<span class="text-accent/60 group-hover:text-primary-content/60 text-[9px]">
+								<span class="text-accent/60 group-hover:text-primary-content/60 text-[9px] italic">
 									bash: {cmd.cmd}
 								</span>
 							</div>
-							<span class="font-mono text-[10px] opacity-20 group-hover:opacity-100">ENTER</span>
+							<span class="font-mono text-[10px] tracking-widest uppercase opacity-20 group-hover:opacity-100">
+								Execute [Enter]
+							</span>
 						</div>
 					))
 				}
-				<div id="help-hint" class="border-accent/20 bg-accent/5 mt-2 hidden border border-dashed p-4">
-					<p class="text-accent mb-2 text-[10px] font-bold uppercase">Manual Page: HELP.MAN</p>
-					<ul class="text-content/60 space-y-1 font-mono text-[9px]">
+				<div id="help-hint" class="border-accent/20 bg-accent/5 mt-4 hidden border border-dashed p-6">
+					<p class="text-accent mb-4 text-[10px] font-black tracking-[0.2em] uppercase">
+						Manual Page: HELP.MAN
+					</p>
+					<ul class="text-content/60 space-y-2 font-mono text-[10px] uppercase">
 						<li>[T] - TOGGLE_THEME</li>
 						<li>[G+H] - GOTO_HOME</li>
 						<li>[G+B] - GOTO_BLOG</li>
 						<li>[G+S] - GOTO_SHOWCASE</li>
+						<li>[G+P] - GOTO_PLAYGROUNDS</li>
 						<li>[/] - OPEN_PALETTE</li>
 						<li>[?] - SHOW_THIS_HELP</li>
 					</ul>
@@ -83,9 +92,9 @@ const commands = [
 			</div>
 
 			<div
-				class="border-border/5 text-content/30 mt-4 flex justify-between border-t pt-2 text-[8px] font-bold tracking-[0.2em] uppercase"
+				class="border-border/5 text-content/30 mt-8 flex justify-between border-t pt-4 text-[9px] font-bold tracking-[0.2em] uppercase"
 			>
-				<span>Status: Awaiting Command</span>
+				<span>Status: Awaiting Input</span>
 				<span>{version}</span>
 			</div>
 		</div>
@@ -98,8 +107,9 @@ const commands = [
 	const items = document.querySelectorAll(".tui-palette-item");
 
 	function togglePalette() {
-		palette?.classList.toggle("hidden");
-		if (!palette?.classList.contains("hidden")) {
+		if (!palette) return;
+		palette.classList.toggle("hidden");
+		if (!palette.classList.contains("hidden")) {
 			input?.focus();
 			input.value = "";
 			filterCommands("");
@@ -109,14 +119,10 @@ const commands = [
 	function filterCommands(query: string) {
 		const q = query.toLowerCase();
 		const helpHint = document.getElementById("help-hint");
+		if (q === "help") helpHint?.classList.remove("hidden");
+		else helpHint?.classList.add("hidden");
 
-		if (q === "help") {
-			helpHint?.classList.remove("hidden");
-		} else {
-			helpHint?.classList.add("hidden");
-		}
-
-		items.forEach((item) => {
+		document.querySelectorAll("[data-cmd]").forEach((item) => {
 			const cmd = item.getAttribute("data-cmd") || "";
 			const label = item.querySelector("span")?.textContent?.toLowerCase() || "";
 			if (cmd.includes(q) || label.includes(q)) {
@@ -127,7 +133,6 @@ const commands = [
 		});
 	}
 
-	// Keyboard triggers
 	window.addEventListener("keydown", (e) => {
 		if ((e.ctrlKey || e.metaKey) && e.key === "k") {
 			e.preventDefault();
@@ -137,23 +142,17 @@ const commands = [
 			e.preventDefault();
 			togglePalette();
 		}
-		if (e.key === "Escape" && !palette?.classList.contains("hidden")) {
-			togglePalette();
-		}
+		if (e.key === "Escape" && palette && !palette.classList.contains("hidden")) togglePalette();
 	});
 
-	input?.addEventListener("input", (e) => {
-		filterCommands((e.target as HTMLInputElement).value);
-	});
+	input?.addEventListener("input", (e) => filterCommands((e.target as HTMLInputElement).value));
 
-	items.forEach((item) => {
+	document.querySelectorAll("[data-url], [data-action]").forEach((item) => {
 		item.addEventListener("click", () => {
 			const url = item.getAttribute("data-url");
 			const action = item.getAttribute("data-action");
-
-			if (url) {
-				window.location.href = url;
-			} else if (action === "toggle-theme") {
+			if (url) window.location.href = url;
+			else if (action === "toggle-theme") {
 				document.getElementById("theme-toggle")?.click();
 				togglePalette();
 			} else if (action === "show-help") {
@@ -163,13 +162,12 @@ const commands = [
 		});
 	});
 
-	// Handle Enter key in input
 	input?.addEventListener("keydown", (e) => {
 		if (e.key === "Enter") {
-			const visibleItems = Array.from(items).filter((i) => (i as HTMLElement).style.display !== "none");
-			if (visibleItems.length > 0) {
-				(visibleItems[0] as HTMLElement).click();
-			}
+			const visibleItems = Array.from(document.querySelectorAll("[data-url], [data-action]")).filter(
+				(i) => (i as HTMLElement).style.display !== "none"
+			);
+			if (visibleItems.length > 0) (visibleItems[0] as HTMLElement).click();
 		}
 	});
 </script>
