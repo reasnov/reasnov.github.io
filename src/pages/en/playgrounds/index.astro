@@ -1,0 +1,55 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+import { trans } from "@core/Translator";
+import playgrounds from "@data/playgrounds.json";
+
+const locale = Astro.currentLocale || "en";
+---
+
+<AppLayout title={trans("pages.playgrounds.title", {}, locale)}>
+    <section class="flex flex-col gap-12 my-10" data-aos="fade-in">
+        <div class="flex flex-col gap-4 border-l-4 border-black dark:border-white pl-6">
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
+                {trans("pages.playgrounds.title", {}, locale)}
+            </h1>
+            <p class="text-neutral-500 font-bold uppercase text-xs md:text-sm tracking-widest">
+                // {trans("pages.playgrounds.subtitle", {}, locale)}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {playgrounds.map((item, index) => (
+                <div class="tui-window group flex flex-col">
+                    <div class="tui-window-header">
+                        <span>EXP_{index + 1}.EXE</span>
+                        <div class="size-2 bg-primary/20"></div>
+                    </div>
+                    
+                    <div class="p-6 flex flex-col gap-4 flex-1">
+                        <div class="flex flex-wrap gap-1">
+                            {item.tags.map(tag => (
+                                <span class="text-[8px] font-bold uppercase px-1 border border-primary/20 text-primary">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        <h2 class="text-xl font-bold group-hover:text-primary transition-colors uppercase">{item.title}</h2>
+                        
+                        <p class="text-xs text-neutral-600 dark:text-neutral-500 leading-relaxed flex-1">
+                            {item.description}
+                        </p>
+
+                        <a 
+                            href={item.link} 
+                            target="_blank" 
+                            class="tui-button text-[10px] w-full text-center mt-4"
+                        >
+                            RUN_EXPERIMENT
+                        </a>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+</AppLayout>
