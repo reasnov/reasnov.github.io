@@ -7,22 +7,46 @@ const year = new Date().getFullYear();
 const version = app_info("app.version");
 ---
 
-<footer class="border-border/10 bg-base text-content/40 mt-auto border-t py-6">
-	<div
-		class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-[9px] font-bold tracking-[0.2em] uppercase md:flex-row"
-	>
-		<p set:html={trans("footer.copyright", { year }, locale)} />
-
-		<div class="flex items-center gap-6">
-			<div class="flex items-center gap-2">
-				<span class="bg-accent size-1.5 animate-pulse"></span>
-				<span>{version}</span>
+<footer class="border-border/10 bg-base text-content/40 mt-auto border-t py-10">
+	<div class="tui-container flex flex-col gap-8">
+		<!-- System Footer Details -->
+		<div class="border-border/5 grid grid-cols-1 gap-8 border-b pb-8 md:grid-cols-3">
+			<div class="flex flex-col gap-2">
+				<span class="text-content/60 text-[9px] font-black tracking-widest uppercase">System_Architecture</span>
+				<p class="text-[10px] leading-tight">Decentralized TUI Node based on Astro 5.x and Tailwind CSS 4.x</p>
 			</div>
-			<div class="flex items-center gap-4">
-				<a href="https://github.com/reasnov" target="_blank" class="hover:text-content transition-colors">GH</a>
-				<a href="https://linkedin.com/in/reasnov" target="_blank" class="hover:text-content transition-colors"
-					>LI</a
-				>
+			<div class="flex flex-col gap-2">
+				<span class="text-content/60 text-[9px] font-black tracking-widest uppercase">Network_Status</span>
+				<div class="flex items-center gap-2">
+					<span class="tui-status-dot bg-t-green"></span>
+					<span class="text-t-green text-[10px] font-bold">NODE_01_ONLINE</span>
+				</div>
+			</div>
+			<div class="flex flex-col gap-2">
+				<span class="text-content/60 text-[9px] font-black tracking-widest uppercase">License_Agreement</span>
+				<p class="text-[10px]">MIT_LICENSE // REASNOV_OPEN_SOURCE</p>
+			</div>
+		</div>
+
+		<div
+			class="flex flex-col items-center justify-between gap-4 text-[9px] font-bold tracking-[0.2em] uppercase md:flex-row"
+		>
+			<p set:html={trans("footer.copyright", { year }, locale)} />
+
+			<div class="flex items-center gap-6">
+				<div class="flex items-center gap-2">
+					<span class="text-t-amber">v{version}</span>
+				</div>
+				<div class="border-border/10 flex items-center gap-4 border-l pl-6">
+					<a href="https://github.com/reasnov" target="_blank" class="hover:text-t-cyan transition-colors"
+						>GITHUB</a
+					>
+					<a
+						href="https://linkedin.com/in/reasnov"
+						target="_blank"
+						class="hover:text-t-blue transition-colors">LINKEDIN</a
+					>
+				</div>
 			</div>
 		</div>
 	</div>

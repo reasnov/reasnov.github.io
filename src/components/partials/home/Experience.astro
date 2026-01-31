@@ -6,7 +6,7 @@ const locale = Astro.currentLocale || "en";
 ---
 
 <section class="my-20 flex w-full flex-col gap-8" data-aos="fade-in">
-	<div class="border-border flex flex-col gap-2 border-l-4 pl-4">
+	<div class="border-t-blue flex flex-col gap-2 border-l-4 pl-4">
 		<h2 class="text-xl font-black tracking-widest uppercase">{trans("experience.title", {}, locale)}</h2>
 		<p class="text-content/50 text-xs font-bold tracking-tighter uppercase">
 			-- {trans("experience.subtitle", {}, locale)}
@@ -17,21 +17,28 @@ const locale = Astro.currentLocale || "en";
 		{
 			experiences.map((exp, index) => (
 				<div
-					class={`group border-border/5 hover:bg-primary/5 border-b p-6 transition-colors last:border-0`}
+					class={`group border-border/5 hover:bg-t-blue/5 relative overflow-hidden border-b p-6 transition-all last:border-0`}
 					data-aos="fade-up"
 					data-aos-delay={index * 50}
 				>
-					<div class="flex flex-col gap-4 md:flex-row md:items-start">
+					{/* Subtle Background Identifier */}
+					<div class="text-content/5 group-hover:text-t-blue/10 pointer-events-none absolute -right-4 -bottom-4 rotate-12 text-6xl font-black transition-colors">
+						{exp.year}
+					</div>
+
+					<div class="relative z-10 flex flex-col gap-4 md:flex-row md:items-start">
 						<div class="flex min-w-[100px] flex-col">
-							<span class="border-accent text-accent w-fit border px-2 py-0.5 text-xs font-bold">
+							<span class="border-t-blue text-t-blue w-fit border-2 px-2 py-0.5 text-xs font-black shadow-[2px_2px_0px_0px_rgba(59,130,246,0.2)]">
 								{exp.year}
 							</span>
 						</div>
 
 						<div class="flex flex-1 flex-col gap-2">
 							<div class="flex flex-col">
-								<h3 class="text-lg font-bold transition-colors group-hover:underline">{exp.title}</h3>
-								<span class="text-xs font-bold text-neutral-500 uppercase">{exp.company}</span>
+								<h3 class="group-hover:text-t-blue text-lg font-bold transition-colors">{exp.title}</h3>
+								<span class="text-content/40 text-xs font-bold tracking-widest uppercase">
+									{exp.company}
+								</span>
 							</div>
 
 							<p class="text-content/70 max-w-3xl text-xs leading-relaxed md:text-sm">

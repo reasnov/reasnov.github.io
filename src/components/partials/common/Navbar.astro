@@ -15,9 +15,30 @@ const navLinks = [
 	{ key: "showcase", path: "showcase" },
 	{ key: "playgrounds", path: "playgrounds" },
 ];
+
+const socialLinks = [
+	{
+		name: "GitHub",
+		url: "https://github.com/reasnov",
+		icon: "icon-[tabler--brand-github]",
+		color: "hover:text-t-cyan",
+	},
+	{
+		name: "LinkedIn",
+		url: "https://linkedin.com/in/reasnov",
+		icon: "icon-[tabler--brand-linkedin]",
+		color: "hover:text-t-blue",
+	},
+	{
+		name: "Medium",
+		url: "https://medium.com/@reasnov",
+		icon: "icon-[tabler--brand-medium]",
+		color: "hover:text-t-magenta",
+	},
+];
 ---
 
-<nav class="border-border bg-base/90 sticky top-0 z-[100] w-full border-b-2 backdrop-blur-md">
+<nav class="border-border bg-base/90 fixed top-0 right-0 left-0 z-[100] w-full border-b-2 backdrop-blur-md">
 	<div class="container mx-auto px-4 md:px-8">
 		<div class="flex h-16 items-center justify-between gap-4">
 			<Brand />
@@ -37,14 +58,41 @@ const navLinks = [
 			</div>
 
 			<div class="flex items-center gap-2">
+				<!-- Search Trigger -->
 				<button
 					onclick="window.dispatchEvent(new CustomEvent('open-palette'))"
-					class="border-border/20 hover:border-accent hidden items-center gap-2 border px-3 py-1 transition-all lg:flex"
+					class="border-border/20 group hover:border-accent hidden items-center gap-2 border px-3 py-1.5 transition-all lg:flex"
 				>
-					<kbd class="text-[9px]">CTRL + K</kbd>
+					<span class="icon-[tabler--search] text-content/40 group-hover:text-accent size-3"></span>
+					<div class="flex items-center gap-1">
+						<kbd
+							class="group-hover:border-accent group-hover:text-accent border-border/20 transition-colors"
+							>CTRL</kbd
+						>
+						<kbd
+							class="group-hover:border-accent group-hover:text-accent border-border/20 transition-colors"
+							>K</kbd
+						>
+					</div>
 				</button>
 
-				<div class="border-border/10 hidden h-16 items-center gap-4 border-x px-6 lg:flex">
+				<!-- Social Links -->
+				<div class="border-border/10 hidden items-center gap-3 border-x px-4 lg:flex">
+					{
+						socialLinks.map((link) => (
+							<a
+								href={link.url}
+								target="_blank"
+								class={`text-content/40 p-1 transition-colors ${link.color}`}
+								title={link.name}
+							>
+								<span class={`${link.icon} size-4`} />
+							</a>
+						))
+					}
+				</div>
+
+				<div class="hidden items-center gap-4 pr-4 lg:flex">
 					<ThemeSwitcher />
 					<LangSwitcher />
 				</div>
@@ -57,8 +105,11 @@ const navLinks = [
 		</div>
 	</div>
 
-	<!-- Mobile Menu Overlay (Truly Full Screen) -->
-	<div id="mobile-menu" class="bg-base border-border fixed inset-0 z-[110] hidden flex-col border-t-2 lg:hidden">
+	<!-- Mobile Menu Overlay (Truly Full Screen & Fixed) -->
+	<div
+		id="mobile-menu"
+		class="bg-base border-border fixed inset-0 z-[110] hidden h-screen w-screen flex-col border-t-2 lg:hidden"
+	>
 		<div class="container mx-auto flex h-full flex-col gap-8 overflow-y-auto px-6 pt-24 pb-12">
 			<div class="tui-window shrink-0">
 				<div class="tui-window-header"><span>DIRECTORY_NAV.SYS</span></div>
@@ -78,7 +129,7 @@ const navLinks = [
 
 			<div class="grid shrink-0 grid-cols-1 gap-6 sm:grid-cols-2">
 				<div class="tui-window flex items-center justify-between p-6">
-					<span class="text-xs font-black tracking-widest uppercase opacity-50">Visual Mode:</span>
+					<span class="text-xs font-black tracking-widest uppercase opacity-50">Theme Mode:</span>
 					<ThemeSwitcher />
 				</div>
 				<div class="tui-window flex items-center justify-between p-6">
@@ -88,21 +139,17 @@ const navLinks = [
 			</div>
 
 			<div class="tui-window flex shrink-0 justify-around p-8">
-				<a href="https://github.com/reasnov" target="_blank" class="text-content/50 hover:text-content text-3xl"
-					><span class="icon-[tabler--brand-github]"></span></a
-				>
-				<a
-					href="https://linkedin.com/in/reasnov"
-					target="_blank"
-					class="text-content/50 hover:text-content text-3xl"
-					><span class="icon-[tabler--brand-linkedin]"></span></a
-				>
-				<a
-					href="https://medium.com/@reasnov"
-					target="_blank"
-					class="text-content/50 hover:text-content text-3xl"
-					><span class="icon-[tabler--brand-medium]"></span></a
-				>
+				{
+					socialLinks.map((link) => (
+						<a
+							href={link.url}
+							target="_blank"
+							class={`text-content/50 text-3xl transition-colors ${link.color}`}
+						>
+							<span class={link.icon} />
+						</a>
+					))
+				}
 			</div>
 
 			<button

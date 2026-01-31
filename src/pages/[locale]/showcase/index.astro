@@ -44,7 +44,6 @@ const locale = Astro.currentLocale || "en";
 							<span>PRJ_{String(index + 1).padStart(3, "0")}</span>
 							<span class="icon-[tabler--external-link] size-3 opacity-20" />
 						</div>
-
 						<div class="border-border/10 relative aspect-video overflow-hidden border-b grayscale transition-all duration-500 group-hover:grayscale-0">
 							<img
 								src={project.image}
@@ -53,17 +52,19 @@ const locale = Astro.currentLocale || "en";
 								loading="lazy"
 							/>
 						</div>
-
 						<div class="flex flex-1 flex-col gap-4 p-5">
-							<div class="flex flex-wrap gap-1">
-								{project.tags.map((tag) => (
-									<span class="border-border/20 border px-1 text-[8px] font-bold uppercase opacity-60">
-										{tag}
-									</span>
-								))}
+							<div class="flex items-center justify-between">
+								<div class="flex flex-wrap gap-1">
+									{project.tags.map((tag) => (
+										<span class="border-t-cyan/30 bg-t-cyan/5 text-t-cyan border px-1.5 py-0.5 text-[8px] font-bold uppercase">
+											{tag}
+										</span>
+									))}
+								</div>
+								<span class="text-t-green text-[8px] font-black opacity-60">STABLE</span>
 							</div>
 
-							<h3 class="decoration-accent font-bold uppercase decoration-2 underline-offset-4 group-hover:underline">
+							<h3 class="decoration-t-cyan font-bold uppercase decoration-2 underline-offset-4 group-hover:underline">
 								{project.title}
 							</h3>
 
@@ -72,12 +73,12 @@ const locale = Astro.currentLocale || "en";
 							<a
 								href={project.link}
 								target="_blank"
-								class="tui-btn-secondary tui-btn-sm mt-4 flex items-center justify-between"
+								class="tui-btn-secondary tui-btn-sm !border-t-cyan/20 text-t-cyan hover:!bg-t-cyan mt-4 flex items-center justify-between hover:!text-white"
 							>
 								<span>{trans("showcase.view_project", {}, locale)}</span>
 								<span class="icon-[tabler--arrow-up-right] size-3" />
 							</a>
-						</div>
+						</div>{" "}
 					</div>
 				))
 			}

@@ -23,7 +23,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* --- Semantic Theme Variables --- */
+/* --- Semantic Retro Theme Variables --- */
 :root {
 	--base: #fafafa;
 	--content: #171717;
@@ -32,8 +32,13 @@
 	--primary-content: #fafafa;
 	--accent: #10b981;
 	--accent-content: #fafafa;
-	--t-green: #22c55e;
+
+	/* Retro Palettes */
+	--t-green: #10b981;
 	--t-amber: #f59e0b;
+	--t-cyan: #06b6d4;
+	--t-magenta: #d946ef;
+	--t-blue: #3b82f6;
 }
 
 .dark {
@@ -56,6 +61,9 @@
 	--color-accent-content: var(--accent-content);
 	--color-t-green: var(--t-green);
 	--color-t-amber: var(--t-amber);
+	--color-t-cyan: var(--t-cyan);
+	--color-t-magenta: var(--t-magenta);
+	--color-t-blue: var(--t-blue);
 }
 
 @layer base {
@@ -63,13 +71,29 @@
 		@apply bg-base text-content scroll-smooth;
 	}
 	body {
-		@apply w-full overflow-x-hidden font-mono antialiased;
+		@apply relative w-full overflow-x-hidden font-mono antialiased;
 		min-height: 100dvh;
 	}
-	/* Tag-based hierarchy resets */
+
+	/* Subtle CRT Scanline Overlay */
+	body::before {
+		content: " ";
+		@apply pointer-events-none fixed inset-0 z-[999] opacity-[0.02] dark:opacity-[0.04];
+		background:
+			linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+			linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+		background-size:
+			100% 2px,
+			3px 100%;
+	}
+
 	h1,
+	.font-display {
+		@apply font-display tracking-tighter uppercase;
+	}
 	h2,
-	h3 {
+	h3,
+	h4 {
 		@apply font-black tracking-tighter uppercase;
 	}
 	p {
@@ -77,7 +101,7 @@
 	}
 
 	::selection {
-		@apply bg-primary text-primary-content;
+		@apply bg-accent text-accent-content;
 	}
 	* {
 		border-radius: 0 !important;
@@ -85,28 +109,29 @@
 }
 
 @layer components {
-	/* Standardized Window */
+	/* Standardized Window with Glow effect on Hover */
 	.tui-window {
-		@apply border-border bg-base w-full border-2 p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)];
+		@apply border-border bg-base relative w-full border-2 p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] transition-all duration-300 dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)];
 	}
+	.tui-window:hover {
+		@apply -translate-y-0.5 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.15)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.08)];
+	}
+
 	.tui-window-header {
 		@apply bg-primary text-primary-content mb-1 flex items-center justify-between px-2 py-0.5 text-[9px] font-bold uppercase md:text-xs;
 	}
 
-	/* BUTTON SYSTEM - BIG & BOLD */
+	/* BUTTON SYSTEM */
 	.tui-btn-primary {
 		@apply border-border bg-primary text-primary-content hover:text-content inline-flex items-center justify-center border-2 px-8 py-3 text-xs font-black uppercase transition-all hover:bg-transparent active:translate-x-0.5 active:translate-y-0.5 md:text-sm;
 	}
 	.tui-btn-secondary {
 		@apply border-border text-content hover:bg-primary hover:text-primary-content inline-flex items-center justify-center border-2 bg-transparent px-8 py-3 text-xs font-black uppercase transition-all active:translate-x-0.5 active:translate-y-0.5 md:text-sm;
 	}
-	.tui-btn-ghost {
-		@apply hover:border-border hover:bg-primary/5 border-2 border-transparent px-4 py-1 text-[10px] font-bold uppercase transition-all;
-	}
 
 	/* PANEL SYSTEM */
 	.tui-panel {
-		@apply border-border w-full border-2 p-6 md:p-10;
+		@apply border-border relative w-full border-2 p-6 md:p-10;
 	}
 	.tui-panel-muted {
 		@apply border-border/10 bg-primary/5;
@@ -115,16 +140,16 @@
 		@apply border-l-accent border-l-4;
 	}
 
-	/* SCROLLBAR */
-	.custom-scrollbar::-webkit-scrollbar {
-		height: 4px;
-		width: 4px;
+	/* RETRO DECORATIONS */
+	.tui-corner-tl {
+		@apply border-accent absolute -top-1 -left-1 size-2 border-t-2 border-l-2;
 	}
-	.custom-scrollbar::-webkit-scrollbar-track {
-		@apply bg-transparent;
+	.tui-corner-br {
+		@apply border-accent absolute -right-1 -bottom-1 size-2 border-r-2 border-b-2;
 	}
-	.custom-scrollbar::-webkit-scrollbar-thumb {
-		@apply bg-border/20;
+
+	.tui-status-dot {
+		@apply size-1.5 animate-pulse rounded-full;
 	}
 }
 

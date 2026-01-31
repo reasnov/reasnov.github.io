@@ -8,4 +8,4 @@ const locale = Astro.currentLocale || "en";
 const count = skills.length;
 ---
 
-<Dock title={trans("skills.title", { count }, locale)} icons={skills} />
+<Dock title={trans("skills.title", { count }, locale)} icons={skills} accentColor="green" />

@@ -5,39 +5,54 @@ import { trans } from "@core/Translator";
 const locale = Astro.currentLocale || "en";
 ---
 
-<div class="flex flex-col items-center justify-center gap-12 lg:flex-row lg:gap-20">
-	<div class="flex flex-1 flex-col gap-10 md:gap-14" data-aos="fade-right">
-		<div class="flex flex-col gap-6">
-			<p class="text-accent animate-pulse text-xs font-bold tracking-[0.4em] uppercase">
-				&gt;&gt; {trans("hero.greeting", {}, locale)}
-			</p>
+<div class="flex flex-col items-center justify-center gap-16 lg:flex-row lg:gap-24">
+	<div class="flex flex-1 flex-col gap-12 md:gap-16" data-aos="fade-right">
+		<div class="flex flex-col gap-8">
+			<div class="flex items-center gap-4">
+				<div class="flex items-center gap-1.5">
+					<span class="tui-status-dot bg-t-green"></span>
+					<span class="text-t-green text-[10px] font-bold tracking-widest uppercase">Connection: Stable</span>
+				</div>
+				<div class="bg-border/10 h-px w-12"></div>
+				<p class="text-t-amber animate-pulse text-xs font-bold tracking-[0.5em] uppercase">
+					{trans("hero.greeting", {}, locale)}
+				</p>
+			</div>
 
-			<h1 class="text-5xl leading-none sm:text-7xl md:text-8xl lg:text-9xl xl:text-[12rem]">
-				{trans("hero.name", {}, locale)}<span class="animate-blink text-accent">_</span>
+			<h1
+				class="font-display text-content text-6xl leading-none drop-shadow-[4px_4px_0px_var(--color-accent)]/10 sm:text-8xl md:text-9xl xl:text-[13rem]"
+			>
+				{trans("hero.name", {}, locale)}<span class="animate-blink text-t-cyan">█</span>
 			</h1>
 
 			<div class="flex flex-wrap items-center gap-4">
-				<span class="text-content/40 text-xs font-bold tracking-widest uppercase"
-					>{trans("hero.role_prefix", {}, locale)}</span
+				<span class="text-content/40 text-[10px] font-bold tracking-widest uppercase md:text-xs"
+					>IDENT_{trans("hero.role_prefix", {}, locale)}</span
 				>
-				<span class="bg-primary text-primary-content px-4 py-1.5 text-sm font-black uppercase md:text-base">
+				<span
+					class="bg-t-blue border-t-blue border-2 px-5 py-2 text-sm font-black text-white uppercase shadow-[4px_4px_0px_0px_rgba(59,130,246,0.3)] md:text-lg"
+				>
 					{trans("hero.role", {}, locale)}
 				</span>
 			</div>
 		</div>
 
-		<div class="tui-panel tui-panel-accent tui-panel-muted border-l-accent">
+		<div class="tui-panel tui-panel-accent tui-panel-muted border-l-t-cyan">
+			<div class="text-t-cyan/60 mb-4 flex items-center gap-2 text-[9px] font-bold uppercase">
+				<span class="icon-[tabler--info-square-rounded] size-3"></span>
+				<span>System_Biography_Manifest</span>
+			</div>
 			<p
-				class="text-content/80 text-sm leading-relaxed md:text-lg"
+				class="text-content/70 text-xs leading-relaxed md:text-sm"
 				set:html={trans("hero.description", {}, locale)}
 			/>
 		</div>
 
-		<div class="flex w-full flex-wrap gap-6">
+		<div class="flex w-full flex-wrap gap-8">
 			<a
 				href={import.meta.env.BASE_URL + locale + "/showcase"}
 				id="hero-f1"
-				class="tui-btn-primary flex-1 sm:flex-none"
+				class="tui-btn-primary !bg-t-green !border-t-green flex-1 !text-white shadow-[4px_4px_0px_0px_rgba(34,197,94,0.3)] sm:flex-none"
 			>
 				{trans("hero.buttons.explore", {}, locale)} [F1]
 			</a>
@@ -45,7 +60,7 @@ const locale = Astro.currentLocale || "en";
 				href="https://linkedin.com/in/reasnov"
 				id="hero-f2"
 				target="__blank"
-				class="tui-btn-secondary flex-1 sm:flex-none"
+				class="tui-btn-secondary border-t-magenta text-t-magenta hover:bg-t-magenta flex-1 shadow-[4px_4px_0px_0px_rgba(217,70,239,0.2)] hover:text-white sm:flex-none"
 			>
 				{trans("hero.buttons.connect", {}, locale)} [F2]
 			</a>
@@ -53,19 +68,23 @@ const locale = Astro.currentLocale || "en";
 	</div>
 
 	<div class="flex w-full flex-1 items-center justify-center lg:justify-end" data-aos="fade-left">
-		<div class="tui-window max-w-xl">
-			<div class="tui-window-header">
+		<div class="tui-window w-full max-w-2xl">
+			<div class="tui-window-header !bg-t-blue">
 				<div class="flex items-center gap-2">
-					<span class="icon-[tabler--terminal-2] size-3"></span>
-					<span>SYSTEM_BOOT.LOG</span>
+					<span class="icon-[tabler--terminal-2] size-4"></span>
+					<span class="tracking-widest">MONITOR_SESSION.LOG</span>
 				</div>
-				<div class="flex gap-1.5">
-					<span class="border-border/20 size-2 border"></span>
-					<span class="border-border/20 size-2 border"></span>
-					<span class="border-border/20 size-2 border"></span>
+				<div class="flex items-center gap-2">
+					<span class="size-2 border border-white/40"></span>
+					<span class="size-2 border border-white/40"></span>
+					<span class="size-2 border border-white/40"></span>
 				</div>
 			</div>
-			<FakeTerminal />
+			<FakeTerminal height="h-[450px]" />
+			<div class="bg-primary/5 border-border/10 flex items-center justify-between border-t p-2">
+				<span class="text-content/30 text-[8px] font-bold uppercase">Localhost:8080 // Secure_Tunnel</span>
+				<span class="text-t-green animate-pulse text-[8px] font-bold">● DATA_TRANSCEIVING</span>
+			</div>
 		</div>
 	</div>
 </div>

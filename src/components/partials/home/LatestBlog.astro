@@ -17,7 +17,10 @@ const latestPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 <section class="my-20 flex w-full flex-col gap-6" data-aos="fade-in">
 	<div class="border-border flex items-center justify-between border-b-2 pb-2">
 		<h2 class="text-xl font-black tracking-widest uppercase">&gt; {trans("latest_blog.title", {}, locale)}</h2>
-		<a href={getRelativeLocaleUrl(locale, "blog")} class="tui-btn-secondary tui-btn-sm">
+		<a
+			href={getRelativeLocaleUrl(locale, "blog")}
+			class="tui-btn-ghost tui-btn-sm text-t-magenta hover:!border-t-magenta"
+		>
 			{trans("latest_blog.view_all", {}, locale)}
 		</a>
 	</div>
@@ -29,24 +32,24 @@ const latestPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 				return (
 					<a
 						href={getRelativeLocaleUrl(locale, `blog/${post.id.replace(`${locale}/`, "")}`)}
-						class="group tui-panel border-border/20 hover:border-accent hover:bg-primary/5 flex flex-col gap-4 transition-all"
+						class="group tui-panel border-border/10 hover:border-t-magenta hover:bg-t-magenta/5 flex flex-col gap-4 transition-all"
 						data-aos="fade-up"
 						data-aos-delay={index * 100}
 					>
 						<div class="flex items-start justify-between">
-							<span class="text-content/50 text-[9px] font-bold uppercase">
+							<span class="text-content/40 text-[9px] font-bold uppercase">
 								{post.data.pubDate.toLocaleDateString(locale, {
 									year: "numeric",
 									month: "2-digit",
 									day: "2-digit",
 								})}
 							</span>
-							<span class="border-accent text-accent border px-1 text-[9px] font-bold">
-								{readingTime}m_read
+							<span class="border-t-amber/30 text-t-amber bg-t-amber/5 border px-1.5 py-0.5 text-[8px] font-black tracking-tighter">
+								{readingTime}M_READ
 							</span>
 						</div>
 
-						<h3 class="decoration-accent line-clamp-2 text-base leading-tight font-bold decoration-2 underline-offset-4 transition-colors group-hover:underline">
+						<h3 class="decoration-t-magenta line-clamp-2 text-base leading-tight font-bold decoration-2 underline-offset-4 transition-colors group-hover:underline">
 							{post.data.title}
 						</h3>
 
@@ -55,10 +58,10 @@ const latestPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 						<div class="border-border/10 mt-auto flex items-center justify-between border-t pt-4">
 							<div class="flex gap-2">
 								{post.data.tags?.slice(0, 1).map((tag) => (
-									<span class="text-content/40 text-[8px] font-bold uppercase">#{tag}</span>
+									<span class="text-t-cyan text-[8px] font-black uppercase">#{tag}</span>
 								))}
 							</div>
-							<span class="icon-[tabler--chevron-right] text-content/20 group-hover:text-accent size-4 transition-all group-hover:translate-x-1" />
+							<span class="icon-[tabler--chevron-right] text-content/20 group-hover:text-t-magenta size-4 transition-all group-hover:translate-x-1" />
 						</div>
 					</a>
 				);
