@@ -3,6 +3,21 @@
 		"name": "Reas Vyn | Fullstack Web Developer"
 	},
 	"reasnov": "Reas Vyn",
+	"nav": {
+		"blog": "Blog",
+		"medium": "Medium"
+	},
+	"skills": {
+		"title": "Skill Sets: [{{count}}+]"
+	},
+	"tools": {
+		"title": "Tool Sets: [{{count}}+]"
+	},
+	"blog": {
+		"reading_time": "{{minutes}} min read",
+		"prev": "Previous Post",
+		"next": "Next Post"
+	},
 	"welcome": "welcome",
 	"hero": {
 		"greeting": "Hello! ^_^",
@@ -16,7 +31,7 @@
 		}
 	},
 	"footer": {
-		"copyright": "{year} &copy Reas Vyn | Fullstack Web Developer"
+		"copyright": "{{year}} &copy Reas Vyn | Fullstack Web Developer"
 	},
 	"showcase": {
 		"title": "Selected Projects",

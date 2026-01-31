@@ -13,7 +13,7 @@ const locale = Astro.currentLocale || "en";
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
             <div 
-                class="group relative flex flex-col overflow-hidden border border-neutral-800 bg-neutral-900/50 hover:border-primary/50 transition-all duration-300"
+                class="group relative flex flex-col overflow-hidden border border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 hover:border-primary/50 transition-all duration-300"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
             >
@@ -21,7 +21,7 @@ const locale = Astro.currentLocale || "en";
                     <img 
                         src={project.image} 
                         alt={project.title} 
-                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110"
+                        class="w-full h-full object-cover grayscale dark:grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110"
                         loading="lazy"
                     />
                 </div>
@@ -29,22 +29,22 @@ const locale = Astro.currentLocale || "en";
                 <div class="flex flex-col flex-1 p-6 gap-4">
                     <div class="flex flex-wrap gap-2">
                         {project.tags.map(tag => (
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-neutral-800 text-neutral-400 group-hover:text-primary transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-neutral-200 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 group-hover:text-primary transition-colors">
                                 {tag}
                             </span>
                         ))}
                     </div>
 
-                    <h3 class="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+                    <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-primary transition-colors">{project.title}</h3>
                     
-                    <p class="text-sm text-neutral-400 leading-relaxed flex-1">
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed flex-1">
                         {project.description}
                     </p>
 
                     <a 
                         href={project.link} 
                         target="_blank" 
-                        class="mt-4 flex items-center gap-2 text-sm font-bold group-hover:translate-x-2 transition-transform"
+                        class="mt-4 flex items-center gap-2 text-sm font-bold text-black dark:text-white group-hover:text-primary group-hover:translate-x-2 transition-transform"
                     >
                         {trans("showcase.view_project", {}, locale)}
                         <span class="icon-[tabler--arrow-right] size-4"></span>

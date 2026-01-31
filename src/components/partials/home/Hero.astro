@@ -7,14 +7,19 @@ const locale = Astro.currentLocale;
 
 <div class="flex flex-col items-center justify-center flex-1 gap-20 py-20 size-full lg:flex-row" data-aos="fade-up">
 	<div class="flex flex-col flex-1 gap-12">
-		<div class="leading-none">
-			<p class="text-sm">{trans("hero.greeting", {}, locale)}</p>
-			<p class="text-[6rem] font-display text-primary">{trans("hero.name", {}, locale)}</p>
-			<p>{trans("hero.role_prefix", {}, locale)} <span class="text-xl font-bold text-black bg-white">{trans("hero.role", {}, locale)}</span></p>
+		<div class="leading-none flex flex-col gap-4">
+			<p class="text-sm font-bold text-neutral-500 uppercase tracking-widest">{trans("hero.greeting", {}, locale)}</p>
+			<p class="text-[5rem] md:text-[6rem] font-display text-black dark:text-primary leading-tight">{trans("hero.name", {}, locale)}</p>
+			<div class="flex items-center gap-3">
+				<span class="text-neutral-600 dark:text-neutral-400 font-medium">{trans("hero.role_prefix", {}, locale)}</span>
+				<span class="text-lg md:text-xl font-black px-3 py-1 bg-black text-white dark:bg-white dark:text-black uppercase tracking-tight">
+					{trans("hero.role", {}, locale)}
+				</span>
+			</div>
 		</div>
 
 		<div class="w-full">
-			<p class="leading-normal" set:html={trans("hero.description", {}, locale)} />
+			<p class="leading-relaxed text-neutral-700 dark:text-neutral-400 text-lg" set:html={trans("hero.description", {}, locale)} />
 		</div>
 
 		<div class="flex w-full gap-6">

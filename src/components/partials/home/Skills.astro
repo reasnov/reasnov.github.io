@@ -2,7 +2,10 @@
 import Dock from "@components/ui/Dock.astro";
 import skills from "@data/skills.json";
 
+import { trans } from "@core/Translator";
+
+const locale = Astro.currentLocale || "en";
 const count = skills.length;
 ---
 
-<Dock title={`Skill Sets: [${count}+]`} icons={skills} />
+<Dock title={trans("skills.title", { count }, locale)} icons={skills} />

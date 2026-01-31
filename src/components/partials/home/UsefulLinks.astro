@@ -11,26 +11,22 @@ const locale = Astro.currentLocale || "en";
         <p class="text-sm text-neutral-500">{trans("useful_links.subtitle", {}, locale)}</p>
     </div>
 
-    <div class="flex flex-col gap-3 max-w-2xl mx-auto w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
         {links.map((link, index) => (
             <a 
                 href={link.url} 
                 target="_blank" 
-                class="group flex items-center justify-between p-4 bg-neutral-900/50 border border-neutral-800 hover:border-primary/50 hover:bg-neutral-800 transition-all duration-300 rounded-lg"
+                class="group flex flex-col items-center text-center p-6 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 hover:bg-white dark:hover:bg-neutral-800 transition-all duration-300 rounded-lg"
                 data-aos="fade-up"
                 data-aos-delay={index * 50}
             >
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-neutral-800 rounded-md group-hover:text-primary transition-colors">
-                        <span class={`${link.icon} size-6`}></span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-bold group-hover:text-primary transition-colors">{link.title}</span>
-                        <span class="text-[10px] uppercase tracking-widest text-neutral-600">{link.category}</span>
-                    </div>
+                <div class="size-16 flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 rounded-xl group-hover:text-primary transition-colors mb-4 text-neutral-600 dark:text-neutral-400 aspect-square">
+                    <span class={`${link.icon} size-8`}></span>
                 </div>
-                
-                <span class="icon-[tabler--chevron-right] size-5 text-neutral-700 group-hover:text-primary group-hover:translate-x-1 transition-all"></span>
+                <div class="flex flex-col gap-1">
+                    <span class="font-bold text-black dark:text-white group-hover:text-primary transition-colors">{link.title}</span>
+                    <span class="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-600 font-bold">{link.category}</span>
+                </div>
             </a>
         ))}
     </div>

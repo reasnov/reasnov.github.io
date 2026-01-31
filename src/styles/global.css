@@ -56,18 +56,18 @@
 }
 
 @layer base {
-	:root {
+	html {
 		background-color: white;
 		color: black;
 	}
 
-	:root.dark {
+	html.dark {
 		background-color: oklch(0% 0 0);
 		color: oklch(87.609% 0 0);
 	}
 
 	body {
-		@apply transition-colors duration-300;
+		@apply bg-white text-black dark:bg-black dark:text-neutral-300 transition-colors duration-300;
 	}
 }
 

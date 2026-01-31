@@ -3,6 +3,21 @@
 		"name": "Reas Vyn | Pengembang Web Fullstack"
 	},
 	"reasnov": "Reas Vyn",
+	"nav": {
+		"blog": "Blog",
+		"medium": "Medium"
+	},
+	"skills": {
+		"title": "Keahlian: [{{count}}+]"
+	},
+	"tools": {
+		"title": "Peralatan: [{{count}}+]"
+	},
+	"blog": {
+		"reading_time": "{{minutes}} menit baca",
+		"prev": "Postingan Sebelumnya",
+		"next": "Postingan Selanjutnya"
+	},
 	"welcome": "selamat datang",
 	"hero": {
 		"greeting": "Halo_! ^_^",
@@ -16,7 +31,7 @@
 		}
 	},
 	"footer": {
-		"copyright": "{year} &copy Reas Vyn | Pengembang Web Fullstack"
+		"copyright": "{{year}} &copy Reas Vyn | Pengembang Web Fullstack"
 	},
 	"showcase": {
 		"title": "Proyek Terpilih",
