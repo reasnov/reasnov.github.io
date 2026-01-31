@@ -3,11 +3,11 @@
 
 <button
 	id="theme-toggle"
-	class="inline-flex items-center justify-center p-2 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-primary/50 transition-colors"
+	class="p-1 hover:text-primary transition-colors focus:outline-none"
 	aria-label="Toggle theme"
 >
-	<span id="theme-toggle-dark-icon" class="icon-[tabler--moon] size-5 hidden"></span>
-	<span id="theme-toggle-light-icon" class="icon-[tabler--sun] size-5 hidden"></span>
+	<span id="theme-toggle-dark-icon" class="icon-[tabler--moon] size-4 hidden"></span>
+	<span id="theme-toggle-light-icon" class="icon-[tabler--sun] size-4 hidden"></span>
 </button>
 
 <script>
@@ -25,7 +25,6 @@
 		}
 	}
 
-	// Change the icons inside the button based on previous settings
 	if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 		updateIcons('dark');
 	} else {
@@ -33,7 +32,6 @@
 	}
 
 	themeToggleBtn?.addEventListener('click', function() {
-		// if set via local storage previously
 		if (localStorage.getItem('color-theme')) {
 			if (localStorage.getItem('color-theme') === 'light') {
 				document.documentElement.classList.add('dark');
@@ -44,8 +42,6 @@
 				localStorage.setItem('color-theme', 'light');
 				updateIcons('light');
 			}
-
-		// if NOT set via local storage previously
 		} else {
 			if (document.documentElement.classList.contains('dark')) {
 				document.documentElement.classList.remove('dark');

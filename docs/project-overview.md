@@ -1,59 +1,64 @@
 # Project Overview: reasnov.github.io
 
 ## 1. Introduction
-`reasnov.github.io` is a modern, high-performance personal portfolio and technical blog platform. It serves as a professional showcase for **Andreas Novyanto (Reas Vyn)**, a Fullstack Web Developer specializing in the Laravel ecosystem and modern web technologies.
+`reasnov.github.io` is a modern, high-performance personal portfolio and technical blog platform. It serves as a professional showcase for **Andreas Novyanto (Reas Vyn)**, a Fullstack Web Developer.
 
-The project is designed with a focus on **speed**, **accessibility**, and **clean architecture**, following industry standards for static site generation (SSG).
+The project is uniquely designed with a **Terminal UI (TUI)** aesthetic, combining the nostalgic feel of a command-line interface with modern web performance and responsiveness.
 
 ## 2. Vision & Goals
-*   **Professional Identity:** To provide a centralized hub for professional experience, projects, and contact information.
-*   **Knowledge Sharing:** To maintain a localized technical blog for sharing insights on web development, specifically Laravel, design patterns, and emerging technologies.
-*   **Performance Excellence:** To achieve near-perfect Lighthouse scores through Astro's Islands Architecture and modern asset optimization.
-*   **Global Reach:** To support multi-language content (English and Indonesian) natively.
+*   **Professional Identity:** A centralized hub for professional experience, projects, and contact info.
+*   **Knowledge Sharing:** A localized technical blog for sharing insights on web development.
+*   **TUI Aesthetic:** Delivering a "hacker-style" user experience through a Terminal-inspired interface.
+*   **Performance Excellence:** Near-perfect Lighthouse scores through Astro's Islands Architecture and self-hosted assets.
+*   **Global Reach:** Native multi-language support (English and Indonesian).
 
 ## 3. Key Features
-*   **Localized Blog:** Full i18n support with features like draft mode, automated reading time calculation, and SEO-optimized metadata.
-*   **Dynamic Portfolio:** Sections for Skills, Tools, Project Showcase, and a professional Career Timeline (Experience).
-*   **Interactive UI:** A virtual terminal introduction (`FakeTerminal.astro`) and smooth scroll animations (AOS).
-*   **SEO & Social:** Automatic JSON-LD structured data generation (Person and BlogPosting) and Open Graph support.
-*   **Language Switcher:** Seamless transition between English (EN) and Indonesian (ID) locales.
-*   **Responsive Design:** Mobile-first approach adaptive to all screen sizes.
+*   **Terminal UI (TUI):** A cohesive design language inspired by retro terminals, featuring boxy borders, monospaced typography, and functional windows.
+*   **Command Palette (Ctrl+K):** Instant navigation and command execution via a Svelte-powered modal.
+*   **Keyboard Navigation:** Power-user shortcuts (e.g., `T` for theme, `G+H` for home, `G+B` for blog).
+*   **Localized Blog:** Full i18n support, draft mode, reading time calculation, and automated Table of Contents (ToC).
+*   **Dynamic Portfolio:** Sections for Skills, Tools, Showcase, and professional Career Timeline.
+*   **SEO & Social:** Automatic JSON-LD (Person/BlogPosting), Open Graph, and Twitter metadata.
+*   **Responsive TUI:** Mobile-first design including a specialized TUI-style mobile navigation menu.
 
 ## 4. Technology Stack
-*   **Framework:** [Astro 5.x](https://astro.build/) (Core engine for SSG and Islands Architecture).
-*   **UI Library:** [Svelte 5.x](https://svelte.dev/) (For interactive components).
-*   **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) with [DaisyUI 5.x](https://daisyui.com/).
-*   **Language:** [TypeScript](https://www.typescriptlang.org/) (Strictly typed).
-*   **Animations:** [AOS](https://michalsnik.github.io/aos/) (Animate on Scroll).
-*   **Testing:** [Vitest](https://vitest.dev/) (Unit/Logic) and [Playwright](https://playwright.dev/) (E2E).
-*   **I18n:** [i18next](https://www.i18next.com/) (Backend logic) + Astro Native i18n (Routing).
+*   **Framework:** [Astro 5.x](https://astro.build/) (SSG & Islands Architecture).
+*   **UI Library:** [Svelte 5.x](https://svelte.dev/) (Interactive components like Command Palette).
+*   **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) & [DaisyUI 5.x](https://daisyui.com/).
+*   **Typography:** [Geist Mono](https://vercel.com/font/mono) (Self-hosted for performance).
+*   **I18n:** [i18next](https://www.i18next.com/) (Logic) + Astro Native i18n (Routing).
+*   **Testing:** [Vitest](https://vitest.dev/) (Unit/Logic) with 100% core coverage.
 
 ## 5. Architecture Summary
 The project follows a **Layered Architecture**:
-1.  **Core Layer (`src/core/`):** Contains framework-agnostic business logic (Config, SEO, Content, Translator).
-2.  **Data Layer (`src/data/`):** Centralized JSON data and Markdown/MDX content collections.
-3.  **Component Layer (`src/components/`):** Divided into atomic `ui/` components and molecular `partials/`.
-4.  **Routing Layer (`src/pages/`):** Locale-specific file-based routing.
+1.  **Core Layer (`src/core/`):** Framework-agnostic kernel (Translator, Config, SEO, Env).
+2.  **Content Layer (`src/content/`):** Astro Content Collections for blog posts.
+3.  **Data Layer (`src/data/`):** Centralized JSON sources for skills, experience, and projects.
+4.  **Component Layer (`src/components/`):** 
+    *   `ui/`: Atomic UI elements and Svelte components.
+    *   `partials/`: Molecular TUI windows and section layouts.
+5.  **Routing Layer (`src/pages/`):** i18n-aware file-based routing.
 
 ## 6. Project Structure
 ```text
-├── config/              # Centralized configuration and Zod schemas
-├── docs/                # Project documentation (Architecture, SRS, Overview)
-├── lang/                # Translation resource files (JSON)
-├── public/              # Static assets (images, icons)
+├── config/              # Application configuration (Laravel-style)
+├── docs/                # Project documentation
+├── locales/             # Translation resource files (JSON)
+├── public/              # Static assets and Self-hosted fonts
 ├── src/
-│   ├── components/      # Astro and Svelte components
-│   ├── core/            # Kernel logic and utility services
-│   ├── data/            # Static data (JSON) and Blog content (MD)
-│   ├── layouts/         # Page templates and partials (Head, Footer)
+│   ├── components/      # UI (Atomic) and Partials (Molecular TUI)
+│   ├── content/         # Markdown content collections (Blog)
+│   ├── core/            # Kernel logic and utility services (with tests)
+│   ├── data/            # Static data sources (JSON)
+│   ├── layouts/         # Page templates (App, Blog)
 │   ├── pages/           # i18n-aware routes
-│   └── styles/          # Global CSS and Tailwind configuration
+│   └── styles/          # Global TUI-themed CSS
 └── vitest.config.ts     # Testing configuration
 ```
 
 ## 7. Development & Deployment
 *   **Setup:** `npm install`
 *   **Development:** `npm run dev`
-*   **Testing:** `npm run test` (Unit tests)
+*   **Testing:** `npm run test`
 *   **Production Build:** `npm run build`
-*   **Deployment:** `npm run deploy` (Automated via `gh-pages` to GitHub Pages)
+*   **Deployment:** Automated via `gh-pages` to GitHub Pages.

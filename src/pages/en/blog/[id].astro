@@ -1,8 +1,8 @@
 ---
 import BlogLayout from "@layouts/BlogLayout.astro";
 import { getCollection, render } from "astro:content";
-import { ContentService } from "@core/Content";
-import { SEOService } from "@core/SEO";
+import { getReadingTime } from "@core/Content";
+import { generateBlogPostingSchema } from "@core/SEO";
 import { trans } from "@core/Translator";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -25,11 +25,11 @@ export async function getStaticPaths() {
 }
 
 const { post, prev, next } = Astro.props;
-const { Content } = await render(post);
-const readingTime = ContentService.getReadingTime(post.body ?? "");
+const { Content, headings } = await render(post);
+const readingTime = getReadingTime(post.body ?? "");
 const locale = Astro.currentLocale || "en";
 
-const schema = SEOService.generateBlogPostingSchema({
+const schema = generateBlogPostingSchema({
 	title: post.data.title,
 	description: post.data.description,
 	pubDate: post.data.pubDate,
@@ -39,7 +39,7 @@ const schema = SEOService.generateBlogPostingSchema({
 });
 ---
 
-<BlogLayout title={post.data.title} date={post.data.pubDate} readingTime={readingTime} schema={schema}>
+<BlogLayout title={post.data.title} date={post.data.pubDate} readingTime={readingTime} schema={schema} headings={headings}>
 	<Content />
 
 	<div class="mt-16 pt-8 border-t border-neutral-100 dark:border-neutral-900 flex flex-col sm:flex-row justify-between gap-8">

@@ -9,16 +9,16 @@ const DEFAULT_LOCALE = config("app.locale", "en");
  * Loads all translation files (namespaces) for a given locale.
  */
 function loadResources(locale: string) {
-	const langDir = path.join(process.cwd(), "lang", locale);
-	if (!fs.existsSync(langDir)) return {};
+	const localesDir = path.join(process.cwd(), "locales", locale);
+	if (!fs.existsSync(localesDir)) return {};
 
 	const resources: Record<string, any> = {};
 	try {
-		const files = fs.readdirSync(langDir);
+		const files = fs.readdirSync(localesDir);
 		files.forEach((file) => {
 			if (file.endsWith(".json")) {
 				const ns = path.basename(file, ".json");
-				const content = JSON.parse(fs.readFileSync(path.join(langDir, file), "utf-8"));
+				const content = JSON.parse(fs.readFileSync(path.join(localesDir, file), "utf-8"));
 				resources[ns] = content;
 			}
 		});
@@ -33,14 +33,15 @@ if (!i18next.isInitialized) {
 	i18next.init({
 		lng: DEFAULT_LOCALE,
 		fallbackLng: "en",
-		ns: [DEFAULT_LOCALE], // default namespace matches the locale name (e.g., 'en.json' -> 'en')
-		defaultNS: DEFAULT_LOCALE,
+		defaultNS: "translations",
 		resources: {
-			[DEFAULT_LOCALE]: loadResources(DEFAULT_LOCALE),
+			[DEFAULT_LOCALE]: {
+				translations: loadResources(DEFAULT_LOCALE)[DEFAULT_LOCALE] || {}
+			},
 		},
-		initImmediate: false, // Ensure synchronous initialization
+		initImmediate: false,
 		interpolation: {
-			escapeValue: false, // Astro/Svelte handles escaping
+			escapeValue: false,
 		},
 	});
 }
@@ -60,11 +61,10 @@ export function trans(
 	locale: string = config("app.locale", "en")
 ): string {
 	// Ensure resources for the requested locale are loaded
-	if (!i18next.hasResourceBundle(locale, locale)) { // Check if the default ns for this locale exists
+	if (!i18next.hasResourceBundle(locale, "translations")) {
 		const resources = loadResources(locale);
-		Object.keys(resources).forEach((ns) => {
-			i18next.addResourceBundle(locale, ns, resources[ns], true, true);
-		});
+		const combinedResources = Object.values(resources).reduce((acc, curr) => ({ ...acc, ...curr }), {});
+		i18next.addResourceBundle(locale, "translations", combinedResources, true, true);
 	}
 
 	return i18next.t(key, { ...replace, lng: locale });

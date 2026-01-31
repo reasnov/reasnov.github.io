@@ -1,20 +1,37 @@
-export function config(key: string, defaults: any = null): any {
+/**
+ * Helper to get all configuration modules.
+ * In a Vite environment, this uses import.meta.glob.
+ */
+function getConfigModules(): Record<string, any> {
+	try {
+		return import.meta.glob("/config/*.ts", { eager: true });
+	} catch (e) {
+		return {};
+	}
+}
+
+/**
+ * Access configuration values using dot notation (e.g., 'app.name').
+ * 
+ * @param key The configuration key.
+ * @param defaults The default value if the key is not found.
+ * @returns The configuration value or the default value.
+ */
+export function config<T = any>(key: string, defaults: T | null = null): T {
 	try {
 		const keyParts = key.split(".");
 		const fileName = keyParts.shift();
 
 		if (!fileName) {
-			return defaults;
+			return defaults as T;
 		}
 
-		// Using import.meta.glob for dynamic import, specific to Vite which Astro uses.
-		const configModules = import.meta.glob("/config/*.ts", { eager: true });
+		const configModules = getConfigModules();
 		const modulePath = `/config/${fileName}.config.ts`;
-
 		const configModule = configModules[modulePath];
 
 		if (!configModule) {
-			return defaults;
+			return defaults as T;
 		}
 
 		const configData = (configModule as any).default;
@@ -24,12 +41,12 @@ export function config(key: string, defaults: any = null): any {
 			if (value && typeof value === "object" && part in value) {
 				value = value[part];
 			} else {
-				return defaults;
+				return defaults as T;
 			}
 		}
 
-		return value ?? defaults;
+		return (value ?? defaults) as T;
 	} catch (e) {
-		return defaults;
+		return defaults as T;
 	}
 }

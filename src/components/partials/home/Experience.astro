@@ -5,35 +5,32 @@ import experiences from "@data/experience.json";
 const locale = Astro.currentLocale || "en";
 ---
 
-<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-up">
-    <div class="flex flex-col gap-2">
-        <h2 class="text-2xl font-bold border-b-2 border-primary pb-2 w-fit">{trans("experience.title", {}, locale)}</h2>
-        <p class="text-sm text-neutral-500">{trans("experience.subtitle", {}, locale)}</p>
+<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-in">
+    <div class="flex flex-col gap-2 border-l-4 border-black dark:border-white pl-4">
+        <h2 class="text-xl font-black uppercase tracking-widest">{trans("experience.title", {}, locale)}</h2>
+        <p class="text-xs font-bold text-neutral-500 uppercase tracking-tighter">-- {trans("experience.subtitle", {}, locale)}</p>
     </div>
 
-    <div class="relative border-l border-neutral-200 dark:border-neutral-800 ml-4 md:ml-6 mt-8">
+    <div class="flex flex-col gap-0 border border-neutral-200 dark:border-neutral-900">
         {experiences.map((exp, index) => (
-            <div 
-                class="mb-12 ml-8 relative group"
-                data-aos="fade-left"
-                data-aos-delay={index * 100}
-            >
-                <!-- Dot -->
-                <div class="absolute -left-[41px] top-1 size-4 rounded-full bg-white dark:bg-neutral-900 border-2 border-primary group-hover:bg-primary transition-colors"></div>
-                
-                <div class="flex flex-col gap-2">
-                    <div class="flex flex-col md:flex-row md:items-center gap-2">
-                        <span class="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded w-fit uppercase tracking-tighter">
+            <div class={`p-6 border-b border-neutral-100 dark:border-neutral-900 last:border-0 group hover:bg-neutral-50 dark:hover:bg-neutral-900/10 transition-colors`}>
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex flex-col min-w-[100px]">
+                        <span class="text-xs font-bold text-primary px-2 py-0.5 border border-primary/20 w-fit">
                             {exp.year}
                         </span>
-                        <h3 class="text-xl font-bold text-black dark:text-white">{exp.title}</h3>
                     </div>
                     
-                    <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">{exp.company}</p>
-                    
-                    <p class="text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed max-w-3xl mt-2">
-                        {exp.description}
-                    </p>
+                    <div class="flex flex-col gap-2 flex-1">
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-bold group-hover:text-primary transition-colors">{exp.title}</h3>
+                            <span class="text-xs font-bold text-neutral-500 uppercase">{exp.company}</span>
+                        </div>
+                        
+                        <p class="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl">
+                            {exp.description}
+                        </p>
+                    </div>
                 </div>
             </div>
         ))}

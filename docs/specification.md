@@ -25,7 +25,7 @@ Includes a landing page, a localized blog system, and high-performance UI compon
 
 ## 3. Data Specifications
 
-### 3.1 Blog Schema (`src/data/blog/`)
+### 3.1 Blog Schema (`src/content/blog/`)
 | Field | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `title` | String | Yes | Article headline. |

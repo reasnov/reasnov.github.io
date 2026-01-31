@@ -1,0 +1,154 @@
+---
+import fakeBootLog from "@data/fake-boot-log.json";
+import { trans } from "@core/Translator";
+
+const locale = Astro.currentLocale || "en";
+const terminalLines = fakeBootLog;
+const speed = 10; // Faster speed for better feel
+const delay = 400;
+
+const i18n = {
+	path: trans("terminal.path", {}, locale),
+};
+---
+
+<div class="w-full bg-neutral-950 font-mono flex flex-col h-80 overflow-hidden relative">
+    <!-- Terminal Header (Inside the window) -->
+	<div class="flex items-center justify-between px-3 py-1 bg-neutral-900 border-b border-neutral-800">
+		<div class="flex items-center gap-4">
+            <span class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest flex items-center gap-2">
+                <span class="size-2 bg-success rounded-full"></span>
+                {trans("terminal.header", {}, locale)}
+            </span>
+        </div>
+        <span id="live-clock" class="text-[10px] text-neutral-600 font-bold"></span>
+	</div>
+
+	<div class="flex flex-col flex-1 w-full overflow-y-auto p-4 custom-scrollbar">
+		<div id="typewriter-output" class="flex flex-col w-full gap-1 text-[11px] md:text-xs"></div>
+
+		<p class="flex items-center w-full gap-2 mt-2 text-nowrap">
+			<span class="text-primary font-bold">{i18n.path}</span>
+			<span class="text-white opacity-80 animate-blink">█</span>
+            <span class="text-neutral-500 italic text-[10px] ml-2">{trans("terminal.prompt", {}, locale)}</span>
+		</p>
+	</div>
+</div>
+
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-neutral-800;
+    }
+</style>
+
+<script define:vars={{ terminalLines, speed, delay, i18n }} is:inline>
+	const output = document.getElementById("typewriter-output");
+	const liveClockEl = document.getElementById("live-clock");
+	
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (!output) return;
+
+	function updateClock() {
+		const now = new Date();
+		liveClockEl.textContent = now.toLocaleTimeString([], { hour12: false });
+	}
+	updateClock();
+	setInterval(updateClock, 1000);
+
+	let lineIndex = 0;
+	let charIndex = 0;
+	let currentEl = null;
+	let isResetting = false;
+	let activeTimers = [];
+
+	function clearTimers() {
+		activeTimers.forEach((t) => clearTimeout(t));
+		activeTimers = [];
+	}
+
+	function safeTimeout(fn, t) {
+		const id = setTimeout(fn, t);
+		activeTimers.push(id);
+		return id;
+	}
+
+	function timestamp() {
+		const now = new Date();
+		return now.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+	}
+
+	function createLineElement() {
+		const el = document.createElement("div");
+		el.className = "line text-neutral-400 break-all leading-tight";
+		output.appendChild(el);
+		output.parentElement.scrollTop = output.parentElement.scrollHeight;
+		return el;
+	}
+
+	function typeLine(text) {
+		if (isResetting) return;
+		if (!currentEl) currentEl = createLineElement();
+
+		if (prefersReducedMotion) {
+			currentEl.textContent = `[${timestamp()}] ${text}`;
+			currentEl = null;
+			charIndex = 0;
+			lineIndex++;
+			safeTimeout(processNextLine, delay / 2);
+			return;
+		}
+
+		if (charIndex < text.length) {
+			if (charIndex === 0) currentEl.textContent = `[${timestamp()}] `;
+			currentEl.textContent += text[charIndex];
+			charIndex++;
+			safeTimeout(() => typeLine(text), speed);
+		} else {
+			currentEl = null;
+			charIndex = 0;
+			lineIndex++;
+			safeTimeout(processNextLine, delay);
+		}
+	}
+
+	function processNextLine() {
+		if (isResetting) return;
+		if (lineIndex >= terminalLines.length) return;
+
+		const line = terminalLines[lineIndex];
+
+		if (line.trim().startsWith("$")) {
+			const cmd = document.createElement("div");
+			cmd.className = "mt-4 mb-1 text-primary font-bold";
+			cmd.textContent = `${i18n.path} ${line}`;
+			output.appendChild(cmd);
+			lineIndex++;
+			safeTimeout(processNextLine, 200);
+		} else {
+			typeLine(line);
+		}
+	}
+
+	function resetAnimation() {
+		isResetting = true;
+		clearTimers();
+		lineIndex = 0;
+		charIndex = 0;
+		currentEl = null;
+		output.innerHTML = "";
+		safeTimeout(() => {
+			isResetting = false;
+			processNextLine();
+		}, 1000);
+	}
+
+	safeTimeout(processNextLine, 500);
+	setInterval(resetAnimation, 120000); // Reset every 2 minutes
+</script>

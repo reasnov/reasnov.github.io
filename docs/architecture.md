@@ -31,7 +31,8 @@ The system follows a **Component-Based Architecture** utilizing Astro's **Island
 | `src/components/` | **Presentation** | UI components (`ui/`, `partials/`). |
 | `src/layouts/` | **Layouts** | Global wrappers including SEO & JSON-LD logic. |
 | `src/pages/` | **Routing** | i18n-aware file-based routing. |
-| `src/data/` | **Data Source** | JSON data and Markdown collections. |
+| `src/content/` | **Content** | Markdown content (Blog). |
+| `src/data/` | **Data Source** | Centralized JSON data. |
 
 ## 4. Key Subsystems
 

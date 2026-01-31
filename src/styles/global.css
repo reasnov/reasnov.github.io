@@ -1,9 +1,25 @@
-/* --- TailwindCSS --- */
+/* --- Fonts --- */
 
+@font-face {
+	font-family: "Geist Mono";
+	src: url("/fonts/GeistMono.woff2") format("woff2-variations");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Plaster";
+	src: url("/fonts/Plaster.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* --- TailwindCSS --- */
 @import "tailwindcss";
 
 /* --- Daisy UI --- */
-
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
@@ -12,79 +28,90 @@
 	prefersdark: true;
 	color-scheme: "dark";
 	--color-base-100: oklch(0% 0 0);
-	--color-base-200: oklch(0% 0 0);
-	--color-base-300: oklch(26% 0 0);
-	--color-base-content: oklch(87.609% 0 0);
-	--color-primary: oklch(97% 0 0);
-	--color-primary-content: oklch(14% 0 0);
-	--color-secondary: oklch(0% 0 0);
-	--color-secondary-content: oklch(98% 0 0);
-	--color-accent: oklch(59% 0.145 163.225);
-	--color-accent-content: oklch(100% 0 0);
-	--color-neutral: oklch(26% 0 0);
-	--color-neutral-content: oklch(98% 0 0);
-	--color-info: oklch(54% 0.245 262.881);
-	--color-info-content: oklch(89.04% 0.062 264.052);
-	--color-success: oklch(59% 0.145 163.225);
-	--color-success-content: oklch(90.395% 0.035 142.495);
-	--color-warning: oklch(82% 0.189 84.429);
-	--color-warning-content: oklch(19.359% 0.042 109.769);
-	--color-error: oklch(63% 0.237 25.331);
-	--color-error-content: oklch(12.559% 0.051 29.233);
-	--size-selector: 0.25rem;
-	--size-field: 0.25rem;
+	--color-base-200: oklch(10% 0 0);
+	--color-base-300: oklch(15% 0 0);
+	--color-base-content: oklch(90% 0 0);
+	--color-primary: oklch(70% 0.15 150); /* Matrix Green */
+	--color-primary-content: oklch(10% 0 0);
+	--color-secondary: oklch(75% 0.15 80); /* Amber/Gold */
+	--color-secondary-content: oklch(10% 0 0);
 	--border: 1px;
-	--depth: 0;
-	--noise: 0;
+	--radius-box: 0px;
+	--radius-btn: 0px;
 }
 
-/* --- Iconify Icon Kits --- */
-
+/* --- Iconify --- */
 @plugin "@iconify/tailwind4" {
-	scale: 1.6;
+	scale: 1.2;
 }
-
-/* --- Custom Variant --- */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* UI Theme */
 @theme {
-	--font-display: "Plaster", system-ui;
-	--font-mono:
-		"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	--font-display: "Geist Mono", monospace;
+	--font-mono: "Geist Mono", monospace;
 }
 
 @layer base {
 	html {
-		background-color: white;
-		color: black;
-	}
-
-	html.dark {
-		background-color: oklch(0% 0 0);
-		color: oklch(87.609% 0 0);
+		@apply bg-white text-black dark:bg-black dark:text-neutral-300 scroll-smooth;
 	}
 
 	body {
-		@apply bg-white text-black dark:bg-black dark:text-neutral-300 transition-colors duration-300;
+		@apply font-mono antialiased;
+	}
+
+	/* Reset all radius for TUI style */
+	* {
+		border-radius: 0 !important;
 	}
 }
 
-/* --- Utilities --- */
+@layer components {
+    /* TUI Window Style */
+    .tui-border {
+        @apply border border-black dark:border-neutral-800;
+    }
+
+    .tui-window {
+        @apply border-2 border-black dark:border-white bg-white dark:bg-black p-1;
+    }
+
+    .tui-window-header {
+        @apply bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 text-xs font-bold uppercase mb-1 flex justify-between items-center;
+    }
+
+    .tui-button {
+        @apply border border-black dark:border-white px-4 py-1 text-sm font-bold uppercase transition-all 
+               bg-transparent text-black dark:text-white
+               hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black
+               active:translate-x-0.5 active:translate-y-0.5;
+    }
+
+    .tui-button-primary {
+        @apply bg-black text-white dark:bg-white dark:text-black hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white;
+    }
+
+    .tui-panel {
+        @apply border border-neutral-200 dark:border-neutral-800 p-4;
+    }
+
+    /* TUI Decoration */
+    .tui-divider {
+        @apply h-px bg-neutral-200 dark:bg-neutral-800 w-full my-4 relative;
+    }
+
+    .tui-divider::after {
+        content: "[+]";
+        @apply absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black px-2 text-[10px] text-neutral-400;
+    }
+}
+
 @utility animate-blink {
-	animation: blink 1.3s ease-in-out infinite;
+	animation: blink 1s step-end infinite;
 }
 
-/* --- Keyframes / Animations --- */
 @keyframes blink {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
 }

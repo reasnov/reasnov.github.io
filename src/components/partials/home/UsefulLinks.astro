@@ -5,27 +5,27 @@ import links from "@data/links.json";
 const locale = Astro.currentLocale || "en";
 ---
 
-<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-up">
+<section class="flex flex-col w-full gap-8 my-20" data-aos="fade-in">
     <div class="flex flex-col gap-2">
-        <h2 class="text-2xl font-bold border-b-2 border-primary pb-2 w-fit">{trans("useful_links.title", {}, locale)}</h2>
-        <p class="text-sm text-neutral-500">{trans("useful_links.subtitle", {}, locale)}</p>
+        <h2 class="text-xl font-black uppercase tracking-widest border-b border-black dark:border-white pb-2 w-fit">
+            &gt;&gt; {trans("useful_links.title", {}, locale)}
+        </h2>
+        <p class="text-[10px] font-bold text-neutral-500 uppercase">-- {trans("useful_links.subtitle", {}, locale)}</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {links.map((link, index) => (
             <a 
                 href={link.url} 
                 target="_blank" 
-                class="group flex flex-col items-center text-center p-6 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 hover:bg-white dark:hover:bg-neutral-800 transition-all duration-300 rounded-lg"
-                data-aos="fade-up"
-                data-aos-delay={index * 50}
+                class="group tui-panel border-neutral-300 dark:border-neutral-800 hover:border-primary hover:bg-neutral-50 dark:hover:bg-neutral-900/10 transition-all flex flex-col items-center gap-4 text-center"
             >
-                <div class="size-16 flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 rounded-xl group-hover:text-primary transition-colors mb-4 text-neutral-600 dark:text-neutral-400 aspect-square">
-                    <span class={`${link.icon} size-8`}></span>
+                <div class="size-12 flex items-center justify-center border border-neutral-200 dark:border-neutral-800 group-hover:border-primary group-hover:text-primary transition-all">
+                    <span class={`${link.icon} size-6`}></span>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span class="font-bold text-black dark:text-white group-hover:text-primary transition-colors">{link.title}</span>
-                    <span class="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-600 font-bold">{link.category}</span>
+                    <span class="text-xs font-bold uppercase tracking-tight group-hover:text-primary transition-colors">{link.title}</span>
+                    <span class="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">{link.category}</span>
                 </div>
             </a>
         ))}

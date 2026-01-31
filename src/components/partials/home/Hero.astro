@@ -1,38 +1,52 @@
 ---
-import FakeTerminal from "@components/FakeTerminal.astro";
+import FakeTerminal from "./FakeTerminal.astro";
 import { trans } from "@core/Translator";
 
-const locale = Astro.currentLocale;
+const locale = Astro.currentLocale || "en";
 ---
 
-<div class="flex flex-col items-center justify-center flex-1 gap-20 py-20 size-full lg:flex-row" data-aos="fade-up">
-	<div class="flex flex-col flex-1 gap-12">
-		<div class="leading-none flex flex-col gap-4">
-			<p class="text-sm font-bold text-neutral-500 uppercase tracking-widest">{trans("hero.greeting", {}, locale)}</p>
-			<p class="text-[5rem] md:text-[6rem] font-display text-black dark:text-primary leading-tight">{trans("hero.name", {}, locale)}</p>
-			<div class="flex items-center gap-3">
-				<span class="text-neutral-600 dark:text-neutral-400 font-medium">{trans("hero.role_prefix", {}, locale)}</span>
-				<span class="text-lg md:text-xl font-black px-3 py-1 bg-black text-white dark:bg-white dark:text-black uppercase tracking-tight">
+<div class="flex flex-col items-center justify-center flex-1 gap-12 py-12 lg:flex-row" data-aos="fade-in">
+	<div class="flex flex-col flex-1 gap-8">
+		<div class="leading-none flex flex-col gap-2">
+			<p class="text-xs font-bold text-neutral-500 uppercase tracking-[0.2em] animate-pulse">
+                &gt;&gt; {trans("hero.greeting", {}, locale)}
+            </p>
+			<h1 class="text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter">
+                {trans("hero.name", {}, locale)}<span class="animate-blink text-primary">_</span>
+            </h1>
+			<div class="flex items-center gap-3 mt-2">
+				<span class="text-neutral-500 font-bold uppercase text-xs tracking-widest">{trans("hero.role_prefix", {}, locale)}</span>
+				<span class="text-sm md:text-base font-bold px-2 py-0.5 bg-black text-white dark:bg-white dark:text-black uppercase">
 					{trans("hero.role", {}, locale)}
 				</span>
 			</div>
 		</div>
 
-		<div class="w-full">
-			<p class="leading-relaxed text-neutral-700 dark:text-neutral-400 text-lg" set:html={trans("hero.description", {}, locale)} />
+		<div class="tui-panel border-l-4 border-l-primary bg-neutral-50 dark:bg-neutral-900/10">
+			<p class="leading-relaxed text-neutral-700 dark:text-neutral-400 text-sm md:text-base" set:html={trans("hero.description", {}, locale)} />
 		</div>
 
-		<div class="flex w-full gap-6">
-			<a href="https://github.com/reasnov" type="button" class="btn btn-primary btn-md"
-				>{trans("hero.buttons.explore", {}, locale)} <span class="icon-[tabler--arrow-narrow-right]"></span></a
-			>
-			<a href="https://linkedin.com/in/reasnov" target="__blank" type="button" class="btn btn-secondary btn-md"
-				><span class="icon-[tabler--brand-linkedin]"></span>{trans("hero.buttons.connect", {}, locale)}</a
-			>
+		<div class="flex flex-wrap w-full gap-4">
+			<a href="https://github.com/reasnov" class="tui-button-primary text-sm">
+				{trans("hero.buttons.explore", {}, locale)} [F1]
+			</a>
+			<a href="https://linkedin.com/in/reasnov" target="__blank" class="tui-button text-sm">
+				{trans("hero.buttons.connect", {}, locale)} [F2]
+			</a>
 		</div>
 	</div>
 
-	<div class="flex items-center justify-center flex-1 w-full max-w-full">
-		<FakeTerminal />
+	<div class="flex items-center justify-center flex-1 w-full">
+		<div class="tui-window w-full">
+            <div class="tui-window-header">
+                <span>SYSTEM_BOOT.LOG</span>
+                <div class="flex gap-1">
+                    <span class="size-2 border border-white/20"></span>
+                    <span class="size-2 border border-white/20"></span>
+                    <span class="size-2 border border-white/20"></span>
+                </div>
+            </div>
+            <FakeTerminal />
+        </div>
 	</div>
 </div>

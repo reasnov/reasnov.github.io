@@ -1,31 +1,75 @@
 ---
 import AppLayout from "./AppLayout.astro";
 import ReadingProgressBar from "@components/ui/ReadingProgressBar.astro";
+import { trans } from "@core/Translator";
 
 interface Props {
     title: string;
     date?: Date;
     readingTime?: number;
     schema?: object;
+    headings?: { depth: number; slug: string; text: string }[];
 }
 
-const { title, date, readingTime, schema } = Astro.props;
+const { title, date, readingTime, schema, headings = [] } = Astro.props;
+const locale = Astro.currentLocale || "en";
+
+const filteredHeadings = headings.filter(h => h.depth > 1 && h.depth < 4);
 ---
 
 <AppLayout title={title} schema={schema}>
     <ReadingProgressBar />
-    <article class="prose dark:prose-invert mx-auto py-8">
-        <h1 class="text-4xl font-bold mb-2">{title}</h1>
-        <div class="flex items-center gap-4 text-neutral-600 dark:text-neutral-400 text-sm mb-8">
-            {date && (
-                <span>
-                    {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                </span>
-            )}
-            {readingTime && (
-                <span>• {readingTime} min read</span>
-            )}
-        </div>
-        <slot />
-    </article>
+    
+    <div class="flex flex-col lg:flex-row gap-12 py-8 relative">
+        <!-- Main Content -->
+        <article class="prose dark:prose-invert flex-1 max-w-none">
+            <div class="mb-12 border-b-2 border-black dark:border-white pb-8">
+                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">{title}</h1>
+                <div class="flex flex-wrap items-center gap-4 text-neutral-500 font-bold uppercase text-[10px] tracking-widest">
+                    {date && (
+                        <div class="flex items-center gap-2">
+                            <span class="icon-[tabler--calendar] size-3"></span>
+                            {date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </div>
+                    )}
+                    {readingTime !== undefined && (
+                        <div class="flex items-center gap-2">
+                            <span class="icon-[tabler--clock] size-3"></span>
+                            {trans("blog.reading_time", { minutes: readingTime }, locale)}
+                        </div>
+                    )}
+                </div>
+            </div>
+            
+            <slot />
+        </article>
+
+        <!-- Sidebar / ToC -->
+        {filteredHeadings.length > 0 && (
+            <aside class="w-full lg:w-64 shrink-0">
+                <div class="sticky top-24">
+                    <div class="tui-window">
+                        <div class="tui-window-header">
+                            <span>CONTENTS.LOG</span>
+                        </div>
+                        <nav class="p-4 flex flex-col gap-2">
+                            {filteredHeadings.map(h => (
+                                <a 
+                                    href={`#${h.slug}`}
+                                    class={`text-[10px] font-bold uppercase tracking-tight hover:text-primary transition-colors line-clamp-2 ${h.depth === 3 ? 'pl-4 border-l border-neutral-200 dark:border-neutral-800' : ''}`}
+                                >
+                                    {h.depth === 2 ? '> ' : '- '}{h.text}
+                                </a>
+                            ))}
+                        </nav>
+                    </div>
+                    
+                    <div class="mt-6 p-4 tui-panel text-[10px] text-neutral-500 font-bold uppercase leading-tight">
+                        <p class="mb-2">TIP:</p>
+                        <p>Press <span class="text-primary">[T]</span> to switch theme or <span class="text-primary">[CTRL+K]</span> for command palette.</p>
+                    </div>
+                </div>
+            </aside>
+        )}
+    </div>
 </AppLayout>

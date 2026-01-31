@@ -9,17 +9,43 @@ interface Props {
 	schema?: object;
 }
 
-const { title, desc, keywords, author = config("app.author"), schema } = Astro.props;
+const { 
+	title = config("settings.site_title"), 
+	desc = config("settings.site_name"), 
+	keywords, 
+	author = config("app.author"), 
+	schema 
+} = Astro.props;
+
+const siteUrl = config("settings.site_url");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 ---
 
 <meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
 <meta name="description" content={desc} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
+<link rel="canonical" href={canonicalUrl} />
 
-<title>{title ?? config("settings.site_title")}</title>
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={desc} />
+<meta property="og:image" content={new URL("/favicon.svg", siteUrl)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={desc} />
+<meta property="twitter:image" content={new URL("/favicon.svg", siteUrl)} />
 
 {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

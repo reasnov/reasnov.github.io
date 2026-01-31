@@ -8,9 +8,9 @@ import Contact from "@components/partials/home/Contact.astro";
 import UsefulLinks from "@components/partials/home/UsefulLinks.astro";
 import Skills from "@components/partials/home/Skills.astro";
 import Tools from "@components/partials/home/Tools.astro";
-import { SEOService } from "@core/SEO";
+import { generatePersonSchema } from "@core/SEO";
 
-const schema = SEOService.generatePersonSchema();
+const schema = generatePersonSchema();
 ---
 
 <AppLayout schema={schema}>

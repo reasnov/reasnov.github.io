@@ -2,21 +2,28 @@
 const { title, icons } = Astro.props;
 ---
 
-<div class="flex flex-col w-full">
-	<div class="w-full mb-2">
-		<span class="text-xs font-bold px-2 py-1 uppercase tracking-widest text-white bg-black dark:text-black dark:bg-white w-fit">{title}</span>
+<div class="flex flex-col w-full gap-2">
+	<div class="flex items-center gap-2">
+		<span class="text-[10px] font-bold px-2 py-0.5 uppercase tracking-widest text-white bg-black dark:text-black dark:bg-white">
+            {title}
+        </span>
+        <div class="flex-1 h-px bg-neutral-200 dark:bg-neutral-800"></div>
 	</div>
 
-	<div class="flex items-center w-full gap-8 p-4 overflow-x-auto flex-nowrap rounded-xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800">
+	<div class="flex items-center w-full gap-4 p-4 overflow-x-auto flex-nowrap tui-panel border-neutral-200 dark:border-neutral-900">
 		{
 			icons.map((icon: { icon: string; name: string }) => (
-				<button
-					tabindex="0"
-					class={`inline-block size-10 md:size-12 aspect-square leading-none shrink-0 transition-all ease-in-out grayscale dark:grayscale opacity-40 dark:opacity-20 hover:opacity-100 hover:grayscale-0 hover:scale-110 active:opacity-100 active:grayscale-0 active:scale-110 ${icon.icon}`}
+				<div
+					class="group flex flex-col items-center gap-2 shrink-0 transition-all"
 					title={icon.name}
 				>
-					{""}
-				</button>
+					<div class={`size-10 md:size-12 flex items-center justify-center border border-transparent group-hover:border-primary group-hover:bg-primary/5 transition-all grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100`}>
+                        <span class={`${icon.icon} size-6 md:size-8`}></span>
+                    </div>
+                    <span class="text-[8px] font-bold uppercase text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        {icon.name}
+                    </span>
+				</div>
 			))
 		}
 	</div>

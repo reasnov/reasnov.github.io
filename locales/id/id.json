@@ -4,6 +4,7 @@
 	},
 	"reasnov": "Reas Vyn",
 	"nav": {
+		"home": "Beranda",
 		"blog": "Blog",
 		"medium": "Medium"
 	},
@@ -44,6 +45,11 @@
 	"latest_blog": {
 		"title": "Tulisan Terbaru",
 		"view_all": "Lihat Semua Postingan"
+	},
+	"terminal": {
+		"header": "Halo!",
+		"path": "terminal \\ pengguna \\ saya:",
+		"prompt": "Ada yang bisa saya bantu?"
 	},
 	"contact": {
 		"title": "Hubungi Saya",

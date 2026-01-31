@@ -11,9 +11,10 @@ interface Props {
 const lang = Astro.currentLocale || "en";
 const { name = config("settings.site_name"), url = getRelativeLocaleUrl(lang, "/"), size = "sm" } = Astro.props;
 
-const sizeClass = `text-${size}`;
+const sizeClass = size === "lg" ? "text-lg" : "text-sm";
 ---
 
-<a class={`flex items-center gap-1 flex-nowrap ${sizeClass}`} href={url}>
-	<span class="font-black">{name}</span>
+<a class={`flex items-center gap-2 group ${sizeClass}`} href={url}>
+    <div class="size-6 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black">R</div>
+	<span class="font-black uppercase tracking-tighter group-hover:text-primary transition-colors">{name}</span>
 </a>

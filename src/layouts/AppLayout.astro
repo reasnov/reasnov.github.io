@@ -4,8 +4,9 @@ import "../styles/global.css";
 
 // Components
 import Head from "./partials/Head.astro";
-import Header from "@components/ui/Header.astro";
-import Footer from "@components/ui/Footer.astro";
+import Header from "@components/partials/common/Header.astro";
+import Footer from "@components/partials/common/Footer.astro";
+import CommandPalette from "@components/ui/CommandPalette.svelte";
 
 import "aos/dist/aos.css";
 
@@ -28,18 +29,11 @@ const lang = Astro.currentLocale || "en";
 				document.documentElement.classList.remove("dark");
 			}
 		</script>
-
-		<!-- Google Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Plaster&display=swap"
-			rel="stylesheet"
-		/>
 	</head>
 
 	<body class="flex flex-col min-h-screen overflow-x-hidden font-mono font-light size-full max-w-screen">
 		<Header />
+		<CommandPalette client:load lang={lang} />
 
 		<main class="container flex flex-col flex-1 gap-8 p-4 mx-auto size-full">
 			<slot />
@@ -54,6 +48,32 @@ const lang = Astro.currentLocale || "en";
 				once: true,
 				offset: 100,
 				easing: "ease-out-cubic",
+			});
+
+			/* --- Keyboard Navigation --- */
+			let lastKey = "";
+			const lang = document.documentElement.lang || "en";
+
+			window.addEventListener("keydown", (e) => {
+				// Ignore if user is typing in an input
+				if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) return;
+
+				const key = e.key.toLowerCase();
+
+				// Toggle Theme (T)
+				if (key === "t") {
+					document.getElementById("theme-toggle")?.click();
+				}
+
+				// Navigation (G then H/B)
+				if (lastKey === "g") {
+					if (key === "h") window.location.href = `/${lang}/`;
+					if (key === "b") window.location.href = `/${lang}/blog/`;
+				}
+
+				lastKey = key;
+				// Reset lastKey after a short delay
+				setTimeout(() => { if (lastKey === key) lastKey = ""; }, 500);
 			});
 		</script>
 	</body>

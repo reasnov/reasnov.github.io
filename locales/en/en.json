@@ -4,6 +4,7 @@
 	},
 	"reasnov": "Reas Vyn",
 	"nav": {
+		"home": "Home",
 		"blog": "Blog",
 		"medium": "Medium"
 	},
@@ -44,6 +45,11 @@
 	"latest_blog": {
 		"title": "Latest Writing",
 		"view_all": "View All Posts"
+	},
+	"terminal": {
+		"header": "What's up!",
+		"path": "terminal \\ users \\ me:",
+		"prompt": "What can I help you?"
 	},
 	"contact": {
 		"title": "Get In Touch",

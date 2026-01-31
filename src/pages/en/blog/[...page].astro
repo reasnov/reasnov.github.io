@@ -3,6 +3,7 @@ import AppLayout from "@layouts/AppLayout.astro";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import type { CollectionEntry } from "astro:content";
+import { trans } from "@core/Translator";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 	const blogs = await getCollection("blog", (entry) => {
@@ -15,6 +16,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 };
 
 const { page } = Astro.props as { page: Page<CollectionEntry<"blog">> };
+const locale = Astro.currentLocale || "en";
 
 const today = new Date();
 const oneWeekAgo = new Date(today);
@@ -22,53 +24,50 @@ oneWeekAgo.setDate(today.getDate() - 7);
 ---
 
 <AppLayout>
-	<h1 class="text-xl font-bold">Blog</h1>
+	<div class="flex flex-col gap-8 my-10" data-aos="fade-up">
+		<h1 class="text-4xl font-bold border-b-4 border-primary pb-2 w-fit">{trans("nav.blog", {}, locale)}</h1>
 
-	<div class="flex flex-col w-full gap-6 px-12">
-		<!-- Map Blogs -->
-		{
-			page.data.map((blog) => {
-				const postDate = blog.data.pubDate;
-				const isNew = postDate >= oneWeekAgo;
+		<div class="flex flex-col w-full">
+			{
+				page.data.map((blog) => {
+					const postDate = blog.data.pubDate;
+					const isNew = postDate >= oneWeekAgo;
 
-				return (
-					<div 
-						class="flex items-center justify-between p-3 transition-all ease-in-out border-y border-neutral-800 hover:bg-neutral-800"
-						data-aos="fade-up"
-					>
-						<div class="flex items-center gap-6">
-							{isNew && <span class="font-medium text-emerald-500 animate-blink">NEW!</span>}
-							<a href={`/en/blog/${blog.id.replace("en/", "")}`} class="w-full font-bold truncate">
-								{blog.data.title}
-							</a>
+					return (
+						<div 
+							class="flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-neutral-100 dark:border-neutral-900 group hover:bg-neutral-50 dark:hover:bg-neutral-900/30 px-4 transition-colors"
+							data-aos="fade-up"
+						>
+							<div class="flex items-center gap-4 flex-1">
+								{isNew && <span class="text-[10px] font-bold text-emerald-500 border border-emerald-500 px-2 py-0.5 rounded animate-pulse">NEW</span>}
+								<a href={`/en/blog/${blog.id.replace("en/", "")}`} class="text-xl font-bold group-hover:text-primary transition-colors">
+									{blog.data.title}
+								</a>
+							</div>
+							<div class="text-sm font-bold text-neutral-400 mt-2 md:mt-0">
+								{postDate.toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" })}
+							</div>
 						</div>
-						<div class="text-sm font-medium text-neutral-600">
-							<span>
-								{postDate
-									? `[ ${postDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} ]`
-									: ""}
-							</span>
-						</div>
-					</div>
-				);
-			})
-		}
-	</div>
+					);
+				})
+			}
+		</div>
 
-	<div class="flex items-center justify-center gap-6 my-6">
-		{
-			page.url.prev && (
-				<a href={page.url.prev} class="btn btn-outline btn-secondary">
-					&laquo; Previous
-				</a>
-			)
-		}
-		{
-			page.url.next && (
-				<a href={page.url.next} class="btn btn-outline btn-secondary">
-					Next &raquo;
-				</a>
-			)
-		}
+		<div class="flex items-center justify-center gap-6 my-10">
+			{
+				page.url.prev && (
+					<a href={page.url.prev} class="btn btn-outline btn-sm">
+						&laquo; {trans("blog.prev", {}, locale)}
+					</a>
+				)
+			}
+			{
+				page.url.next && (
+					<a href={page.url.next} class="btn btn-outline btn-sm">
+						{trans("blog.next", {}, locale)} &raquo;
+					</a>
+				)
+			}
+		</div>
 	</div>
 </AppLayout>
