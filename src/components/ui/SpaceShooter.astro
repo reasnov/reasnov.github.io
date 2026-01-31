@@ -18,12 +18,12 @@ const { manual = false } = Astro.props;
 	<div class="tui-window relative h-[600px] w-full max-w-4xl overflow-hidden shadow-2xl">
 		<div class="tui-window-header">
 			<div class="flex items-center gap-2">
-				<span class="icon-[tabler--shield-check] size-3 text-accent"></span>
+				<span class="icon-[tabler--shield-check] text-accent size-3"></span>
 				<span>SYSTEM_INTEGRITY_CHECK.EXE</span>
 			</div>
 			<div class="flex items-center gap-4">
 				<span id="game-score" class="text-[10px] font-bold">BUGS_CLEARED: 0/10</span>
-				<button id="skip-game" class="text-[9px] opacity-50 hover:text-accent hover:opacity-100"
+				<button id="skip-game" class="hover:text-accent text-[9px] opacity-50 hover:opacity-100"
 					>[SKIP_PROTOCOL]</button
 				>
 			</div>
@@ -35,7 +35,8 @@ const { manual = false } = Astro.props;
 				<defs>
 					<!-- Player Ship -->
 					<g id="svg-player">
-						<path d="M0 -15 L10 10 L0 5 L-10 10 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+						<path d="M0 -15 L10 10 L0 5 L-10 10 Z" fill="none" stroke="currentColor" stroke-width="2"
+						></path>
 						<path d="M0 -5 L3 2 L0 0 L-3 2 Z" fill="var(--accent)"></path>
 					</g>
 					<!-- Enemy Bug -->
@@ -55,39 +56,54 @@ const { manual = false } = Astro.props;
 			<!-- Mobile Controls (Visible only on touch devices) -->
 			<div id="mobile-controls" class="pointer-events-none absolute inset-0 hidden select-none md:hidden">
 				<div class="absolute bottom-8 left-8 flex gap-4">
-					<div id="m-left" class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/20 bg-white/5 active:bg-white/20 text-white font-bold">&lt;</div>
-					<div id="m-right" class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/20 bg-white/5 active:bg-white/20 text-white font-bold">&gt;</div>
+					<div
+						id="m-left"
+						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/20 bg-white/5 font-bold text-white active:bg-white/20"
+					>
+						&lt;
+					</div>
+					<div
+						id="m-right"
+						class="pointer-events-auto flex size-12 items-center justify-center border-2 border-white/20 bg-white/5 font-bold text-white active:bg-white/20"
+					>
+						&gt;
+					</div>
 				</div>
-				<div id="m-shoot" class="pointer-events-auto absolute bottom-8 right-8 flex size-16 items-center justify-center border-2 border-accent/40 bg-accent/10 active:bg-accent/30 text-accent font-bold">FIRE</div>
+				<div
+					id="m-shoot"
+					class="border-accent/40 bg-accent/10 active:bg-accent/30 text-accent pointer-events-auto absolute right-8 bottom-8 flex size-16 items-center justify-center border-2 font-bold"
+				>
+					FIRE
+				</div>
 			</div>
 
 			<!-- Start Screen -->
 			<div
 				id="start-screen"
-				class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black/80"
+				class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 p-8 text-center"
 			>
-				<h2 class="font-display mb-4 text-3xl text-accent">SECURITY THREAT DETECTED</h2>
+				<h2 class="font-display text-accent mb-4 text-3xl">SECURITY THREAT DETECTED</h2>
 				<p class="mb-8 max-w-md text-xs tracking-widest text-neutral-400 uppercase">
 					Multiple 'Unclean_Code' bugs detected in home directory. Please execute cleanup protocol to proceed.
 				</p>
 				<button id="start-btn" class="tui-btn-primary tui-btn-lg">INITIALIZE_CLEANUP</button>
 				<div class="mt-6 flex flex-col gap-2">
-                    <p class="text-[9px] text-neutral-500 uppercase">Desktop: [ARROWS] to Move, [SPACE] to Shoot</p>
-                    <p class="text-[9px] text-neutral-500 uppercase">Mobile: Use On-Screen Controls</p>
-                </div>
+					<p class="text-[9px] text-neutral-500 uppercase">Desktop: [ARROWS] to Move, [SPACE] to Shoot</p>
+					<p class="text-[9px] text-neutral-500 uppercase">Mobile: Use On-Screen Controls</p>
+				</div>
 			</div>
 
 			<!-- Victory Screen -->
 			<div
 				id="victory-screen"
-				class="absolute inset-0 hidden flex flex-col items-center justify-center p-8 text-center bg-black/90"
+				class="absolute inset-0 flex hidden flex-col items-center justify-center bg-black/90 p-8 text-center"
 			>
-				<h2 class="font-display mb-4 text-3xl text-accent">SYSTEM_SECURED</h2>
+				<h2 class="font-display text-accent mb-4 text-3xl">SYSTEM_SECURED</h2>
 				<p class="mb-8 text-xs tracking-widest text-neutral-400 uppercase">
 					Integrity check passed. Redirecting to core...
 				</p>
 				<div class="h-1 w-48 overflow-hidden bg-neutral-800">
-					<div class="h-full animate-[loading_2s_ease-in-out] bg-accent"></div>
+					<div class="bg-accent h-full animate-[loading_2s_ease-in-out]"></div>
 				</div>
 			</div>
 		</div>
@@ -116,7 +132,7 @@ const { manual = false } = Astro.props;
 	const startBtn = document.getElementById("start-btn");
 	const skipBtn = document.getElementById("skip-game");
 	const scoreEl = document.getElementById("game-score");
-    const mobileControls = document.getElementById("mobile-controls");
+	const mobileControls = document.getElementById("mobile-controls");
 
 	let isPlaying = false;
 	let score = 0;
@@ -129,8 +145,8 @@ const { manual = false } = Astro.props;
 	let lastShootTime = 0;
 	let keys = {} as Record<string, boolean>;
 
-    // Touch State
-    let touchState = { left: false, right: false, shoot: false };
+	// Touch State
+	let touchState = { left: false, right: false, shoot: false };
 
 	// Always show splash on refresh
 	document.body.style.overflow = "hidden";
@@ -144,17 +160,17 @@ const { manual = false } = Astro.props;
 		}, 1000);
 	}
 
-    window.addEventListener("trigger-game-reset", () => {
-        score = 0;
-        if (scoreEl) scoreEl.textContent = `BUGS_CLEARED: 0/${targetScore}`;
-        document.getElementById("start-screen")?.classList.remove("hidden");
-        document.getElementById("victory-screen")?.classList.add("hidden");
-        isPlaying = false;
-        // Clear entities
-        if(entitiesGroup) entitiesGroup.innerHTML = "";
-        bullets = [];
-        enemies = [];
-    });
+	window.addEventListener("trigger-game-reset", () => {
+		score = 0;
+		if (scoreEl) scoreEl.textContent = `BUGS_CLEARED: 0/${targetScore}`;
+		document.getElementById("start-screen")?.classList.remove("hidden");
+		document.getElementById("victory-screen")?.classList.add("hidden");
+		isPlaying = false;
+		// Clear entities
+		if (entitiesGroup) entitiesGroup.innerHTML = "";
+		bullets = [];
+		enemies = [];
+	});
 
 	skipBtn?.addEventListener("click", exitGame);
 
@@ -201,11 +217,11 @@ const { manual = false } = Astro.props;
 		else if (keys["ArrowRight"] || touchState.right) player.vx = speed;
 		else player.vx = 0;
 
-        if (keys["ArrowUp"]) player.vy = -speed;
+		if (keys["ArrowUp"]) player.vy = -speed;
 		else if (keys["ArrowDown"]) player.vy = speed;
 		else player.vy = 0;
 
-        if (keys[" "] || touchState.shoot) shoot();
+		if (keys[" "] || touchState.shoot) shoot();
 
 		player.x += player.vx;
 		player.y += player.vy;
@@ -270,20 +286,20 @@ const { manual = false } = Astro.props;
 		el.setAttribute("class", "text-neutral-100");
 		entitiesGroup?.appendChild(el);
 		player.el = el;
-        
-        // Center player
-        if(container) {
-            player.x = container.clientWidth / 2;
-            player.y = container.clientHeight - 80;
-        }
+
+		// Center player
+		if (container) {
+			player.x = container.clientWidth / 2;
+			player.y = container.clientHeight - 80;
+		}
 
 		initStars();
 		gameLoop();
 
-        // Check if touch device
-        if ('ontouchstart' in window) {
-            mobileControls?.classList.remove("hidden");
-        }
+		// Check if touch device
+		if ("ontouchstart" in window) {
+			mobileControls?.classList.remove("hidden");
+		}
 	});
 
 	// Keyboard Handlers
@@ -303,15 +319,24 @@ const { manual = false } = Astro.props;
 	});
 	container?.addEventListener("mousedown", shoot);
 
-    // Mobile Control Handlers
-    const mLeft = document.getElementById("m-left");
-    const mRight = document.getElementById("m-right");
-    const mShoot = document.getElementById("m-shoot");
+	// Mobile Control Handlers
+	const mLeft = document.getElementById("m-left");
+	const mRight = document.getElementById("m-right");
+	const mShoot = document.getElementById("m-shoot");
 
-    mLeft?.addEventListener("touchstart", (e) => { e.preventDefault(); touchState.left = true; });
-    mLeft?.addEventListener("touchend", () => touchState.left = false);
-    mRight?.addEventListener("touchstart", (e) => { e.preventDefault(); touchState.right = true; });
-    mRight?.addEventListener("touchend", () => touchState.right = false);
-    mShoot?.addEventListener("touchstart", (e) => { e.preventDefault(); touchState.shoot = true; });
-    mShoot?.addEventListener("touchend", () => touchState.shoot = false);
+	mLeft?.addEventListener("touchstart", (e) => {
+		e.preventDefault();
+		touchState.left = true;
+	});
+	mLeft?.addEventListener("touchend", () => (touchState.left = false));
+	mRight?.addEventListener("touchstart", (e) => {
+		e.preventDefault();
+		touchState.right = true;
+	});
+	mRight?.addEventListener("touchend", () => (touchState.right = false));
+	mShoot?.addEventListener("touchstart", (e) => {
+		e.preventDefault();
+		touchState.shoot = true;
+	});
+	mShoot?.addEventListener("touchend", () => (touchState.shoot = false));
 </script>

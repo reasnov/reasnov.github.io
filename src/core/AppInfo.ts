@@ -2,7 +2,7 @@ import appInfoData from "../../app_info.json";
 
 /**
  * Access application metadata from app_info.json using dot notation.
- * 
+ *
  * @param key The metadata key (e.g., 'app.version', 'author.name').
  * @param defaults The default value if the key is not found.
  * @returns The metadata value or the default value.

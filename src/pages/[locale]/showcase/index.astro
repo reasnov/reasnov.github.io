@@ -32,48 +32,50 @@ const locale = Astro.currentLocale || "en";
 		</div>
 
 		<!-- Terminal Grid -->
-		<div class="border-border grid grid-cols-1 gap-0 border-2 md:grid-cols-2 lg:grid-cols-3">
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{
 				projects.map((project, index) => (
 					<div
-						class="group border-border flex flex-col transition-all duration-300 [&:not(:last-child)]:border-b md:[&:not(:nth-child(2n))]:border-r lg:[&:not(:nth-child(3n))]:border-r"
+						class="tui-window group flex flex-col transition-all duration-300 hover:scale-[1.02]"
 						data-aos="fade-up"
 						data-aos-delay={index * 100}
 					>
-						<div class="border-border relative aspect-video overflow-hidden border-b grayscale transition-all duration-500 group-hover:invert">
+						<div class="tui-window-header">
+							<span>PRJ_{String(index + 1).padStart(3, "0")}</span>
+							<span class="icon-[tabler--external-link] size-3 opacity-20" />
+						</div>
+
+						<div class="border-border/10 relative aspect-video overflow-hidden border-b grayscale transition-all duration-500 group-hover:grayscale-0">
 							<img
 								src={project.image}
 								alt={project.title}
 								class="h-full w-full object-cover"
 								loading="lazy"
 							/>
-							<div class="border-primary-fg/20 bg-primary text-primary-fg absolute top-2 left-2 border px-2 py-0.5 text-[8px] font-bold tracking-widest uppercase">
-								PRJ_{String(index + 1).padStart(3, "0")}
-							</div>
 						</div>
 
-						<div class="bg-bg group-hover:bg-primary group-hover:text-primary-fg flex flex-1 flex-col gap-4 p-6 transition-colors">
+						<div class="flex flex-1 flex-col gap-4 p-5">
 							<div class="flex flex-wrap gap-1">
 								{project.tags.map((tag) => (
-									<span class="border-border group-hover:border-primary-fg/50 border px-1 text-[8px] font-bold uppercase opacity-60 group-hover:opacity-100">
+									<span class="border-border/20 border px-1 text-[8px] font-bold uppercase opacity-60">
 										{tag}
 									</span>
 								))}
 							</div>
 
-							<h2 class="text-xl font-bold uppercase underline decoration-2 underline-offset-4">
+							<h3 class="decoration-accent font-bold uppercase decoration-2 underline-offset-4 group-hover:underline">
 								{project.title}
-							</h2>
+							</h3>
 
-							<p class="flex-1 text-xs leading-relaxed opacity-80">{project.description}</p>
+							<p class="text-fg/60 flex-1 text-xs leading-relaxed">{project.description}</p>
 
 							<a
 								href={project.link}
 								target="_blank"
-								class="mt-4 flex items-center justify-between text-[10px] font-black tracking-widest uppercase group-hover:underline"
+								class="tui-btn-secondary tui-btn-sm mt-4 flex items-center justify-between"
 							>
-								<span>[{trans("showcase.view_project", {}, locale)}]</span>
-								<span class="icon-[tabler--arrow-up-right] size-4" />
+								<span>{trans("showcase.view_project", {}, locale)}</span>
+								<span class="icon-[tabler--arrow-up-right] size-3" />
 							</a>
 						</div>
 					</div>

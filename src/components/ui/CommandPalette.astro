@@ -1,4 +1,4 @@
---- 
+---
 import { trans } from "@core/Translator";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { app_info } from "@core/AppInfo";
@@ -9,7 +9,12 @@ const version = app_info("app.version");
 const commands = [
 	{ id: "home", label: trans("nav.home", {}, lang), cmd: "goto home", url: getRelativeLocaleUrl(lang, "/") },
 	{ id: "blog", label: trans("nav.blog", {}, lang), cmd: "goto blog", url: getRelativeLocaleUrl(lang, "blog") },
-	{ id: "showcase", label: trans("nav.showcase", {}, lang), cmd: "goto showcase", url: getRelativeLocaleUrl(lang, "showcase") },
+	{
+		id: "showcase",
+		label: trans("nav.showcase", {}, lang),
+		cmd: "goto showcase",
+		url: getRelativeLocaleUrl(lang, "showcase"),
+	},
 	{
 		id: "playgrounds",
 		label: trans("nav.playgrounds", {}, lang),
@@ -32,8 +37,10 @@ const commands = [
 		</div>
 
 		<div class="p-4">
-			<div class="flex items-center gap-3 border-b-2 border-accent/30 transition-colors focus-within:border-accent">
-				<span class="animate-pulse text-xl font-black text-accent">!</span>
+			<div
+				class="border-accent/30 focus-within:border-accent flex items-center gap-3 border-b-2 transition-colors"
+			>
+				<span class="text-accent animate-pulse text-xl font-black">!</span>
 				<input
 					type="text"
 					id="palette-input"
@@ -46,30 +53,37 @@ const commands = [
 			<div id="palette-results" class="tui-palette-results">
 				{
 					commands.map((cmd) => (
-						<div class="tui-palette-item group" data-url={cmd.url} data-action={cmd.action} data-cmd={cmd.cmd}>
+						<div
+							class="tui-palette-item group"
+							data-url={cmd.url}
+							data-action={cmd.action}
+							data-cmd={cmd.cmd}
+						>
 							<div class="flex flex-col">
 								<span class="text-xs font-black tracking-widest uppercase">{cmd.label}</span>
-								<span class="text-[9px] text-accent/60 group-hover:text-primary-fg/60">bash: {cmd.cmd}</span>
+								<span class="text-accent/60 group-hover:text-primary-fg/60 text-[9px]">
+									bash: {cmd.cmd}
+								</span>
 							</div>
 							<span class="font-mono text-[10px] opacity-20 group-hover:opacity-100">ENTER</span>
 						</div>
 					))
 				}
-                <div id="help-hint" class="hidden p-4 border border-dashed border-accent/20 bg-accent/5 mt-2">
-                    <p class="text-[10px] font-bold text-accent uppercase mb-2">Manual Page: HELP.MAN</p>
-                    <ul class="text-[9px] font-mono text-fg/60 space-y-1">
-                        <li>[T]     - TOGGLE_THEME</li>
-                        <li>[G+H]   - GOTO_HOME</li>
-                        <li>[G+B]   - GOTO_BLOG</li>
-                        <li>[G+S]   - GOTO_SHOWCASE</li>
-                        <li>[/]     - OPEN_PALETTE</li>
-                        <li>[?]     - SHOW_THIS_HELP</li>
-                    </ul>
-                </div>
+				<div id="help-hint" class="border-accent/20 bg-accent/5 mt-2 hidden border border-dashed p-4">
+					<p class="text-accent mb-2 text-[10px] font-bold uppercase">Manual Page: HELP.MAN</p>
+					<ul class="text-fg/60 space-y-1 font-mono text-[9px]">
+						<li>[T] - TOGGLE_THEME</li>
+						<li>[G+H] - GOTO_HOME</li>
+						<li>[G+B] - GOTO_BLOG</li>
+						<li>[G+S] - GOTO_SHOWCASE</li>
+						<li>[/] - OPEN_PALETTE</li>
+						<li>[?] - SHOW_THIS_HELP</li>
+					</ul>
+				</div>
 			</div>
 
 			<div
-				class="mt-4 flex justify-between border-t border-border/5 pt-2 text-[8px] font-bold tracking-[0.2em] text-fg/30 uppercase"
+				class="border-border/5 text-fg/30 mt-4 flex justify-between border-t pt-2 text-[8px] font-bold tracking-[0.2em] uppercase"
 			>
 				<span>Status: Awaiting Command</span>
 				<span>{version}</span>
@@ -94,13 +108,13 @@ const commands = [
 
 	function filterCommands(query: string) {
 		const q = query.toLowerCase();
-        const helpHint = document.getElementById("help-hint");
-        
-        if (q === "help") {
-            helpHint?.classList.remove("hidden");
-        } else {
-            helpHint?.classList.add("hidden");
-        }
+		const helpHint = document.getElementById("help-hint");
+
+		if (q === "help") {
+			helpHint?.classList.remove("hidden");
+		} else {
+			helpHint?.classList.add("hidden");
+		}
 
 		items.forEach((item) => {
 			const cmd = item.getAttribute("data-cmd") || "";
@@ -144,7 +158,7 @@ const commands = [
 				togglePalette();
 			} else if (action === "show-help") {
 				input.value = "help";
-                filterCommands("help");
+				filterCommands("help");
 			}
 		});
 	});

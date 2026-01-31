@@ -31,11 +31,11 @@ const lang = Astro.currentLocale || "en";
 		</script>
 	</head>
 
-	<body class="flex size-full min-h-screen max-w-screen flex-col overflow-x-hidden font-mono font-light">
+	<body class="bg-bg text-fg selection:bg-primary selection:text-primary-fg min-h-screen font-mono">
 		<Header />
 		<CommandPalette />
 
-		<main class="container mx-auto flex size-full flex-1 flex-col gap-8 p-4">
+		<main class="tui-container flex flex-1 flex-col gap-12 py-12 md:gap-24 md:py-24">
 			<slot />
 		</main>
 
@@ -46,7 +46,7 @@ const lang = Astro.currentLocale || "en";
 			AOS.init({
 				duration: 800,
 				once: true,
-				offset: 100,
+				offset: 50,
 				easing: "ease-out-cubic",
 			});
 
@@ -55,12 +55,10 @@ const lang = Astro.currentLocale || "en";
 			const lang = document.documentElement.lang || "en";
 
 			window.addEventListener("keydown", (e) => {
-				// Ignore if user is typing in an input
 				if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) return;
 
 				const key = e.key.toLowerCase();
 
-				// Function Keys (F1, F2)
 				if (e.key === "F1") {
 					e.preventDefault();
 					document.getElementById("hero-f1")?.click();
@@ -70,7 +68,6 @@ const lang = Astro.currentLocale || "en";
 					document.getElementById("hero-f2")?.click();
 				}
 
-				// Close Mobile Menu (ESC)
 				if (e.key === "Escape") {
 					const mobileMenu = document.getElementById("mobile-menu");
 					if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
@@ -78,12 +75,10 @@ const lang = Astro.currentLocale || "en";
 					}
 				}
 
-				// Toggle Theme (T)
 				if (key === "t") {
 					document.getElementById("theme-toggle")?.click();
 				}
 
-				// Navigation (G then H/B/S/P)
 				if (lastKey === "g") {
 					if (key === "h") window.location.href = `/${lang}/`;
 					if (key === "b") window.location.href = `/${lang}/blog/`;
@@ -91,19 +86,16 @@ const lang = Astro.currentLocale || "en";
 					if (key === "p") window.location.href = `/${lang}/playgrounds/`;
 				}
 
-				// Help (?)
 				if (key === "?") {
 					window.dispatchEvent(new CustomEvent("open-palette", { detail: { query: "help" } }));
 				}
 
 				lastKey = key;
-				// Reset lastKey after a short delay
 				setTimeout(() => {
 					if (lastKey === key) lastKey = "";
 				}, 500);
 			});
 
-			// Listen for internal palette trigger
 			window.addEventListener("open-palette", (e: any) => {
 				const paletteEvent = new KeyboardEvent("keydown", {
 					key: "k",
@@ -111,7 +103,7 @@ const lang = Astro.currentLocale || "en";
 					bubbles: true,
 				});
 				window.dispatchEvent(paletteEvent);
-				
+
 				if (e.detail?.query) {
 					setTimeout(() => {
 						const input = document.getElementById("palette-input") as HTMLInputElement;
